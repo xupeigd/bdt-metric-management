@@ -1,0 +1,76 @@
+data_source:
+  name: aggr_customer_card_tradeshop_day
+  description: 会员卡交易表汇总表
+  owners:
+    - changzhaofei.quicksand.com
+    - wangxiaotai.quicksand.com
+  sql_table: gauss.aggr_customer_card_tradeshop_day
+  identifiers:
+    - name: pt
+      type: primary
+---
+dimensions:
+  - name: card_id
+    description: 描述信息
+    type: categorical #categorical/time 分类/时间 time类型时，需增加附加参数
+    expr: card_id
+    data_type: bigint #字段的真实类型，与真实的数据库/数仓 一致
+    # 这意味着在explain成sql时，片段为 select card_id($expr) as card_id($name)
+    type_params: #仅type为time时必填
+      is_primary: true #默认false，多个time纬度时，主时间维度改值设置为true（主时间必须存在且有且仅有一个）
+      time_granularity: day #时间粒度，默认day 支持week，month，year
+  - name: group_id
+    description: 描述信息
+    type: categorical
+    expr: group_id
+    data_type: bigint
+  - name: trans_shop_id
+    description: 描述信息
+    type: categorical
+    expr: trans_shop_id
+    data_type: bigint
+---
+measures:
+  - name: cust_consume_cnt
+    description: "消费次数"
+    # 可选，非必填
+    expr: cust_consume_cnt
+    # 必填，字段名/表达式 eg： CONCAT(cust_consume_cnt,'1')
+    processing_logic: "SELECT  COUNT(distinct if(trans_type = 30 AND is_new_order = 1,trans_id,null)) AS cust_consume_cnt --消费次数
+            FROM gauss.fact_customer_trade
+            WHERE pt >= ${v_30day}
+            AND pt <= ${v_1day}
+            AND trans_shop_id > 0
+            AND card_id > 0"
+    # 加工逻辑，可选，非必填
+    agg: SUM
+    # 必填，聚合方法，必填 SUM/MAX/MIN/AVG/COUNT/SUM_BOOLEAN/COUNT_DISTINCT/COUNT
+    data_type: bigint
+    # 必填，；列的真实类型 与真实的数据库/数仓 一致
+  - name: cust_consume_amt
+    expr: cust_consume_amt
+    processing_logic: "select
+            sum(if(trans_type=30 and is_new_order = 1,cust_consume_amt,0)) as cust_consume_amt  --消费金额
+            from gauss.fact_customer_trade 
+            where pt >=${v_30day} and pt<=${v_1day} and trans_shop_id > 0 and card_id>0"
+    agg: SUM
+    data_type: bigint
+---
+metric:
+  name: cust_consume_amt
+  cn_name: 中文名称
+  alias: 别名
+  cn_alias: 中文别名
+  metric_code: H10022010001
+  theme: "会员营销"
+  business: "会员"
+  tech_owners:
+    - wangxiaotai.quicksand.com
+  business_owners:
+    - wangxiaotai.quicksand.com
+  metric_type: T1
+  data_security_level: T0
+  data_type: bigint
+  processing_logic: 加工逻辑如是
+  type_params:
+    measure: cust_consume_amt

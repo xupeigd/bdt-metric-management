@@ -1,0 +1,1 @@
+mvn clean  && mvn package -DskipTests=true && docker rm -f metric-management && docker rmi -f metric-management:1.0 && docker compose up metric-management &

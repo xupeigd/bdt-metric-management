@@ -1,0 +1,47 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "data": {
+    "type": "page",
+    "body": {
+      "type": "form",
+      "title": "",
+      "panelClassName": "px-48 m:px-0",
+      "mode": "horizontal",
+      "initApi": "\/current-user",
+      "api": "put:\/user_setting",
+      "body": [
+        {
+          "type": "input-image",
+          "receiver": "\/upload_image",
+          "label": "\u5934\u50cf",
+          "name": "avatar",
+          "disabled": true
+        },
+        {
+          "type": "input-text",
+          "label": "\u59d3\u540d",
+          "name": "name",
+          "required": true,
+          "disabled": true
+        },
+        {
+          "type": "input-password",
+          "label": "\u65e7\u5bc6\u7801",
+          "name": "old_password"
+        },
+        {
+          "type": "input-password",
+          "label": "\u5bc6\u7801",
+          "name": "password"
+        },
+        {
+          "type": "input-password",
+          "label": "\u786e\u8ba4\u5bc6\u7801",
+          "name": "confirm_password"
+        }
+      ]
+    }
+  }
+}

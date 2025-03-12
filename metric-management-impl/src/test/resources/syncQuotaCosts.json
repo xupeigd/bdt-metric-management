@@ -1,0 +1,22 @@
+[
+  {
+    "appId": 1,
+    "metricId": 1,
+    "quota": 1000,
+    "cost": 57,
+    "maxQps": 19,
+    "syncMills": 1671605281000,
+    "dateFlag": "aoefect|2022-12-21 14:49:56",
+    "updateTime": "2022-12-21 14:58:56"
+  },
+  {
+    "appId": 1,
+    "metricId": 1,
+    "quota": 1000,
+    "cost": 11,
+    "maxQps": 5,
+    "syncMills": 1671605281000,
+    "dateFlag": "aoefect|2022-12-21 14:58:56",
+    "updateTime": "2022-12-21 14:58:56"
+  }
+]

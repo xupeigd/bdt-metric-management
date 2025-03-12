@@ -1,0 +1,318 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+    ]
+  },
+  "data": {
+    "type": "page",
+    "className": "m:overflow-auto",
+    "css": {
+      ".clear-card-mb": {
+        "margin-bottom": "0 !important"
+      },
+      ".cxd-Image": {
+        "border": "0"
+      },
+      ".bg-blingbling": {
+        "color": "#fff",
+        "background": "linear-gradient(to bottom right, #2C3E50, #FD746C, #FF8235, #ffff1c, #92FE9D, #00C9FF, #a044ff, #e73827)",
+        "background-repeat": "no-repeat",
+        "background-size": "1000% 1000%",
+        "animation": "gradient 60s ease infinite"
+      },
+      "@keyframes gradient": [
+        "0%{background-position:0% 0%} 50%{background-position:100% 100%} 100%{background-position:0% 0%}"
+      ],
+      ".bg-blingbling .cxd-Card-title": {
+        "color": "#fff"
+      }
+    },
+    "body": [
+      {
+        "type": "grid",
+        "columns": [
+          {
+            "type": "card",
+            "className": "h-96",
+            "body": {
+              "type": "wrapper",
+              "className": "h-full",
+              "body": [
+                {
+                  "type": "flex",
+                  "className": "h-full",
+                  "direction": "column",
+                  "justify": "center",
+                  "alignItems": "center",
+                  "items": [
+                    {
+                      "type": "image",
+                      "src": "\/admin-assets\/logo.png"
+                    },
+                    {
+                      "type": "wrapper",
+                      "className": "text-3xl mt-9 font-bold",
+                      "body": "Metric Platform"
+                    },
+                    {
+                      "type": "flex",
+                      "className": "px-24 w-full mt-5",
+                      "justify": "space-around",
+                      "items": [
+                        {
+                          "type": "action",
+                          "level": "link",
+                          "className": "text-lg font-semibold",
+                          "label": "GitHub",
+                          "blank": true,
+                          "actionType": "url",
+                          "link": "https:\/\/github.com\/slowlyo\/owl-admin"
+                        },
+                        {
+                          "type": "action",
+                          "level": "link",
+                          "className": "text-lg font-semibold",
+                          "label": "Official website",
+                          "blank": true,
+                          "actionType": "url",
+                          "link": "https:\/\/owladmin.com"
+                        },
+                        {
+                          "type": "action",
+                          "level": "link",
+                          "className": "text-lg font-semibold",
+                          "label": "Documentation",
+                          "blank": true,
+                          "actionType": "url",
+                          "link": "https:\/\/doc.owladmin.com"
+                        },
+                        {
+                          "type": "action",
+                          "level": "link",
+                          "className": "text-lg font-semibold",
+                          "label": "Demo",
+                          "blank": true,
+                          "actionType": "url",
+                          "link": "http:\/\/demo.owladmin.com"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "md": 5
+          },
+          {
+            "type": "flex",
+            "items": [
+              {
+                "type": "card",
+                "className": "h-96",
+                "body": {
+                  "type": "chart",
+                  "height": 350,
+                  "config": {
+                    "backgroundColor": "",
+                    "tooltip": {
+                      "trigger": "item"
+                    },
+                    "legend": {
+                      "bottom": 0,
+                      "left": "center"
+                    },
+                    "series": [
+                      {
+                        "name": "Access From",
+                        "type": "pie",
+                        "radius": [
+                          "40%",
+                          "70%"
+                        ],
+                        "avoidLabelOverlap": false,
+                        "itemStyle": {
+                          "borderRadius": 10,
+                          "borderColor": "#fff",
+                          "borderWidth": 2
+                        },
+                        "label": {
+                          "show": false,
+                          "position": "center"
+                        },
+                        "emphasis": {
+                          "label": {
+                            "show": true,
+                            "fontSize": "40",
+                            "fontWeight": "bold"
+                          }
+                        },
+                        "labelLine": {
+                          "show": false
+                        },
+                        "data": [
+                          {
+                            "value": 1048,
+                            "name": "Search Engine"
+                          },
+                          {
+                            "value": 735,
+                            "name": "Direct"
+                          },
+                          {
+                            "value": 580,
+                            "name": "Email"
+                          },
+                          {
+                            "value": 484,
+                            "name": "Union Ads"
+                          },
+                          {
+                            "value": 300,
+                            "name": "Video Ads"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "card",
+                "className": "h-96 ml-4 w-8\/12",
+                "body": {
+                  "type": "tpl",
+                  "html": "<style>\n    .cube-box{ height: 300px; display: flex; align-items: center; justify-content: center; }\n  .cube { width: 100px; height: 100px; position: relative; transform-style: preserve-3d; animation: rotate 10s linear infinite; }\n  .cube:after {\n    content: '';\n    width: 100%;\n    height: 100%;\n    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);\n    position: absolute;\n    transform-origin: bottom;\n    transform-style: preserve-3d;\n    transform: rotateX(90deg) translateY(50px) translateZ(-50px);\n    background-color: rgba(0, 0, 0, 0.1);\n  }\n  .cube div {\n    background-color: rgba(64, 158, 255, 0.7);\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    border: 1px solid rgb(27, 99, 170);\n    box-shadow: 0 0 60px rgba(64, 158, 255, 0.7);\n  }\n  .cube div:nth-child(1) { transform: translateZ(-50px); animation: shade 10s -5s linear infinite; }\n  .cube div:nth-child(2) { transform: translateZ(50px) rotateY(180deg); animation: shade 10s linear infinite; }\n  .cube div:nth-child(3) { transform-origin: right; transform: translateZ(50px) rotateY(270deg); animation: shade 10s -2.5s linear infinite; }\n  .cube div:nth-child(4) { transform-origin: left; transform: translateZ(50px) rotateY(90deg); animation: shade 10s -7.5s linear infinite; }\n  .cube div:nth-child(5) { transform-origin: bottom; transform: translateZ(50px) rotateX(90deg); background-color: rgba(0, 0, 0, 0.7); }\n  .cube div:nth-child(6) { transform-origin: top; transform: translateZ(50px) rotateX(270deg); }\n\n  @keyframes rotate {\n    0% { transform: rotateX(-15deg) rotateY(0deg); }\n    100% { transform: rotateX(-15deg) rotateY(360deg); }\n  }\n  @keyframes shade { 50% { background-color: rgba(0, 0, 0, 0.7); } }\n<\/style>\n<div class=\"cube-box\">\n    <div class=\"cube\">\n        <div><\/div>\n        <div><\/div>\n        <div><\/div>\n        <div><\/div>\n        <div><\/div>\n        <div><\/div>\n    <\/div>\n<\/div>"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "grid",
+        "columns": [
+          {
+            "type": "card",
+            "className": "clear-card-mb",
+            "body": {
+              "type": "chart",
+              "height": 380,
+              "className": "h-96",
+              "config": {
+                "backgroundColor": "",
+                "title": {
+                  "text": "Users Behavior"
+                },
+                "tooltip": {
+                  "trigger": "axis"
+                },
+                "xAxis": {
+                  "type": "category",
+                  "boundaryGap": false,
+                  "data": [
+                    "Mon",
+                    "Tue",
+                    "Wed",
+                    "Thu",
+                    "Fri",
+                    "Sat",
+                    "Sun"
+                  ]
+                },
+                "yAxis": {
+                  "type": "value"
+                },
+                "grid": {
+                  "left": "7%",
+                  "right": "3%",
+                  "top": 60,
+                  "bottom": 30
+                },
+                "legend": {
+                  "data": [
+                    "Visits",
+                    "Bounce Rate"
+                  ]
+                },
+                "series": [
+                  {
+                    "name": "Visits",
+                    "data": [
+                      103,
+                      172,
+                      146,
+                      144,
+                      140,
+                      102,
+                      31
+                    ],
+                    "type": "line",
+                    "areaStyle": [],
+                    "smooth": true,
+                    "symbol": "none"
+                  },
+                  {
+                    "name": "Bounce Rate",
+                    "data": [
+                      159,
+                      128,
+                      125,
+                      52,
+                      34,
+                      198,
+                      53
+                    ],
+                    "type": "line",
+                    "areaStyle": [],
+                    "smooth": true,
+                    "symbol": "none"
+                  }
+                ]
+              }
+            },
+            "md": 8
+          },
+          {
+            "type": "flex",
+            "className": "h-full",
+            "items": [
+              {
+                "type": "card",
+                "className": "h-full bg-blingbling",
+                "header": {
+                  "title": "Clock"
+                },
+                "body": [
+                  {
+                    "type": "custom",
+                    "name": "clock",
+                    "html": "<div id=\"clock\" class=\"text-4xl\"><\/div><div id=\"clock-date\" class=\"mt-5\"><\/div>",
+                    "onMount": "const clock = document.getElementById('clock');\nconst tick = () => {\n    clock.innerHTML = (new Date()).toLocaleTimeString();\n    requestAnimationFrame(tick);\n};\ntick();\n\nconst clockDate = document.getElementById('clock-date');\nclockDate.innerHTML = (new Date()).toLocaleDateString();"
+                  }
+                ]
+              },
+              {
+                "type": "panel",
+                "className": "h-full clear-card-mb rounded-md",
+                "body": [
+                  {
+                    "type": "markdown",
+                    "options": {
+                      "html": true,
+                      "breaks": true
+                    },
+                    "value": "### __The beginning of everything__\n\n```php\n<?php\n\necho 'Hello World';\n```"
+                  }
+                ]
+              }
+            ],
+            "direction": "column"
+          }
+        ]
+      }
+    ]
+  }
+}

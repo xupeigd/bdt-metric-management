@@ -1,0 +1,20 @@
+{
+  "createMetric": {
+    "businessDomainId": 4,
+    "businessOwner": 1,
+    "cnAlias": "测试指标",
+    "cnName": "测试指标",
+    "dataSecurityLevel": 1,
+    "dataType": "DECIMAL(38,4)",
+    "datasetId": 603,
+    "description": "string",
+    "enAlias": "mockMetric",
+    "enName": "mockMetric",
+    "metricLevel": "T0",
+    "processLogic": "一个假定的加工逻辑",
+    "serialNumber": "MT001",
+    "techOwner": 1,
+    "topicDomainId": 1,
+    "yamlSegment": "---\n  dimensions:\n    - name: tl_user\n      type: categorical\n      expr: concat(user_id,'')\n---\n  measures:\n    - name: tl_new_customers\n      expr: \"1\"\n      agg: SUM\n      create_metric: true\n    - name: tl_ucount\n      expr: id\n      agg: SUM\n      create_metric: true\n---\nmetric:\n  name: ncsitl\n  owners:\n    - demo@transformdata.io\n  type: measure_proxy\n  type_params:\n    measure: tl_new_customers"
+  }
+}

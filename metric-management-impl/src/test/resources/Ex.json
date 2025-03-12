@@ -1,0 +1,27 @@
+{
+  "metricIds": [
+    1019
+  ],
+  "dimensions": [
+    "pt",
+    "mealperiod_name"
+  ],
+  "condition": {
+    "left": {
+      "name": "pt",
+      "symbol": 11,
+      "hitValues": [
+        "20221201"
+      ]
+    },
+    "right": {
+      "name": "mealperiod_name",
+      "symbol": 40,
+      "hitValues": [
+        "午餐",
+        "晚餐"
+      ]
+    },
+    "symbol": 100
+  }
+}

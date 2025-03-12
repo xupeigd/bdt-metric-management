@@ -1,0 +1,1 @@
+ssh page.quicksand.com -t 'sudo docker rm -f metric-management && sudo docker rmi -f metric-management:1.0 && sudo nohup docker compose -f /usr/local/dev/sync-wsp/bdt-metric-management/docker-compose.yml up metric-management >> /dev/null &'

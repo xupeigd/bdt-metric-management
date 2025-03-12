@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  management-compiler:
+    image: maven:3.5.2-jdk-8-alpine
+    container_name: management-compiler
+    hostname: management-compiler
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /mnt/d/Dev/maven/repo:/root/.m2/repository
+      - ../bdt-metric-management:/home/bdt-metric-management
+    stdin_open: true
+    tty: true
+    working_dir:
+      /home/bdt-metric-management
+    entrypoint: [ "sh", "./compile-java.sh" ]

@@ -1,0 +1,162 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+      "[24.82 ms] select * from `personal_access_tokens` where `personal_access_tokens`.`id` = 2900 limit 1",
+      "[4.18 ms] select * from `admin_users` where `admin_users`.`id` = 1 limit 1",
+      "[6.88 ms] update `personal_access_tokens` set `last_used_at` = '2025-03-03 13:39:11', `personal_access_tokens`.`updated_at` = '2025-03-03 13:39:11' where `id` = 2900",
+      "[13.89 ms] select `admin_roles`.*, `admin_role_users`.`user_id` as `pivot_user_id`, `admin_role_users`.`role_id` as `pivot_role_id`, `admin_role_users`.`created_at` as `pivot_created_at`, `admin_role_users`.`updated_at` as `pivot_updated_at` from `admin_roles` inner join `admin_role_users` on `admin_roles`.`id` = `admin_role_users`.`role_id` where `admin_role_users`.`user_id` = 1",
+      "[0.58 ms] select * from `admin_roles` where `admin_roles`.`id` = 1 limit 1",
+      "[9.12 ms] select `admin_permissions`.*, `admin_role_permissions`.`role_id` as `pivot_role_id`, `admin_role_permissions`.`permission_id` as `pivot_permission_id`, `admin_role_permissions`.`created_at` as `pivot_created_at`, `admin_role_permissions`.`updated_at` as `pivot_updated_at` from `admin_permissions` inner join `admin_role_permissions` on `admin_permissions`.`id` = `admin_role_permissions`.`permission_id` where `admin_role_permissions`.`role_id` in (1)"
+    ]
+  },
+  "data": {
+    "id": 1,
+    "name": "\u8d85\u7ea7\u7ba1\u7406\u5458",
+    "slug": "administrator",
+    "permissions": [
+      {
+        "id": 1,
+        "name": "\u9996\u9875",
+        "slug": "dashboard",
+        "http_method": null,
+        "http_path": [
+          "\/dashboard*"
+        ],
+        "order": 0,
+        "parent_id": 0,
+        "created_at": null,
+        "updated_at": null,
+        "custom_order": 0,
+        "pivot": {
+          "role_id": 1,
+          "permission_id": 1,
+          "created_at": "2023-12-28T06:09:27.000000Z",
+          "updated_at": "2023-12-28T06:09:27.000000Z"
+        }
+      },
+      {
+        "id": 2,
+        "name": "\u7cfb\u7edf\u7ba1\u7406",
+        "slug": "system",
+        "http_method": null,
+        "http_path": [
+          "\/system*"
+        ],
+        "order": 10,
+        "parent_id": 0,
+        "created_at": null,
+        "updated_at": "2023-01-31 14:54:21",
+        "custom_order": 0,
+        "pivot": {
+          "role_id": 1,
+          "permission_id": 2,
+          "created_at": "2024-01-12T05:20:03.000000Z",
+          "updated_at": "2024-01-12T05:20:03.000000Z"
+        }
+      },
+      {
+        "id": 3,
+        "name": "\u7ba1\u7406\u5458",
+        "slug": "system.admin_users",
+        "http_method": null,
+        "http_path": [
+          "\/system\/admin_users*"
+        ],
+        "order": 0,
+        "parent_id": 2,
+        "created_at": null,
+        "updated_at": null,
+        "custom_order": 0,
+        "pivot": {
+          "role_id": 1,
+          "permission_id": 3,
+          "created_at": "2024-01-12T05:20:03.000000Z",
+          "updated_at": "2024-01-12T05:20:03.000000Z"
+        }
+      },
+      {
+        "id": 4,
+        "name": "\u89d2\u8272",
+        "slug": "system.admin_roles",
+        "http_method": null,
+        "http_path": [
+          "\/system\/admin_roles*"
+        ],
+        "order": 10,
+        "parent_id": 2,
+        "created_at": null,
+        "updated_at": null,
+        "custom_order": 0,
+        "pivot": {
+          "role_id": 1,
+          "permission_id": 4,
+          "created_at": "2024-01-12T05:20:03.000000Z",
+          "updated_at": "2024-01-12T05:20:03.000000Z"
+        }
+      },
+      {
+        "id": 5,
+        "name": "\u6743\u9650",
+        "slug": "system.admin_permissions",
+        "http_method": null,
+        "http_path": [
+          "\/system\/admin_permissions*"
+        ],
+        "order": 20,
+        "parent_id": 2,
+        "created_at": null,
+        "updated_at": null,
+        "custom_order": 0,
+        "pivot": {
+          "role_id": 1,
+          "permission_id": 5,
+          "created_at": "2024-01-12T05:20:03.000000Z",
+          "updated_at": "2024-01-12T05:20:03.000000Z"
+        }
+      },
+      {
+        "id": 14,
+        "name": "\u9009\u9879\u5361",
+        "slug": "example.tabs",
+        "http_method": null,
+        "http_path": [
+          "\/example\/tabs*"
+        ],
+        "order": 40,
+        "parent_id": 8,
+        "created_at": "2022-09-06 19:23:46",
+        "updated_at": "2022-09-06 19:23:46",
+        "custom_order": 0,
+        "pivot": {
+          "role_id": 1,
+          "permission_id": 14,
+          "created_at": "2024-03-19T12:53:29.000000Z",
+          "updated_at": "2024-03-19T12:53:29.000000Z"
+        }
+      },
+      {
+        "id": 15,
+        "name": "\u6b65\u9aa4\u8868\u5355",
+        "slug": "example.wizard",
+        "http_method": null,
+        "http_path": [
+          "\/example\/wizard*"
+        ],
+        "order": 50,
+        "parent_id": 8,
+        "created_at": "2022-09-06 19:23:46",
+        "updated_at": "2022-09-06 19:23:46",
+        "custom_order": 0,
+        "pivot": {
+          "role_id": 1,
+          "permission_id": 15,
+          "created_at": "2024-03-19T12:53:29.000000Z",
+          "updated_at": "2024-03-19T12:53:29.000000Z"
+        }
+      }
+    ]
+  }
+}

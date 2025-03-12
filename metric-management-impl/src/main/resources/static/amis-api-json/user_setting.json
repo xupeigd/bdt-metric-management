@@ -1,0 +1,47 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "data": {
+    "type": "page",
+    "body": {
+      "type": "form",
+      "title": "",
+      "panelClassName": "px-48 m:px-0",
+      "mode": "horizontal",
+      "initApi": "\/current-user",
+      "api": "put:\/modifyPassword",
+      "body": [
+        {
+          "type": "input-image",
+          "receiver": "\/upload_image",
+          "label": "\u5934\u50cf",
+          "name": "avatar",
+          "disabled": true
+        },
+        {
+          "type": "input-text",
+          "label": "\u59d3\u540d",
+          "name": "name",
+          "required": true,
+          "disabled": true
+        },
+        {
+          "type": "input-password",
+          "label": "当前密码",
+          "name": "oldPassword"
+        },
+        {
+          "type": "input-password",
+          "label": "密码",
+          "name": "newPassword"
+        },
+        {
+          "type": "input-password",
+          "label": "确认密码",
+          "name": "confirmPassword"
+        }
+      ]
+    }
+  }
+}

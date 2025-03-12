@@ -1,0 +1,74 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+      "[37.89 ms] select * from `cache` where `key` = 'admin_has_table_admin_relationships' limit 1",
+      "[10.91 ms] select * from `cache` where `key` = 'admin_relationships' limit 1",
+      "[11.55 ms] select * from `personal_access_tokens` where `personal_access_tokens`.`id` = 3 limit 1",
+      "[11.18 ms] select * from `admin_users` where `admin_users`.`id` = 1 limit 1",
+      "[23.49 ms] update `personal_access_tokens` set `last_used_at` = '2024-06-12 16:33:53', `personal_access_tokens`.`updated_at` = '2024-06-12 16:33:53' where `id` = 3",
+      "[11.75 ms] select `admin_roles`.*, `admin_role_users`.`user_id` as `pivot_user_id`, `admin_role_users`.`role_id` as `pivot_role_id`, `admin_role_users`.`created_at` as `pivot_created_at`, `admin_role_users`.`updated_at` as `pivot_updated_at` from `admin_roles` inner join `admin_role_users` on `admin_roles`.`id` = `admin_role_users`.`role_id` where `admin_role_users`.`user_id` = 1",
+      "[10.9 ms] select `values`, `key` from `admin_settings`"
+    ]
+  },
+  "data": {
+    "type": "page",
+    "className": "m:overflow-auto",
+    "body": [
+      {
+        "type": "alert",
+        "showIcon": true,
+        "body": "\u6b64\u5904\u5185\u5bb9\u4ec5\u4f9b\u6f14\u793a, \u8bbe\u7f6e\u9879\u65e0\u5b9e\u9645\u610f\u4e49\uff0c\u5b9e\u9645\u5f00\u53d1\u4e2d\u8bf7\u6839\u636e\u5b9e\u9645\u60c5\u51b5\u8fdb\u884c\u4fee\u6539\u3002"
+      },
+      {
+        "type": "form",
+        "panelClassName": "px-48 m:px-0",
+        "title": " ",
+        "mode": "horizontal",
+        "promptPageLeave": true,
+        "redirect": "",
+        "api": "post:\/system\/settings",
+        "data": {
+          "admin_locale": "zh_CN"
+        },
+        "body": {
+          "type": "tabs",
+          "tabs": [
+            {
+              "title": "\u57fa\u672c\u8bbe\u7f6e",
+              "body": [
+                {
+                  "type": "input-text",
+                  "label": "\u7f51\u7ad9\u540d\u79f0",
+                  "name": "site_name"
+                },
+                {
+                  "type": "input-kv",
+                  "label": "\u9644\u52a0\u914d\u7f6e",
+                  "name": "addition_config"
+                }
+              ]
+            },
+            {
+              "title": "\u4e0a\u4f20\u8bbe\u7f6e",
+              "body": [
+                {
+                  "type": "input-text",
+                  "label": "\u4e0a\u4f20\u57df\u540d",
+                  "name": "upload_domain"
+                },
+                {
+                  "type": "input-text",
+                  "label": "\u4e0a\u4f20\u8def\u5f84",
+                  "name": "upload_path"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

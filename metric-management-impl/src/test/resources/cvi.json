@@ -1,0 +1,43 @@
+{
+  "metricIds": [
+    1760
+  ],
+  "dimensions": [
+    "year_id",
+    "month_id",
+    "group_id"
+  ],
+  "condition": {
+    "left": {
+      "left": {
+        "name": "month_id",
+        "symbol": 1,
+        "hitValues": [
+          "01"
+        ]
+      },
+      "right": {
+        "name": "group_id",
+        "symbol": 1,
+        "hitValues": [
+          "5726"
+        ]
+      },
+      "symbol": 100
+    },
+    "right": {
+      "name": "year_id",
+      "symbol": 1,
+      "hitValues": [
+        "2023"
+      ]
+    },
+    "symbol": 100
+  },
+  "sorts": [
+    {
+      "asc": true,
+      "name": "year_id"
+    }
+  ]
+}

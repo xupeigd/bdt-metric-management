@@ -1,0 +1,109 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "data": {
+    "nav": {
+      "appendNav": {
+        "type": "dropdown-button",
+        "hideCaret": false,
+        "trigger": "hover",
+        "label": "系统管理",
+        "className": "h-full w-full",
+        "btnClassName": "navbar-user w-full",
+        "menuClassName": "min-w-0",
+        "icon": "fa-sharp-duotone fa-solid fa-gears",
+        "buttons": [
+          {
+            "type": "button",
+            "iconClassName": "pr-2",
+            "icon": "fas fa-users",
+            "label": "用户",
+            "onClick": "window.location.hash = \"#\/system\/admin_users\""
+          },
+          {
+            "type": "button",
+            "iconClassName": "pr-2",
+            "icon": "fas fa-users-cog",
+            "label": "角色",
+            "onClick": "window.location.hash = \"#\/system\/admin_roles\""
+          },
+          {
+            "type": "button",
+            "iconClassName": "pr-2",
+            "label": "权限",
+            "icon": "fas fa-key",
+            "onClick": "window.location.hash = \"#\/system\/admin_permissions\""
+          },
+          {
+            "type": "button",
+            "iconClassName": "pr-2",
+            "label": "菜单",
+            "icon": "fas fa-bars",
+            "onClick": "window.location.hash = \"#\/system\/admin_menus\""
+          }
+        ]
+      },
+      "prependNav": {
+        "type": "flex",
+        "items": []
+      }
+    },
+    "assets": {
+      "js": [],
+      "css": [],
+      "scripts": [],
+      "styles": []
+    },
+    "app_name": "Metric Platform",
+    "locale": "zh_CN",
+    "layout": {
+      "title": "%title% | Metric Platform",
+      "header": {
+        "refresh": true,
+        "dark": true,
+        "full_screen": true,
+        "locale_toggle": false,
+        "theme_config": false,
+        "theme_config_bak": false
+      },
+      "locale_options": {
+        "en": "English",
+        "zh_CN": "\u7b80\u4f53\u4e2d\u6587"
+      },
+      "keep_alive_exclude": []
+    },
+    "logo": "\/admin-assets\/logo.png",
+    "login_captcha": false,
+    "locale_options": [
+      {
+        "label": "English",
+        "value": "en"
+      },
+      {
+        "label": "\u7b80\u4f53\u4e2d\u6587",
+        "value": "zh_CN"
+      }
+    ],
+    "show_development_tools": true,
+    "system_theme_setting": {
+      "darkTheme": false,
+      "footer": false,
+      "breadcrumb": true,
+      "themeColor": "#1677ff",
+      "layoutMode": "top-mix",
+      "siderTheme": "light",
+      "topTheme": "light",
+      "animateInType": "alpha",
+      "animateInDuration": 600,
+      "animateOutType": "alpha",
+      "animateOutDuration": 600,
+      "loginTemplate": "amis",
+      "keepAlive": false,
+      "enableTab": true,
+      "tabIcon": true,
+      "accordionMenu": true
+    },
+    "enabled_extensions": []
+  }
+}

@@ -1,0 +1,718 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+      "[18.42 ms] select * from `personal_access_tokens` where `personal_access_tokens`.`id` = 2904 limit 1",
+      "[2.75 ms] select * from `admin_users` where `admin_users`.`id` = 1 limit 1",
+      "[3.49 ms] select `admin_roles`.*, `admin_role_users`.`user_id` as `pivot_user_id`, `admin_role_users`.`role_id` as `pivot_role_id`, `admin_role_users`.`created_at` as `pivot_created_at`, `admin_role_users`.`updated_at` as `pivot_updated_at` from `admin_roles` inner join `admin_role_users` on `admin_roles`.`id` = `admin_role_users`.`role_id` where `admin_role_users`.`user_id` = 1",
+      "[3.64 ms] select `sign` as `value`, `title` as `label` from `admin_pages`",
+      "[0.42 ms] select `sign` as `value`, `title` as `label` from `admin_pages`"
+    ]
+  },
+  "data": {
+    "type": "page",
+    "className": "m:overflow-auto pb-48",
+    "body": {
+      "type": "crud",
+      "perPage": 999,
+      "affixHeader": false,
+      "filterTogglable": false,
+      "filterDefaultVisible": false,
+      "api": "\/system\/admin_menus?_action=getData",
+      "quickSaveApi": "post:\/system\/admin_menus?_action=quickEdit",
+      "quickSaveItemApi": "post:\/system\/admin_menus?_action=quickEditItem",
+      "bulkActions": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "label": "\u5220\u9664",
+          "icon": "fa-solid fa-trash-can",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u5220\u9664",
+            "className": "py-2",
+            "actions": [
+              {
+                "type": "action",
+                "actionType": "cancel",
+                "label": "\u53d6\u6d88"
+              },
+              {
+                "type": "action",
+                "actionType": "submit",
+                "label": "\u5220\u9664",
+                "level": "danger"
+              }
+            ],
+            "body": [
+              {
+                "type": "form",
+                "wrapWithPanel": false,
+                "api": "delete:\/system\/admin_menus\/${ids}",
+                "body": [
+                  {
+                    "type": "tpl",
+                    "className": "py-2",
+                    "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                  }
+                ]
+              }
+            ]
+          },
+          "reload": "window"
+        }
+      ],
+      "perPageAvailable": [
+        10,
+        20,
+        30,
+        50,
+        100,
+        200
+      ],
+      "footerToolbar": [
+        "statistics"
+      ],
+      "headerToolbar": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u65b0\u589e",
+            "body": {
+              "type": "form",
+              "panelClassName": "px-48 m:px-0",
+              "title": " ",
+              "mode": "horizontal",
+              "promptPageLeave": true,
+              "onEvent": [],
+              "body": [
+                {
+                  "type": "group",
+                  "body": [
+                    {
+                      "type": "input-text",
+                      "name": "title",
+                      "label": "\u540d\u79f0",
+                      "required": true
+                    },
+                    {
+                      "type": "picker",
+                      "name": "icon",
+                      "label": "\u56fe\u6807",
+                      "pickerSchema": {
+                        "mode": "cards",
+                        "type": "crud",
+                        "perPage": 40,
+                        "loadDataOnce": true,
+                        "columnsCount": 8,
+                        "footerToolbar": [
+                          "statistics",
+                          "pagination"
+                        ],
+                        "api": "\/_iconify_search",
+                        "filter": {
+                          "type": "form",
+                          "wrapWithPanel": false,
+                          "body": [
+                            {
+                              "type": "group",
+                              "className": "pt-3 pb-3",
+                              "body": [
+                                {
+                                  "type": "input-text",
+                                  "name": "query",
+                                  "size": "md",
+                                  "value": "${icon || \"home\"}",
+                                  "clearable": true,
+                                  "required": true
+                                },
+                                {
+                                  "type": "button",
+                                  "label": "\u641c\u7d22",
+                                  "level": "primary",
+                                  "actionType": "submit",
+                                  "icon": "fa fa-search"
+                                },
+                                {
+                                  "type": "button",
+                                  "actionType": "url",
+                                  "className": "ml-2",
+                                  "icon": "fa fa-external-link-alt",
+                                  "label": "Icones",
+                                  "blank": true,
+                                  "url": "https:\/\/icones.js.org\/collection\/all"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "card": {
+                          "type": "card",
+                          "body": [
+                            {
+                              "type": "custom-svg-icon",
+                              "icon": "${icon}",
+                              "className": "text-2xl"
+                            }
+                          ]
+                        }
+                      },
+                      "source": "\/_iconify_search",
+                      "size": "lg",
+                      "labelField": "icon",
+                      "valueField": "icon"
+                    }
+                  ]
+                },
+                {
+                  "type": "group",
+                  "body": [
+                    {
+                      "type": "tree-select",
+                      "name": "parent_id",
+                      "label": "\u7236\u7ea7",
+                      "labelField": "title",
+                      "valueField": "id",
+                      "showIcon": false,
+                      "value": 0,
+                      "source": "\/system\/admin_menus?_action=getData"
+                    },
+                    {
+                      "type": "input-number",
+                      "name": "order",
+                      "label": "\u6392\u5e8f",
+                      "required": true,
+                      "displayMode": "enhance",
+                      "description": "\u5347\u5e8f\u6392\u5e8f",
+                      "min": 0,
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "list-select",
+                  "name": "url_type",
+                  "label": "\u7c7b\u578b",
+                  "options": {
+                    "1": "\u8def\u7531",
+                    "2": "\u5916\u94fe",
+                    "3": "Iframe",
+                    "4": "\u9875\u9762"
+                  },
+                  "value": 1
+                },
+                {
+                  "type": "input-text",
+                  "name": "url",
+                  "label": "\u94fe\u63a5",
+                  "required": true,
+                  "validateOnChange": true,
+                  "validations": {
+                    "matchRegexp": "\/^(http(s)?\\:\\\/)?(\\\/)+\/"
+                  },
+                  "validationErrors": {
+                    "matchRegexp": "\u9700\u8981\u4ee5 \/ \u5f00\u5934"
+                  },
+                  "placeholder": "eg: \/admin_menus",
+                  "hiddenOn": "url_type != 2"
+                },
+                {
+                  "type": "input-text",
+                  "name": "url",
+                  "label": "\u8def\u7531",
+                  "required": true,
+                  "validateOnChange": true,
+                  "validations": {
+                    "matchRegexp": "\/^(http(s)?\\:\\\/)?(\\\/)+\/"
+                  },
+                  "validationErrors": {
+                    "matchRegexp": "\u9700\u8981\u4ee5 \/ \u5f00\u5934"
+                  },
+                  "placeholder": "eg: \/admin_menus",
+                  "hiddenOn": "url_type == 2"
+                },
+                {
+                  "type": "input-text",
+                  "name": "component",
+                  "label": "\u7ec4\u4ef6",
+                  "description": "\u9ed8\u8ba4\u4e3a amis , \u975e\u81ea\u5b9a\u4e49\u524d\u7aef\u9875\u9762\u8bf7\u52ff\u4fee\u6539",
+                  "value": "amis",
+                  "hiddenOn": "url_type != 1"
+                },
+                {
+                  "type": "select",
+                  "name": "component",
+                  "label": "\u9875\u9762",
+                  "required": true,
+                  "options": [],
+                  "menuTpl": "${label} <span class=\"text-gray-300 pl-2\">${value}<\/span>",
+                  "selectFirst": true,
+                  "searchable": true,
+                  "visibleOn": "url_type == 4"
+                },
+                {
+                  "type": "group",
+                  "body": [
+                    {
+                      "type": "input-text",
+                      "name": "iframe_url",
+                      "label": "IframeUrl",
+                      "required": true,
+                      "validateOnChange": true,
+                      "validations": {
+                        "matchRegexp": "\/^(http(s)?\\:\\\/)?(\\\/)+\/"
+                      },
+                      "validationErrors": {
+                        "matchRegexp": "\u9700\u8981\u4ee5 \/ \u5f00\u5934"
+                      },
+                      "placeholder": "eg: https:\/\/www.qq.com",
+                      "hiddenOn": "url_type != 3"
+                    }
+                  ]
+                },
+                {
+                  "type": "switch",
+                  "name": "keep_alive",
+                  "label": "\u7f13\u5b58\u9875\u9762",
+                  "onText": "\u662f",
+                  "offText": "\u5426",
+                  "description": "\u5f00\u542f\u540e\u9875\u9762\u5c06\u7f13\u5b58\uff0c\u91cd\u65b0\u6253\u5f00\u65f6\u4e0d\u4f1a\u91cd\u65b0\u52a0\u8f7d",
+                  "value": 0
+                },
+                {
+                  "type": "switch",
+                  "name": "visible",
+                  "label": "\u53ef\u89c1",
+                  "onText": "\u53ef\u89c1",
+                  "offText": "\u9690\u85cf",
+                  "value": 1
+                },
+                {
+                  "type": "switch",
+                  "name": "is_home",
+                  "label": "\u9996\u9875",
+                  "onText": "\u662f",
+                  "offText": "\u5426",
+                  "description": "\u5728\u591a\u9875\u7b7e\u5361\u6a21\u5f0f\u4e0b\uff0c\u9875\u9762\u6807\u7b7e\u5c06\u56fa\u5b9a\u5728\u5de6\u4fa7",
+                  "value": 0
+                },
+                {
+                  "type": "switch",
+                  "name": "is_full",
+                  "label": "\u5168\u5c4f",
+                  "onText": "\u662f",
+                  "offText": "\u5426",
+                  "description": "\u5f00\u542f\u540e\u5c06\u9690\u85cf\u8be5\u9875\u9762\u7684\u83dc\u5355\u680f\u90e8\u5206",
+                  "value": 0
+                }
+              ],
+              "canAccessSuperData": false,
+              "api": "post:\/system\/admin_menus"
+            },
+            "size": "lg"
+          },
+          "label": "\u65b0\u589e",
+          "icon": "fa fa-add",
+          "level": "primary"
+        },
+        "bulkActions",
+        {
+          "type": "reload",
+          "align": "right"
+        },
+        {
+          "type": "filter-toggler",
+          "align": "right"
+        }
+      ],
+      "primaryField": "id",
+      "draggable": true,
+      "saveOrderApi": {
+        "url": "\/system\/admin_menus\/save_order",
+        "data": {
+          "ids": "${ids}"
+        }
+      },
+      "loadDataOnce": true,
+      "syncLocation": false,
+      "columns": [
+        {
+          "name": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "name": "title",
+          "label": "\u540d\u79f0"
+        },
+        {
+          "name": "icon",
+          "label": "\u56fe\u6807",
+          "type": "flex",
+          "className": "text-center h-full",
+          "justify": "start",
+          "items": [
+            {
+              "type": "wrapper",
+              "size": "none",
+              "body": {
+                "type": "custom-svg-icon",
+                "icon": "${icon}",
+                "className": "mr-2 text-xl h-full"
+              }
+            },
+            {
+              "type": "tpl",
+              "tpl": "${icon}"
+            }
+          ]
+        },
+        {
+          "name": "url",
+          "label": "\u94fe\u63a5"
+        },
+        {
+          "name": "order",
+          "label": "\u6392\u5e8f",
+          "quickEdit": {
+            "type": "input-number",
+            "min": 0,
+            "saveImmediately": true
+          }
+        },
+        {
+          "name": "visible",
+          "label": "\u53ef\u89c1",
+          "quickEdit": {
+            "type": "switch",
+            "mode": "inline",
+            "saveImmediately": true
+          }
+        },
+        {
+          "name": "is_home",
+          "label": "\u9996\u9875",
+          "quickEdit": {
+            "type": "switch",
+            "mode": "inline",
+            "saveImmediately": true
+          }
+        },
+        {
+          "type": "operation",
+          "label": "\u64cd\u4f5c",
+          "buttons": [
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "dialog": {
+                "type": "dialog",
+                "title": "\u7f16\u8f91",
+                "body": {
+                  "type": "form",
+                  "panelClassName": "px-48 m:px-0",
+                  "title": " ",
+                  "mode": "horizontal",
+                  "promptPageLeave": true,
+                  "onEvent": [],
+                  "body": [
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "title",
+                          "label": "\u540d\u79f0",
+                          "required": true
+                        },
+                        {
+                          "type": "picker",
+                          "name": "icon",
+                          "label": "\u56fe\u6807",
+                          "pickerSchema": {
+                            "mode": "cards",
+                            "type": "crud",
+                            "perPage": 40,
+                            "loadDataOnce": true,
+                            "columnsCount": 8,
+                            "footerToolbar": [
+                              "statistics",
+                              "pagination"
+                            ],
+                            "api": "\/_iconify_search",
+                            "filter": {
+                              "type": "form",
+                              "wrapWithPanel": false,
+                              "body": [
+                                {
+                                  "type": "group",
+                                  "className": "pt-3 pb-3",
+                                  "body": [
+                                    {
+                                      "type": "input-text",
+                                      "name": "query",
+                                      "size": "md",
+                                      "value": "${icon || \"home\"}",
+                                      "clearable": true,
+                                      "required": true
+                                    },
+                                    {
+                                      "type": "button",
+                                      "label": "\u641c\u7d22",
+                                      "level": "primary",
+                                      "actionType": "submit",
+                                      "icon": "fa fa-search"
+                                    },
+                                    {
+                                      "type": "button",
+                                      "actionType": "url",
+                                      "className": "ml-2",
+                                      "icon": "fa fa-external-link-alt",
+                                      "label": "Icones",
+                                      "blank": true,
+                                      "url": "https:\/\/icones.js.org\/collection\/all"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "card": {
+                              "type": "card",
+                              "body": [
+                                {
+                                  "type": "custom-svg-icon",
+                                  "icon": "${icon}",
+                                  "className": "text-2xl"
+                                }
+                              ]
+                            }
+                          },
+                          "source": "\/_iconify_search",
+                          "size": "lg",
+                          "labelField": "icon",
+                          "valueField": "icon"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "tree-select",
+                          "name": "parent_id",
+                          "label": "\u7236\u7ea7",
+                          "labelField": "title",
+                          "valueField": "id",
+                          "showIcon": false,
+                          "value": 0,
+                          "source": "\/system\/admin_menus?_action=getData"
+                        },
+                        {
+                          "type": "input-number",
+                          "name": "order",
+                          "label": "\u6392\u5e8f",
+                          "required": true,
+                          "displayMode": "enhance",
+                          "description": "\u5347\u5e8f\u6392\u5e8f",
+                          "min": 0,
+                          "value": 0
+                        }
+                      ]
+                    },
+                    {
+                      "type": "list-select",
+                      "name": "url_type",
+                      "label": "\u7c7b\u578b",
+                      "options": {
+                        "1": "\u8def\u7531",
+                        "2": "\u5916\u94fe",
+                        "3": "Iframe",
+                        "4": "\u9875\u9762"
+                      },
+                      "value": 1
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "url",
+                      "label": "\u94fe\u63a5",
+                      "required": true,
+                      "validateOnChange": true,
+                      "validations": {
+                        "matchRegexp": "\/^(http(s)?\\:\\\/)?(\\\/)+\/"
+                      },
+                      "validationErrors": {
+                        "matchRegexp": "\u9700\u8981\u4ee5 \/ \u5f00\u5934"
+                      },
+                      "placeholder": "eg: \/admin_menus",
+                      "hiddenOn": "url_type != 2"
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "url",
+                      "label": "\u8def\u7531",
+                      "required": true,
+                      "validateOnChange": true,
+                      "validations": {
+                        "matchRegexp": "\/^(http(s)?\\:\\\/)?(\\\/)+\/"
+                      },
+                      "validationErrors": {
+                        "matchRegexp": "\u9700\u8981\u4ee5 \/ \u5f00\u5934"
+                      },
+                      "placeholder": "eg: \/admin_menus",
+                      "hiddenOn": "url_type == 2"
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "component",
+                      "label": "\u7ec4\u4ef6",
+                      "description": "\u9ed8\u8ba4\u4e3a amis , \u975e\u81ea\u5b9a\u4e49\u524d\u7aef\u9875\u9762\u8bf7\u52ff\u4fee\u6539",
+                      "value": "amis",
+                      "hiddenOn": "url_type != 1"
+                    },
+                    {
+                      "type": "select",
+                      "name": "component",
+                      "label": "\u9875\u9762",
+                      "required": true,
+                      "options": [],
+                      "menuTpl": "${label} <span class=\"text-gray-300 pl-2\">${value}<\/span>",
+                      "selectFirst": true,
+                      "searchable": true,
+                      "visibleOn": "url_type == 4"
+                    },
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "iframe_url",
+                          "label": "IframeUrl",
+                          "required": true,
+                          "validateOnChange": true,
+                          "validations": {
+                            "matchRegexp": "\/^(http(s)?\\:\\\/)?(\\\/)+\/"
+                          },
+                          "validationErrors": {
+                            "matchRegexp": "\u9700\u8981\u4ee5 \/ \u5f00\u5934"
+                          },
+                          "placeholder": "eg: https:\/\/www.qq.com",
+                          "hiddenOn": "url_type != 3"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "switch",
+                      "name": "keep_alive",
+                      "label": "\u7f13\u5b58\u9875\u9762",
+                      "onText": "\u662f",
+                      "offText": "\u5426",
+                      "description": "\u5f00\u542f\u540e\u9875\u9762\u5c06\u7f13\u5b58\uff0c\u91cd\u65b0\u6253\u5f00\u65f6\u4e0d\u4f1a\u91cd\u65b0\u52a0\u8f7d",
+                      "value": 0
+                    },
+                    {
+                      "type": "switch",
+                      "name": "visible",
+                      "label": "\u53ef\u89c1",
+                      "onText": "\u53ef\u89c1",
+                      "offText": "\u9690\u85cf",
+                      "value": 1
+                    },
+                    {
+                      "type": "switch",
+                      "name": "is_home",
+                      "label": "\u9996\u9875",
+                      "onText": "\u662f",
+                      "offText": "\u5426",
+                      "description": "\u5728\u591a\u9875\u7b7e\u5361\u6a21\u5f0f\u4e0b\uff0c\u9875\u9762\u6807\u7b7e\u5c06\u56fa\u5b9a\u5728\u5de6\u4fa7",
+                      "value": 0
+                    },
+                    {
+                      "type": "switch",
+                      "name": "is_full",
+                      "label": "\u5168\u5c4f",
+                      "onText": "\u662f",
+                      "offText": "\u5426",
+                      "description": "\u5f00\u542f\u540e\u5c06\u9690\u85cf\u8be5\u9875\u9762\u7684\u83dc\u5355\u680f\u90e8\u5206",
+                      "value": 0
+                    }
+                  ],
+                  "api": "put:\/system\/admin_menus\/${id}",
+                  "initApi": "\/system\/admin_menus\/${id}\/edit?_action=getData",
+                  "redirect": ""
+                },
+                "size": "lg"
+              },
+              "label": "\u7f16\u8f91",
+              "icon": "fa-regular fa-pen-to-square",
+              "level": "link"
+            },
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "label": "\u5220\u9664",
+              "icon": "fa-regular fa-trash-can",
+              "level": "link",
+              "dialog": {
+                "type": "dialog",
+                "title": "",
+                "className": "py-2",
+                "actions": [
+                  {
+                    "type": "action",
+                    "actionType": "cancel",
+                    "label": "\u53d6\u6d88"
+                  },
+                  {
+                    "type": "action",
+                    "actionType": "submit",
+                    "label": "\u5220\u9664",
+                    "level": "danger"
+                  }
+                ],
+                "body": [
+                  {
+                    "type": "form",
+                    "wrapWithPanel": false,
+                    "api": "delete:\/system\/admin_menus\/${id}",
+                    "body": [
+                      {
+                        "type": "tpl",
+                        "className": "py-2",
+                        "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "toolbar": {
+      "type": "button",
+      "actionType": "dialog",
+      "label": "\u9875\u9762\u6e90\u7801",
+      "icon": "fa fa-code",
+      "dialog": {
+        "type": "dialog",
+        "title": "",
+        "actions": [],
+        "size": "lg",
+        "closeOnEsc": true,
+        "closeOnOutside": true,
+        "body": {
+          "type": "editor",
+          "language": "php",
+          "readOnly": true,
+          "size": "xxl",
+          "value": "<?php\n\nnamespace Slowlyo\\OwlAdmin\\Controllers;\n\nuse Slowlyo\\OwlAdmin\\Admin;\nuse Slowlyo\\OwlAdmin\\Renderers\\Page;\nuse Slowlyo\\OwlAdmin\\Renderers\\Form;\nuse Slowlyo\\OwlAdmin\\Services\\AdminMenuService;\nuse Slowlyo\\OwlAdmin\\Traits\\IconifyPickerTrait;\nuse Slowlyo\\OwlAdmin\\Services\\AdminPageService;\n\n\/**\n * @property AdminMenuService $service\n *\/\nclass AdminMenuController extends AdminController\n{\n    use IconifyPickerTrait;\n\n    protected string $serviceName = AdminMenuService::class;\n\n    public function list(): Page\n    {\n        $crud = $this->baseCRUD()\n            ->perPage(999)\n            ->draggable()\n            ->saveOrderApi([\n                'url'  => '\/system\/admin_menus\/save_order',\n                'data' => ['ids' => '${ids}'],\n            ])\n            ->loadDataOnce()\n            ->syncLocation(false)\n            ->footerToolbar([])\n            ->headerToolbar([$this->createButton(true, 'lg'), ...$this->baseHeaderToolBar()])\n            ->filterTogglable(false)\n            ->footerToolbar(['statistics'])\n            ->bulkActions([$this->bulkDeleteButton()->reload('window')])\n            ->columns([\n                amis()->TableColumn('id', 'ID')->sortable(),\n                amis()->TableColumn('title', admin_trans('admin.admin_menu.title')),\n                amis()->TableColumn('icon', admin_trans('admin.admin_menu.icon'))\n                    ->type('flex')\n                    ->className('text-center h-full')\n                    ->justify('start')\n                    ->items('center')\n                    ->items([\n                        amis()->Wrapper()->size('none')->body(\n                            amis()->SvgIcon()->icon('${icon}')->className('mr-2 text-xl h-full')\n                        ),\n                        amis()->Tpl()->tpl('${icon}'),\n                    ]),\n                amis()->TableColumn('url', admin_trans('admin.admin_menu.url')),\n                amis()->TableColumn('order', admin_trans('admin.admin_menu.order'))->quickEdit(\n                    amis()->NumberControl()->min(0)->saveImmediately(true)\n                ),\n                amis()->TableColumn('visible', admin_trans('admin.admin_menu.visible'))->quickEdit(\n                    amis()->SwitchControl()->mode('inline')->saveImmediately(true)\n                ),\n                amis()->TableColumn('is_home', admin_trans('admin.admin_menu.is_home'))->quickEdit(\n                    amis()->SwitchControl()->mode('inline')->saveImmediately(true)\n                ),\n                $this->rowActions([\n                    $this->rowEditButton(true, 'lg'),\n                    $this->rowDeleteButton(),\n                ]),\n            ]);\n\n        return $this->baseList($crud);\n    }\n\n    public function form(): Form\n    {\n        return $this->baseForm()->body([\n            amis()->GroupControl()->body([\n                amis()->TextControl('title', admin_trans('admin.admin_menu.title'))->required(),\n                $this->iconifyPicker('icon', admin_trans('admin.admin_menu.icon')),\n            ]),\n            amis()->GroupControl()->body([\n                amis()->TreeSelectControl('parent_id', admin_trans('admin.admin_menu.parent_id'))\n                    ->labelField('title')\n                    ->valueField('id')\n                    ->showIcon(false)\n                    ->value(0)\n                    ->source('\/system\/admin_menus?_action=getData'),\n                amis()->NumberControl('order', admin_trans('admin.admin_menu.order'))\n                    ->required()\n                    ->displayMode('enhance')\n                    ->description(admin_trans('admin.order_asc'))\n                    ->min(0)\n                    ->value(0),\n            ]),\n            amis()->ListControl('url_type', admin_trans('admin.admin_menu.type'))\n                ->options(Admin::adminMenuModel()::getType())\n                ->value(Admin::adminMenuModel()::TYPE_ROUTE),\n            amis()->TextControl('url', admin_trans('admin.admin_menu.url'))\n                ->required()\n                ->validateOnChange()\n                ->validations(['matchRegexp' => '\/^(http(s)?\\:\\\/)?(\\\/)+\/'])\n                ->validationErrors(['matchRegexp' => admin_trans('admin.need_start_with_slash')])\n                ->placeholder('eg: \/admin_menus')->hiddenOn('url_type != ' . Admin::adminMenuModel()::TYPE_LINK),\n\n            amis()->TextControl('url', admin_trans('admin.admin_menu.route'))\n                ->required()\n                ->validateOnChange()\n                ->validations(['matchRegexp' => '\/^(http(s)?\\:\\\/)?(\\\/)+\/'])\n                ->validationErrors(['matchRegexp' => admin_trans('admin.need_start_with_slash')])\n                ->placeholder('eg: \/admin_menus')->hiddenOn('url_type == ' . Admin::adminMenuModel()::TYPE_LINK),\n\n            amis()->TextControl('component', admin_trans('admin.admin_menu.component'))\n                ->description(admin_trans('admin.admin_menu.component_desc'))\n                ->value('amis')->hiddenOn('url_type != ' . Admin::adminMenuModel()::TYPE_ROUTE),\n\n            amis()->SelectControl('component', admin_trans('admin.admin_menu.page'))\n                ->required()\n                ->options(AdminPageService::make()->options())\n                ->menuTpl('${label} <span class=\"text-gray-300 pl-2\">${value}<\/span>')\n                ->selectFirst()\n                ->searchable()\n                ->visibleOn('url_type == ' . Admin::adminMenuModel()::TYPE_PAGE),\n\n            amis()->GroupControl()->body([\n                amis()->TextControl('iframe_url', 'IframeUrl')\n                    ->required()\n                    ->validateOnChange()\n                    ->validations(['matchRegexp' => '\/^(http(s)?\\:\\\/)?(\\\/)+\/'])\n                    ->validationErrors(['matchRegexp' => admin_trans('admin.need_start_with_slash')])\n                    ->placeholder('eg: https:\/\/www.qq.com')\n                    ->hiddenOn('url_type != ' . Admin::adminMenuModel()::TYPE_IFRAME),\n            ]),\n\n            amis()->SwitchControl('keep_alive', admin_trans('admin.admin_menu.keep_alive'))\n                ->onText(admin_trans('admin.yes'))\n                ->offText(admin_trans('admin.no'))\n                ->description(admin_trans('admin.admin_menu.iframe_description'))\n                ->value(0),\n\n            amis()->SwitchControl('visible', admin_trans('admin.admin_menu.visible'))\n                ->onText(admin_trans('admin.admin_menu.show'))\n                ->offText(admin_trans('admin.admin_menu.hide'))\n                ->value(1),\n            amis()->SwitchControl('is_home', admin_trans('admin.admin_menu.is_home'))\n                ->onText(admin_trans('admin.yes'))\n                ->offText(admin_trans('admin.no'))\n                ->description(admin_trans('admin.admin_menu.is_home_description'))\n                ->value(0),\n            amis()->SwitchControl('is_full', admin_trans('admin.admin_menu.is_full'))\n                ->onText(admin_trans('admin.yes'))\n                ->offText(admin_trans('admin.no'))\n                ->description(admin_trans('admin.admin_menu.is_full_description'))\n                ->value(0),\n        ])->onEvent([\n            'submitSucc' => [\n                'actions' => [\n                    'actionType' => 'custom',\n                    'script'     => 'window.location.reload()',\n                ],\n            ],\n        ]);\n    }\n\n    public function detail(): Form\n    {\n        return $this->baseDetail()->body([]);\n    }\n\n    \/**\n     * \u4fdd\u5b58\u6392\u5e8f\n     *\n     * @return \\Illuminate\\Http\\JsonResponse|\\Illuminate\\Http\\Resources\\Json\\JsonResource\n     *\/\n    public function saveOrder()\n    {\n        return $this->autoResponse($this->service->reorder(request()->input('ids')));\n    }\n}\n"
+        }
+      }
+    }
+  }
+}

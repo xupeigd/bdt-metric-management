@@ -1,0 +1,29 @@
+{
+  "createDataset": {
+    "cluster": 1,
+    "name": "Mock_Dataset",
+    "tableName": "t_identify_operation_logs",
+    "owner": 1,
+    "primaryKey": "id",
+    "description": "虚拟的Dataset",
+    "mutability": {
+      "alongColumn": "",
+      "type": 0,
+      "updateCron": ""
+    }
+  },
+  "modeifyDataset": {
+    "id": 102,
+    "cluster": 1,
+    "name": "Mock_Dataset",
+    "tableName": "t_identify_operation_logs",
+    "owner": 1,
+    "primaryKey": "id",
+    "description": "虚拟的Dataset",
+    "mutability": {
+      "alongColumn": "",
+      "type": 0,
+      "updateCron": ""
+    }
+  }
+}

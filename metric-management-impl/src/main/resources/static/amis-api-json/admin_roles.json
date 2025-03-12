@@ -1,0 +1,422 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "data": {
+    "type": "page",
+    "className": "m:overflow-auto pb-48",
+    "body": {
+      "type": "crud",
+      "perPage": 20,
+      "affixHeader": false,
+      "filterTogglable": false,
+      "filterDefaultVisible": false,
+      "api": "\/amis\/roles",
+      "bulkActions": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "label": "\u5220\u9664",
+          "icon": "fa-solid fa-trash-can",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u5220\u9664",
+            "className": "py-2",
+            "actions": [
+              {
+                "type": "action",
+                "actionType": "cancel",
+                "label": "\u53d6\u6d88"
+              },
+              {
+                "type": "action",
+                "actionType": "submit",
+                "label": "\u5220\u9664",
+                "level": "danger"
+              }
+            ],
+            "body": [
+              {
+                "type": "form",
+                "wrapWithPanel": false,
+                "api": "delete:\/amis\/roles\/${ids}",
+                "body": [
+                  {
+                    "type": "tpl",
+                    "className": "py-2",
+                    "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "perPageAvailable": [
+        10,
+        20,
+        50
+      ],
+      "footerToolbar": [
+        "switch-per-page",
+        "statistics",
+        "pagination"
+      ],
+      "headerToolbar": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u65b0\u589e",
+            "body": {
+              "type": "form",
+              "panelClassName": "px-48 m:px-0",
+              "title": " ",
+              "mode": "horizontal",
+              "promptPageLeave": true,
+              "onEvent": [],
+              "body": [
+                {
+                  "type": "input-text",
+                  "label": "\u540d\u79f0",
+                  "name": "name",
+                  "required": true
+                },
+                {
+                  "type": "input-text",
+                  "label": "\u6807\u8bc6",
+                  "name": "code",
+                  "description": "\u89d2\u8272\u7684\u552f\u4e00\u6807\u8bc6, \u4e0d\u53ef\u91cd\u590d",
+                  "required": true
+                }
+              ],
+              "canAccessSuperData": false,
+              "api": "post:\/amis\/roles"
+            },
+            "size": ""
+          },
+          "label": "\u65b0\u589e",
+          "icon": "fa fa-add",
+          "level": "primary"
+        },
+        "bulkActions",
+        {
+          "type": "reload",
+          "align": "right"
+        },
+        {
+          "type": "filter-toggler",
+          "align": "right"
+        }
+      ],
+      "primaryField": "id",
+      "itemCheckableOn": "${slug !== \"administrator\"}",
+      "columns": [
+        {
+          "label": "ID",
+          "name": "id",
+          "sortable": true
+        },
+        {
+          "label": "\u540d\u79f0",
+          "name": "name"
+        },
+        {
+          "label": "\u6807\u8bc6",
+          "name": "code",
+          "type": "tag"
+        },
+        {
+          "label": "类型",
+          "name": "type",
+          "quickEdit": {
+            "type": "select",
+            "mode": "inline",
+            "disabled": true,
+            "options": [
+              {
+                "label": "公共",
+                "value": 0
+              },
+              {
+                "label": "私有",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "label": "\u521b\u5efa\u65f6\u95f4",
+          "name": "createTime",
+          "type": "datetime",
+          "sortable": true
+        },
+        {
+          "label": "\u66f4\u65b0\u65f6\u95f4",
+          "name": "updateTime",
+          "type": "datetime",
+          "sortable": true
+        },
+        {
+          "type": "operation",
+          "label": "\u64cd\u4f5c",
+          "buttons": [
+            {
+              "type": "button",
+              "actionType": "drawer",
+              "label": "\u8bbe\u7f6e\u6743\u9650",
+              "icon": "fa-solid fa-gear",
+              "level": "link",
+              "drawer": {
+                "type": "drawer",
+                "title": "\u8bbe\u7f6e\u6743\u9650",
+                "resizable": true,
+                "closeOnOutside": true,
+                "closeOnEsc": true,
+                "body": [
+                  {
+                    "type": "form",
+                    "api": {
+                      "method": "put",
+                      "url" : "\/amis\/permissions\/roles\/${id}",
+                      "data": {
+                        "&": "$$",
+                        "type": "0"
+                      }
+                    },
+                    "initApi": "\/amis\/permissions\/roles\/${id}?type=0",
+                    "mode": "normal",
+                    "data": {
+                      "id": "${id}"
+                    },
+                    "body": [
+                      {
+                        "type": "input-tree",
+                        "name": "permissions",
+                        "label": "",
+                        "multiple": true,
+                        "heightAuto": true,
+                        "source": "\/amis\/permissions",
+                        "searchable": true,
+                        "cascade": true,
+                        "joinValues": false,
+                        "extractValue": false,
+                        "size": "full",
+                        "className": "h-full b-none",
+                        "inputClassName": "h-full tree-full",
+                        "labelField": "name",
+                        "valueField": "id"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "hiddenOn": "${type == 1 || type == 2}"
+            },
+            {
+              "type": "button",
+              "actionType": "drawer",
+              "label": "增加\u6743\u9650",
+              "icon": "fa-solid fa-plus",
+              "level": "link",
+              "drawer": {
+                "type": "drawer",
+                "title": "\u8bbe\u7f6e\u6743\u9650",
+                "resizable": true,
+                "closeOnOutside": true,
+                "closeOnEsc": true,
+                "body": [
+                  {
+                    "type": "form",
+                    "api": {
+                      "method": "put",
+                      "url" : "\/amis\/permissions\/roles\/${id}",
+                      "data": {
+                        "&": "$$",
+                        "type": "0"
+                      }
+                    },
+                    "initApi": "\/amis\/permissions\/roles\/${id}?type=0",
+                    "mode": "normal",
+                    "data": {
+                      "id": "${id}"
+                    },
+                    "body": [
+                      {
+                        "type": "input-tree",
+                        "name": "permissions",
+                        "label": "",
+                        "multiple": true,
+                        "heightAuto": true,
+                        "source": "\/amis\/permissions",
+                        "searchable": true,
+                        "cascade": true,
+                        "joinValues": false,
+                        "extractValue": false,
+                        "size": "full",
+                        "className": "h-full b-none",
+                        "inputClassName": "h-full tree-full",
+                        "labelField": "name",
+                        "valueField": "id"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "hiddenOn": "${type != 1 && type != 2}"
+            },
+            {
+              "type": "button",
+              "actionType": "drawer",
+              "label": "减少\u6743\u9650",
+              "icon": "fa-solid fa-minus",
+              "level": "link",
+              "drawer": {
+                "type": "drawer",
+                "title": "\u8bbe\u7f6e\u6743\u9650",
+                "resizable": true,
+                "closeOnOutside": true,
+                "closeOnEsc": true,
+                "body": [
+                  {
+                    "type": "form",
+                    "api": {
+                      "method": "put",
+                      "url" : "\/amis\/permissions\/roles\/${id}",
+                      "data": {
+                        "&": "$$",
+                        "type": "1"
+                      }
+                    },
+                    "initApi": "\/amis\/permissions\/roles\/${id}?type=1",
+                    "mode": "normal",
+                    "data": {
+                      "id": "${id}"
+                    },
+                    "body": [
+                      {
+                        "type": "input-tree",
+                        "name": "permissions",
+                        "label": "",
+                        "multiple": true,
+                        "heightAuto": true,
+                        "source": "\/amis\/permissions",
+                        "searchable": true,
+                        "cascade": true,
+                        "joinValues": false,
+                        "extractValue": false,
+                        "size": "full",
+                        "className": "h-full b-none",
+                        "inputClassName": "h-full tree-full",
+                        "labelField": "name",
+                        "valueField": "id"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "hiddenOn": "${type != 1 && type != 2}"
+            },
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "dialog": {
+                "type": "dialog",
+                "title": "\u7f16\u8f91",
+                "body": {
+                  "type": "form",
+                  "panelClassName": "px-48 m:px-0",
+                  "title": " ",
+                  "mode": "horizontal",
+                  "promptPageLeave": true,
+                  "onEvent": [],
+                  "body": [
+                    {
+                      "type": "input-text",
+                      "label": "ID",
+                      "name": "id",
+                      "required": true,
+                      "disabled": true
+                    },
+                    {
+                      "type": "input-text",
+                      "label": "\u540d\u79f0",
+                      "name": "name",
+                      "required": true
+                    },
+                    {
+                      "type": "input-text",
+                      "label": "\u6807\u8bc6",
+                      "name": "code",
+                      "description": "\u89d2\u8272\u7684\u552f\u4e00\u6807\u8bc6, \u4e0d\u53ef\u91cd\u590d",
+                      "required": true,
+                      "disabled": true
+                    }
+                  ],
+                  "api": "put:\/amis\/roles\/${id}",
+                  "initApi": "\/amis\/roles\/${id}",
+                  "redirect": ""
+                },
+                "size": ""
+              },
+              "label": "\u7f16\u8f91",
+              "icon": "fa-regular fa-pen-to-square",
+              "level": "link",
+              "hiddenOn": "${type == 1 || type == 2 }"
+            },
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "label": "\u5220\u9664",
+              "icon": "fa-regular fa-trash-can",
+              "level": "link",
+              "dialog": {
+                "type": "dialog",
+                "title": "",
+                "className": "py-2",
+                "actions": [
+                  {
+                    "type": "action",
+                    "actionType": "cancel",
+                    "label": "\u53d6\u6d88"
+                  },
+                  {
+                    "type": "action",
+                    "actionType": "submit",
+                    "label": "\u5220\u9664",
+                    "level": "danger"
+                  }
+                ],
+                "body": [
+                  {
+                    "type": "form",
+                    "wrapWithPanel": false,
+                    "api": "delete:\/amis\/roles\/${id}",
+                    "body": [
+                      {
+                        "type": "tpl",
+                        "className": "py-2",
+                        "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "hiddenOn": "${code == \"Admin\" || code == \"SYS\" || type == 1 || type == 2 }"
+            }
+          ]
+        }
+      ]
+    },
+    "css": {
+      ".tree-full": {
+        "overflow": "hidden !important"
+      },
+      ".cxd-TreeControl > .cxd-Tree": {
+        "height": "100% !important",
+        "max-height": "100% !important"
+      }
+    }
+  }
+}

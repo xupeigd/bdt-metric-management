@@ -1,0 +1,43 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "data": {
+    "name": "admin",
+    "email": "admin@tektite.com",
+    "avatar": "\/admin-assets\/default-avatar.png",
+    "menus": {
+      "type": "dropdown-button",
+      "hideCaret": false,
+      "trigger": "hover",
+      "label": "admin",
+      "className": "h-full w-full",
+      "btnClassName": "navbar-user w-full",
+      "menuClassName": "min-w-0",
+      "icon": "\/admin-assets\/default-avatar.png",
+      "buttons": [
+        {
+          "type": "button",
+          "iconClassName": "pr-2",
+          "icon": "fa fa-user-gear",
+          "label": "\u4e2a\u4eba\u8bbe\u7f6e",
+          "onClick": "window.location.hash = \"#\/user_setting\""
+        },
+        {
+          "type": "button",
+          "iconClassName": "pr-2",
+          "icon": "fa fa-user-gear",
+          "label": "[Weak]",
+          "onClick": "window.location.hash = \"#\/user_setting_bak\""
+        },
+        {
+          "type": "button",
+          "iconClassName": "pr-2",
+          "label": "\u9000\u51fa\u767b\u5f55",
+          "icon": "fa-solid fa-right-from-bracket",
+          "onClick": "window.$owl.logout()"
+        }
+      ]
+    }
+  }
+}

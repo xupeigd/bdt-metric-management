@@ -1,0 +1,92 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+    ]
+  },
+  "data": {
+    "items": [
+      {
+        "id": 1,
+        "name": "\u9996\u9875",
+        "slug": "home",
+        "http_method": null,
+        "http_path": null,
+        "order": 0,
+        "parent_id": 0,
+        "created_at": "2024-05-26 13:26:01",
+        "updated_at": "2024-05-26 13:26:01"
+      },
+      {
+        "id": 2,
+        "name": "\u7cfb\u7edf",
+        "slug": "system",
+        "http_method": null,
+        "http_path": null,
+        "order": 0,
+        "parent_id": 0,
+        "created_at": "2024-05-26 13:26:01",
+        "updated_at": "2024-05-26 13:26:01",
+        "children": [
+          {
+            "id": 3,
+            "name": "\u7528\u6237",
+            "slug": "admin_users",
+            "http_method": null,
+            "http_path": null,
+            "order": 0,
+            "parent_id": 2,
+            "created_at": "2024-05-26 13:26:01",
+            "updated_at": "2024-05-26 13:26:01"
+          },
+          {
+            "id": 4,
+            "name": "\u89d2\u8272",
+            "slug": "roles",
+            "http_method": null,
+            "http_path": null,
+            "order": 0,
+            "parent_id": 2,
+            "created_at": "2024-05-26 13:26:01",
+            "updated_at": "2024-05-26 13:26:01"
+          },
+          {
+            "id": 5,
+            "name": "\u6743\u9650",
+            "slug": "permissions",
+            "http_method": null,
+            "http_path": null,
+            "order": 0,
+            "parent_id": 2,
+            "created_at": "2024-05-26 13:26:01",
+            "updated_at": "2024-05-26 13:26:01"
+          },
+          {
+            "id": 6,
+            "name": "\u83dc\u5355",
+            "slug": "menus",
+            "http_method": null,
+            "http_path": null,
+            "order": 0,
+            "parent_id": 2,
+            "created_at": "2024-05-26 13:26:01",
+            "updated_at": "2024-05-26 13:26:01"
+          },
+          {
+            "id": 7,
+            "name": "\u8bbe\u7f6e",
+            "slug": "settings",
+            "http_method": null,
+            "http_path": null,
+            "order": 0,
+            "parent_id": 2,
+            "created_at": "2024-05-26 13:26:01",
+            "updated_at": "2024-05-26 13:26:01"
+          }
+        ]
+      }
+    ]
+  }
+}

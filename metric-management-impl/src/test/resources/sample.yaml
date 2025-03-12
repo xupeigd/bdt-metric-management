@@ -1,0 +1,94 @@
+data_source:
+  name: t_logs
+  description: user logs
+  owners:
+    - page.quicksand.com
+  sql_table: db_metric_management.t_identify_operation_logs
+  identifiers:
+    - name: id
+      type: primary
+      expr: id
+---
+dimensions:
+  - name: tl_user
+    type: categorical
+    expr: concat(user_id,'')
+  - name: ds
+    type: time
+    expr: CURRENT_TIMESTAMP()
+    type_params:
+      is_primary: true
+      time_granularity: day
+---
+measures:
+  - name: tl_new_customers
+    expr: "1"
+    agg: SUM
+    create_metric: true
+  - name: tl_ucount
+    expr: id
+    agg: SUM
+    create_metric: true
+---
+metric:
+  name: ncsitl
+  owners:
+    - demo@transformdata.io
+  type: measure_proxy
+  type_params:
+    measure: tl_new_customers
+---
+metric:
+  name: ucountsi
+  owners:
+    - demo@transformdata.io
+  type: measure_proxy
+  type_params:
+    measure: tl_ucount
+
+
+---
+name: "Mock_Dataset"
+description: "虚拟的Dataset"
+mutability:
+  type: "immutable"
+identifiers:
+  - name: "id"
+    type: "primary"
+    expr: "id"
+sql_table: "t_identify_operation_logs"
+
+---
+name: febe084d87feffb0cd373f59f98a9e40
+description: 虚拟的Dataset
+mutability:
+  type: immutable
+identifiers:
+  - name: id
+    type: primary
+    expr: id
+sql_table: t_identify_operation_logs
+
+---
+dimensions:
+  - name: tl_user
+    type: categorical
+    expr: concat(user_id,'')
+---
+measures:
+  - name: tl_new_customers
+    expr: "1"
+    agg: SUM
+    create_metric: true
+  - name: tl_ucount
+    expr: id
+    agg: SUM
+    create_metric: true
+---
+metric:
+  name: ncsitl
+  owners:
+    - demo@transformdata.io
+  type: measure_proxy
+  type_params:
+    measure: tl_new_customers

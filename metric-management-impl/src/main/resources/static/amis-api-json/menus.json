@@ -1,0 +1,407 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "data": [
+    {
+      "name": "[1]",
+      "path": "\/dashboard",
+      "component": "amis",
+      "is_home": 1,
+      "iframe_url": "",
+      "url_type": 1,
+      "keep_alive": 0,
+      "is_full": 0,
+      "is_link": false,
+      "page_sign": "",
+      "meta": {
+        "title": "指标看板",
+        "icon": "mdi:chart-line",
+        "hide": false,
+        "order": 0
+      }
+    },
+    {
+      "name": "[2]",
+      "path": "\/system",
+      "component": "amis",
+      "is_home": 0,
+      "iframe_url": "",
+      "url_type": 1,
+      "keep_alive": 0,
+      "is_full": 0,
+      "is_link": false,
+      "page_sign": "",
+      "meta": {
+        "title": "\u7cfb\u7edf\u7ba1\u7406",
+        "icon": "material-symbols:settings-outline",
+        "hide": true,
+        "order": 0
+      },
+      "children": [
+        {
+          "name": "[2]-[3]",
+          "path": "\/system\/admin_users",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u7528\u6237",
+            "icon": "ph:user-gear",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[3]-create",
+          "path": "\/system\/admin_users\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ph:user-gear",
+            "title": "\u7528\u6237 - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[3]-show",
+          "path": "\/system\/admin_users\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ph:user-gear",
+            "title": "\u7528\u6237 - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[3]-edit",
+          "path": "\/system\/admin_users\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ph:user-gear",
+            "title": "\u7528\u6237 - \u7f16\u8f91"
+          }
+        },
+        {
+          "name": "[2]-[4]",
+          "path": "\/system\/admin_roles",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u89d2\u8272",
+            "icon": "carbon:user-role",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[4]-create",
+          "path": "\/system\/admin_roles\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "carbon:user-role",
+            "title": "\u89d2\u8272 - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[4]-show",
+          "path": "\/system\/admin_roles\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "carbon:user-role",
+            "title": "\u89d2\u8272 - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[4]-edit",
+          "path": "\/system\/admin_roles\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "carbon:user-role",
+            "title": "\u89d2\u8272 - \u7f16\u8f91"
+          }
+        },
+        {
+          "name": "[2]-[5]",
+          "path": "\/system\/admin_permissions",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u6743\u9650",
+            "icon": "fluent-mdl2:permissions",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[5]-create",
+          "path": "\/system\/admin_permissions\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "fluent-mdl2:permissions",
+            "title": "\u6743\u9650 - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[5]-show",
+          "path": "\/system\/admin_permissions\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "fluent-mdl2:permissions",
+            "title": "\u6743\u9650 - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[5]-edit",
+          "path": "\/system\/admin_permissions\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "fluent-mdl2:permissions",
+            "title": "\u6743\u9650 - \u7f16\u8f91"
+          }
+        },
+        {
+          "name": "[2]-[6]",
+          "path": "\/system\/admin_menus",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u83dc\u5355",
+            "icon": "ant-design:menu-unfold-outlined",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[6]-create",
+          "path": "\/system\/admin_menus\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ant-design:menu-unfold-outlined",
+            "title": "\u83dc\u5355 - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[6]-show",
+          "path": "\/system\/admin_menus\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ant-design:menu-unfold-outlined",
+            "title": "\u83dc\u5355 - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[6]-edit",
+          "path": "\/system\/admin_menus\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ant-design:menu-unfold-outlined",
+            "title": "\u83dc\u5355 - \u7f16\u8f91"
+          }
+        },
+        {
+          "name": "[2]-[7]",
+          "path": "\/system\/settings",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u8bbe\u7f6e",
+            "icon": "akar-icons:settings-horizontal",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[7]-create",
+          "path": "\/system\/settings\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "akar-icons:settings-horizontal",
+            "title": "\u8bbe\u7f6e - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[7]-show",
+          "path": "\/system\/settings\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "akar-icons:settings-horizontal",
+            "title": "\u8bbe\u7f6e - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[7]-edit",
+          "path": "\/system\/settings\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "akar-icons:settings-horizontal",
+            "title": "\u8bbe\u7f6e - \u7f16\u8f91"
+          }
+        }
+      ]
+    },
+    {
+      "name": "[3]",
+      "path": "\/metric_market",
+      "component": "amis",
+      "meta": {
+        "hide": false,
+        "title": "指标市场",
+        "icon": "mdi:shopping",
+        "singleLayout": "basic"
+      }
+    },
+    {
+      "name": "[4]",
+      "path": "\/metric_manage",
+      "component": "amis",
+      "meta": {
+        "hide": false,
+        "title": "指标管理",
+        "icon": "material-symbols:perm-data-setting",
+        "singleLayout": "basic"
+      },
+      "children": [
+        {
+          "name": "[4]-[1]",
+          "path": "\/catalogs_manage",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "指标域",
+            "icon": "mdi:set-split",
+            "hide": false,
+            "order": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "[5]",
+      "path": "\/model_manage",
+      "component": "amis",
+      "meta": {
+        "hide": false,
+        "title": "模型管理",
+        "icon": "mdi:database-cog",
+        "singleLayout": "basic"
+      },
+      "children": [
+        {
+          "name": "[5]-[1]",
+          "path": "\/clusters_manage",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "集群信息",
+            "icon": "mdi:database-settings",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[5]-[1]",
+          "path": "\/datasets_manage",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "数据集",
+            "icon": "mdi:table",
+            "hide": false,
+            "order": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "[6]",
+      "path": "\/application_manage",
+      "component": "amis",
+      "meta": {
+        "hide": false,
+        "title": "应用中心",
+        "icon": "mdi:application-cog",
+        "singleLayout": "basic"
+      },
+      "children": [
+        {
+          "name": "[6]-[1]",
+          "path": "\/approval",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "审批中心",
+            "icon": "mdi:list-status",
+            "hide": false,
+            "order": 0
+          }
+        }
+      ]
+    }
+  ]
+}

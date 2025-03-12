@@ -1,0 +1,370 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+  },
+  "data": {
+    "type": "page",
+    "className": "m:overflow-auto pb-48",
+    "body": {
+      "type": "crud",
+      "perPage": 20,
+      "affixHeader": false,
+      "filterTogglable": false,
+      "filterDefaultVisible": false,
+      "api": "\/amis\/clusters",
+      "bulkActions": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "label": "\u5220\u9664",
+          "icon": "fa-solid fa-trash-can",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u5220\u9664",
+            "className": "py-2",
+            "actions": [
+              {
+                "type": "action",
+                "actionType": "cancel",
+                "label": "\u53d6\u6d88"
+              },
+              {
+                "type": "action",
+                "actionType": "submit",
+                "label": "\u5220\u9664",
+                "level": "danger"
+              }
+            ],
+            "body": [
+              {
+                "type": "form",
+                "wrapWithPanel": false,
+                "api": "delete:\/amis\/clusters\/${ids}",
+                "body": [
+                  {
+                    "type": "tpl",
+                    "className": "py-2",
+                    "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                  }
+                ]
+              }
+            ]
+          },
+          "reload": "window"
+        }
+      ],
+      "perPageAvailable": [
+        10,
+        20,
+        50
+      ],
+      "footerToolbar": [
+        "switch-per-page",
+        "statistics",
+        "pagination"
+      ],
+      "headerToolbar": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u65b0\u589e",
+            "body": {
+              "type": "card",
+              "body": {
+                "type": "wizard",
+                "steps": [
+                  {
+                    "type": "form",
+                    "title": "选择集群",
+                    "mode": "horizontal",
+                    "body": [
+                      {
+                        "type": "select",
+                        "name": "cluster",
+                        "label": "数据集群",
+                        "searchable": true,
+                        "multiple": false,
+                        "labelField": "name",
+                        "valueField": "id",
+                        "joinValues": false,
+                        "extractValue": true,
+                        "source": "\/amis\/clusters?perPage=9999"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "form",
+                    "title": "选择数据表",
+                    "mode": "horizontal",
+                    "body": [
+                      {
+                        "type": "select",
+                        "name": "table",
+                        "label": "数据表",
+                        "searchable": true,
+                        "multiple": false,
+                        "labelField": "name",
+                        "valueField": "value",
+                        "joinValues": false,
+                        "extractValue": true,
+                        "source": "\/amis\/datasource\/clusters\/${cluster}\/tables"
+                      }
+                    ]
+                  },
+                  {
+                    "$schema": "https://houtai.baidu.com/v2/schemas/page.json#",
+                    "type": "form",
+                    "title": "选择字段",
+                    "mode": "horizontal",
+                    "controls": [
+                      {
+                        "type": "transfer",
+                        "name": "transfer3",
+                        "selectMode": "table",
+                        "columns": [
+                          {
+                            "name": "name",
+                            "label": "名称"
+                          },
+                          {
+                            "name": "type",
+                            "label": "类型"
+                          },
+                          {
+                            "name": "comment",
+                            "label": "备注"
+                          }
+                        ],
+                        "source": "\/amis\/datasource\/clusters\/${cluster}\/tables\/${table}\/columns"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "size": "lg"
+          },
+          "label": "\u65b0\u589e",
+          "icon": "fa fa-add",
+          "level": "primary"
+        },
+        "bulkActions",
+        {
+          "type": "reload",
+          "align": "right"
+        },
+        {
+          "type": "filter-toggler",
+          "align": "right"
+        }
+      ],
+      "primaryField": "id",
+      "draggable": true,
+      "loadDataOnce": false,
+      "syncLocation": false,
+      "columns": [
+        {
+          "name": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "name": "name",
+          "label": "\u540d\u79f0"
+        },
+        {
+          "name": "type",
+          "label": "类型"
+        },
+        {
+          "name": "createTime",
+          "label": "创建时间"
+        },
+        {
+          "name": "updateTime",
+          "label": "更新时间"
+        },
+        {
+          "type": "operation",
+          "label": "\u64cd\u4f5c",
+          "buttons": [
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "dialog": {
+                "type": "dialog",
+                "title": "编辑",
+                "body": {
+                  "type": "form",
+                  "panelClassName": "px-48 m:px-0",
+                  "title": " ",
+                  "mode": "horizontal",
+                  "promptPageLeave": true,
+                  "onEvent": [],
+                  "body": [
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "id",
+                          "label": "ID",
+                          "disabled": true,
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "name",
+                          "label": "\u540d\u79f0",
+                          "required": true
+                        },
+                        {
+                          "type": "select",
+                          "name": "type",
+                          "label": "类型",
+                          "options": [
+                            {
+                              "label": "MySql",
+                              "value": "MySql"
+                            },
+                            {
+                              "label": "Hive",
+                              "value": "Hive"
+                            },
+                            {
+                              "label": "Clickhouse",
+                              "value": "Clickhouse"
+                            },
+                            {
+                              "label": "Doris",
+                              "value": "Doris"
+                            },
+                            {
+                              "label": "StarRocks",
+                              "value": "StarRocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "address",
+                          "label": "链接地址",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "defaultDatabase",
+                          "label": "默认数据库",
+                          "required": true
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "defaultSchema",
+                          "label": "默认Schema",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "type": "group",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "username",
+                          "label": "账户名",
+                          "required": true
+                        },
+                        {
+                          "type": "input-password",
+                          "name": "password",
+                          "label": "密码",
+                          "required": true
+                        }
+                      ]
+                    },
+                    {
+                      "type": "textarea",
+                      "name": "comment",
+                      "label": "备注"
+                    }
+                  ],
+                  "canAccessSuperData": false,
+                  "initApi": "/amis/clusters/${id}",
+                  "api": "put:\/amis\/clusters\/${id}"
+                },
+                "size": "lg"
+              },
+              "label": "\u7f16\u8f91",
+              "icon": "fa-regular fa-pen-to-square",
+              "level": "link"
+            },
+            {
+              "type": "button",
+              "label": " 测试链接",
+              "icon": "fa-solid fa-xmarks-lines",
+              "level": "link"
+            },
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "label": "\u5220\u9664",
+              "icon": "fa-regular fa-trash-can",
+              "level": "link",
+              "dialog": {
+                "type": "dialog",
+                "title": "",
+                "className": "py-2",
+                "actions": [
+                  {
+                    "type": "action",
+                    "actionType": "cancel",
+                    "label": "\u53d6\u6d88"
+                  },
+                  {
+                    "type": "action",
+                    "actionType": "submit",
+                    "label": "\u5220\u9664",
+                    "level": "danger"
+                  }
+                ],
+                "body": [
+                  {
+                    "type": "form",
+                    "wrapWithPanel": false,
+                    "api": "delete:\/amis\/clusters\/${id}",
+                    "body": [
+                      {
+                        "type": "tpl",
+                        "className": "py-2",
+                        "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

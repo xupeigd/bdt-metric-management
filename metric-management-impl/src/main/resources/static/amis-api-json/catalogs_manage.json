@@ -1,0 +1,278 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+    ]
+  },
+  "data": {
+    "type": "page",
+    "className": "m:overflow-auto pb-48",
+    "body": {
+      "type": "crud",
+      "perPage": 999999,
+      "affixHeader": false,
+      "filterTogglable": false,
+      "filterDefaultVisible": false,
+      "api": "\/amis\/metric-catalogs",
+      "bulkActions": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "label": "\u5220\u9664",
+          "icon": "fa-solid fa-trash-can",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u5220\u9664",
+            "className": "py-2",
+            "actions": [
+              {
+                "type": "action",
+                "actionType": "cancel",
+                "label": "\u53d6\u6d88"
+              },
+              {
+                "type": "action",
+                "actionType": "submit",
+                "label": "\u5220\u9664",
+                "level": "danger"
+              }
+            ],
+            "body": [
+              {
+                "type": "form",
+                "wrapWithPanel": false,
+                "api": "delete:\/amis\/metric-catalogs\/${ids}",
+                "body": [
+                  {
+                    "type": "tpl",
+                    "className": "py-2",
+                    "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "perPageAvailable": [
+        10,
+        20,
+        50
+      ],
+      "footerToolbar": [],
+      "headerToolbar": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u65b0\u589e",
+            "body": {
+              "type": "form",
+              "panelClassName": "px-48 m:px-0",
+              "title": " ",
+              "mode": "horizontal",
+              "promptPageLeave": true,
+              "onEvent": [],
+              "body": [
+                {
+                  "type": "input-text",
+                  "name": "name",
+                  "label": "\u540d\u79f0",
+                  "required": true
+                },
+                {
+                  "type": "input-text",
+                  "name": "businessCode",
+                  "label": "业务编码",
+                  "required": true
+                },
+                {
+                  "type": "select",
+                  "name": "type",
+                  "options": [
+                    {
+                      "label": "主题域",
+                      "value": 0
+                    },
+                    {
+                      "label": "业务域",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "tree-select",
+                  "name": "parent",
+                  "label": "\u7236\u7ea7",
+                  "labelField": "name",
+                  "valueField": "id",
+                  "value": 0,
+                  "source": "\/amis\/metric-catalogs"
+                }
+              ],
+              "canAccessSuperData": false,
+              "api": "post:\/amis\/metric-catalogs"
+            },
+            "size": "md"
+          },
+          "label": "\u65b0\u589e",
+          "icon": "fa fa-add",
+          "level": "primary"
+        },
+        "bulkActions",
+        {
+          "type": "reload",
+          "align": "right"
+        },
+        {
+          "type": "filter-toggler",
+          "align": "right"
+        }
+      ],
+      "primaryField": "id",
+      "loadDataOnce": true,
+      "columns": [
+        {
+          "name": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "name": "name",
+          "label": "\u540d\u79f0"
+        },
+        {
+          "name": "businessCode",
+          "label": "业务编码"
+        },
+        {
+          "name": "type",
+          "label": "类型",
+          "quickEdit": {
+            "type": "select",
+            "mode": "inline",
+            "disabled": true,
+            "options": [
+              {
+                "label": "主题域",
+                "value": 0
+              },
+              {
+                "label": "业务域",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "type": "operation",
+          "label": "\u64cd\u4f5c",
+          "buttons": [
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "dialog": {
+                "type": "dialog",
+                "title": "\u7f16\u8f91",
+                "body": {
+                  "type": "form",
+                  "panelClassName": "px-48 m:px-0",
+                  "title": " ",
+                  "mode": "horizontal",
+                  "promptPageLeave": true,
+                  "onEvent": [],
+                  "body": [
+                    {
+                      "type": "input-text",
+                      "name": "id",
+                      "label": "ID",
+                      "required": true,
+                      "disabled": true
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "name",
+                      "label": "\u540d\u79f0",
+                      "required": true
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "code",
+                      "label": "\u6807\u8bc6",
+                      "required": true,
+                      "disabled": true
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "businessCode",
+                      "label": "业务编码",
+                      "disabled": true
+                    },
+                    {
+                      "type": "tree-select",
+                      "name": "parent",
+                      "label": "\u7236\u7ea7",
+                      "labelField": "name",
+                      "valueField": "id",
+                      "disabled": true,
+                      "source": "\/amis\/metric-catalogs"
+                    }
+                  ],
+                  "api": "put:\/amis\/metric-catalogs\/${id}",
+                  "initApi": "\/amis\/metric-catalogs\/${id}",
+                  "redirect": ""
+                },
+                "size": "md"
+              },
+              "label": "\u7f16\u8f91",
+              "icon": "fa-regular fa-pen-to-square",
+              "level": "link"
+            },
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "label": "\u5220\u9664",
+              "icon": "fa-regular fa-trash-can",
+              "level": "link",
+              "dialog": {
+                "type": "dialog",
+                "title": "",
+                "className": "py-2",
+                "actions": [
+                  {
+                    "type": "action",
+                    "actionType": "cancel",
+                    "label": "\u53d6\u6d88"
+                  },
+                  {
+                    "type": "action",
+                    "actionType": "submit",
+                    "label": "\u5220\u9664",
+                    "level": "danger"
+                  }
+                ],
+                "body": [
+                  {
+                    "type": "form",
+                    "wrapWithPanel": false,
+                    "api": "delete:\/amis\/metric-catalogs\/${id}",
+                    "body": [
+                      {
+                        "type": "tpl",
+                        "className": "py-2",
+                        "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "createMetricCatalog": {
+    "name": "业务域",
+    "parent": 3
+  }
+}

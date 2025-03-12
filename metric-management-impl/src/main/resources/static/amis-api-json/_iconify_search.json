@@ -1,0 +1,2751 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+      "[18.6 ms] select * from `personal_access_tokens` where `personal_access_tokens`.`id` = 2904 limit 1",
+      "[0.47 ms] select * from `admin_users` where `admin_users`.`id` = 1 limit 1",
+      "[7.52 ms] update `personal_access_tokens` set `last_used_at` = '2025-02-26 17:40:17', `personal_access_tokens`.`updated_at` = '2025-02-26 17:40:17' where `id` = 2904",
+      "[0.73 ms] select `admin_roles`.*, `admin_role_users`.`user_id` as `pivot_user_id`, `admin_role_users`.`role_id` as `pivot_role_id`, `admin_role_users`.`created_at` as `pivot_created_at`, `admin_role_users`.`updated_at` as `pivot_updated_at` from `admin_roles` inner join `admin_role_users` on `admin_roles`.`id` = `admin_role_users`.`role_id` where `admin_role_users`.`user_id` = 1"
+    ]
+  },
+  "data": {
+    "items": [
+      {
+        "icon": "akar-icons:home"
+      },
+      {
+        "icon": "akar-icons:home-alt1"
+      },
+      {
+        "icon": "ant-design:home-filled"
+      },
+      {
+        "icon": "ant-design:home-outlined"
+      },
+      {
+        "icon": "ant-design:home-twotone"
+      },
+      {
+        "icon": "arcticons:adguard-home-manager"
+      },
+      {
+        "icon": "arcticons:english-home"
+      },
+      {
+        "icon": "arcticons:eufyhome"
+      },
+      {
+        "icon": "arcticons:folder-home"
+      },
+      {
+        "icon": "arcticons:genius-home"
+      },
+      {
+        "icon": "arcticons:google-home"
+      },
+      {
+        "icon": "arcticons:govee-home"
+      },
+      {
+        "icon": "arcticons:home-assistant"
+      },
+      {
+        "icon": "arcticons:home-assistant-alt-1"
+      },
+      {
+        "icon": "arcticons:home-connect"
+      },
+      {
+        "icon": "arcticons:home-depot"
+      },
+      {
+        "icon": "arcticons:home-finance"
+      },
+      {
+        "icon": "arcticons:home-network"
+      },
+      {
+        "icon": "arcticons:home-smart"
+      },
+      {
+        "icon": "arcticons:home-workouts"
+      },
+      {
+        "icon": "arcticons:homebase"
+      },
+      {
+        "icon": "arcticons:homee"
+      },
+      {
+        "icon": "arcticons:homewav"
+      },
+      {
+        "icon": "arcticons:homewizard-energy"
+      },
+      {
+        "icon": "arcticons:jiohome"
+      },
+      {
+        "icon": "arcticons:life-fits-into-home"
+      },
+      {
+        "icon": "arcticons:mi-home"
+      },
+      {
+        "icon": "arcticons:ourhome"
+      },
+      {
+        "icon": "arcticons:pets-at-home"
+      },
+      {
+        "icon": "arcticons:pokemon-home"
+      },
+      {
+        "icon": "arcticons:polaris-iq-home"
+      },
+      {
+        "icon": "arcticons:smart-home"
+      },
+      {
+        "icon": "arcticons:squarehome2"
+      },
+      {
+        "icon": "arcticons:syska-smart-home"
+      },
+      {
+        "icon": "arcticons:tachometer"
+      },
+      {
+        "icon": "arcticons:vectorifydahome"
+      },
+      {
+        "icon": "arcticons:wiim-home"
+      },
+      {
+        "icon": "arcticons:wipro-next-smart-home"
+      },
+      {
+        "icon": "arcticons:yi-home"
+      },
+      {
+        "icon": "basil:home-outline"
+      },
+      {
+        "icon": "basil:home-solid"
+      },
+      {
+        "icon": "bitcoin-icons:home-filled"
+      },
+      {
+        "icon": "bitcoin-icons:home-outline"
+      },
+      {
+        "icon": "bx:bxs-camera-home"
+      },
+      {
+        "icon": "bx:bxs-home"
+      },
+      {
+        "icon": "bx:bxs-home-circle"
+      },
+      {
+        "icon": "bx:bxs-home-heart"
+      },
+      {
+        "icon": "bx:bxs-home-smile"
+      },
+      {
+        "icon": "bx:bxs-tachometer"
+      },
+      {
+        "icon": "bx:camera-home"
+      },
+      {
+        "icon": "bx:home"
+      },
+      {
+        "icon": "bx:home-alt"
+      },
+      {
+        "icon": "bx:home-alt-2"
+      },
+      {
+        "icon": "bx:home-circle"
+      },
+      {
+        "icon": "bx:home-heart"
+      },
+      {
+        "icon": "bx:home-smile"
+      },
+      {
+        "icon": "bx:tachometer"
+      },
+      {
+        "icon": "bxs:camera-home"
+      },
+      {
+        "icon": "bxs:home"
+      },
+      {
+        "icon": "bxs:home-alt-2"
+      },
+      {
+        "icon": "bxs:home-circle"
+      },
+      {
+        "icon": "bxs:home-heart"
+      },
+      {
+        "icon": "bxs:home-smile"
+      },
+      {
+        "icon": "bxs:tachometer"
+      },
+      {
+        "icon": "bytesize:home"
+      },
+      {
+        "icon": "carbon:home"
+      },
+      {
+        "icon": "cbi:carrier-home"
+      },
+      {
+        "icon": "cbi:esphome"
+      },
+      {
+        "icon": "cbi:google-home"
+      },
+      {
+        "icon": "cbi:google-home-icon"
+      },
+      {
+        "icon": "cbi:home-mini"
+      },
+      {
+        "icon": "cbi:homekit"
+      },
+      {
+        "icon": "cbi:homemati-ip"
+      },
+      {
+        "icon": "cbi:homepod"
+      },
+      {
+        "icon": "cbi:homepod-mini"
+      },
+      {
+        "icon": "cbi:homey"
+      },
+      {
+        "icon": "cbi:smarthome-solver"
+      },
+      {
+        "icon": "cbi:tabbar-home"
+      },
+      {
+        "icon": "charm:home"
+      },
+      {
+        "icon": "ci:home-alt-check"
+      },
+      {
+        "icon": "ci:home-alt-fill"
+      },
+      {
+        "icon": "ci:home-alt-minus"
+      },
+      {
+        "icon": "ci:home-alt-outline"
+      },
+      {
+        "icon": "ci:home-alt-plus"
+      },
+      {
+        "icon": "ci:home-alt-x"
+      },
+      {
+        "icon": "ci:home-check"
+      },
+      {
+        "icon": "ci:home-fill"
+      },
+      {
+        "icon": "ci:home-heart"
+      },
+      {
+        "icon": "ci:home-heart-1"
+      },
+      {
+        "icon": "ci:home-minus"
+      },
+      {
+        "icon": "ci:home-outline"
+      },
+      {
+        "icon": "ci:home-plus"
+      },
+      {
+        "icon": "ci:home-x"
+      },
+      {
+        "icon": "cil:home"
+      },
+      {
+        "icon": "circum:home"
+      },
+      {
+        "icon": "clarity:home-line"
+      },
+      {
+        "icon": "clarity:home-solid"
+      },
+      {
+        "icon": "codicon:home"
+      },
+      {
+        "icon": "dashicons:admin-home"
+      },
+      {
+        "icon": "devicon-line:homebrew"
+      },
+      {
+        "icon": "devicon-line:homebrew-wordmark"
+      },
+      {
+        "icon": "devicon-original:homebrew"
+      },
+      {
+        "icon": "devicon-original:homebrew-wordmark"
+      },
+      {
+        "icon": "devicon-plain:homebrew"
+      },
+      {
+        "icon": "devicon-plain:homebrew-wordmark"
+      },
+      {
+        "icon": "devicon:homebrew"
+      },
+      {
+        "icon": "devicon:homebrew-wordmark"
+      },
+      {
+        "icon": "el:home"
+      },
+      {
+        "icon": "el:home-alt"
+      },
+      {
+        "icon": "el:iphone-home"
+      },
+      {
+        "icon": "entypo:home"
+      },
+      {
+        "icon": "ep:home-filled"
+      },
+      {
+        "icon": "eva:home-fill"
+      },
+      {
+        "icon": "eva:home-outline"
+      },
+      {
+        "icon": "fa-solid:home"
+      },
+      {
+        "icon": "fa-solid:tachometer-alt"
+      },
+      {
+        "icon": "fa:home"
+      },
+      {
+        "icon": "fe:home"
+      },
+      {
+        "icon": "feather:home"
+      },
+      {
+        "icon": "file-icons:homebrew"
+      },
+      {
+        "icon": "flat-color-icons:home"
+      },
+      {
+        "icon": "flowbite:home-outline"
+      },
+      {
+        "icon": "flowbite:home-solid"
+      },
+      {
+        "icon": "fluent-mdl2:add-home"
+      },
+      {
+        "icon": "fluent-mdl2:home"
+      },
+      {
+        "icon": "fluent-mdl2:home-dropdown"
+      },
+      {
+        "icon": "fluent-mdl2:home-group"
+      },
+      {
+        "icon": "fluent-mdl2:home-solid"
+      },
+      {
+        "icon": "fluent-mdl2:home-verify"
+      },
+      {
+        "icon": "fluent:building-home-16-filled"
+      },
+      {
+        "icon": "fluent:building-home-16-regular"
+      },
+      {
+        "icon": "fluent:building-home-20-filled"
+      },
+      {
+        "icon": "fluent:building-home-20-regular"
+      },
+      {
+        "icon": "fluent:building-home-24-filled"
+      },
+      {
+        "icon": "fluent:building-home-24-regular"
+      },
+      {
+        "icon": "fluent:home-12-filled"
+      },
+      {
+        "icon": "fluent:home-12-regular"
+      },
+      {
+        "icon": "fluent:home-16-filled"
+      },
+      {
+        "icon": "fluent:home-16-regular"
+      },
+      {
+        "icon": "fluent:home-20-filled"
+      },
+      {
+        "icon": "fluent:home-20-regular"
+      },
+      {
+        "icon": "fluent:home-24-filled"
+      },
+      {
+        "icon": "fluent:home-24-regular"
+      },
+      {
+        "icon": "fluent:home-28-filled"
+      },
+      {
+        "icon": "fluent:home-28-regular"
+      },
+      {
+        "icon": "fluent:home-32-filled"
+      },
+      {
+        "icon": "fluent:home-32-regular"
+      },
+      {
+        "icon": "fluent:home-48-filled"
+      },
+      {
+        "icon": "fluent:home-48-regular"
+      },
+      {
+        "icon": "fluent:home-add-20-filled"
+      },
+      {
+        "icon": "fluent:home-add-20-regular"
+      },
+      {
+        "icon": "fluent:home-add-24-filled"
+      },
+      {
+        "icon": "fluent:home-add-24-regular"
+      },
+      {
+        "icon": "fluent:home-checkmark-16-filled"
+      },
+      {
+        "icon": "fluent:home-checkmark-16-regular"
+      },
+      {
+        "icon": "fluent:home-checkmark-20-filled"
+      },
+      {
+        "icon": "fluent:home-checkmark-20-regular"
+      },
+      {
+        "icon": "fluent:home-checkmark-24-filled"
+      },
+      {
+        "icon": "fluent:home-checkmark-24-regular"
+      },
+      {
+        "icon": "fluent:home-database-20-filled"
+      },
+      {
+        "icon": "fluent:home-database-20-regular"
+      },
+      {
+        "icon": "fluent:home-database-24-filled"
+      },
+      {
+        "icon": "fluent:home-database-24-regular"
+      },
+      {
+        "icon": "fluent:home-database-32-filled"
+      },
+      {
+        "icon": "fluent:home-database-32-regular"
+      },
+      {
+        "icon": "fluent:home-heart-16-filled"
+      },
+      {
+        "icon": "fluent:home-heart-16-regular"
+      },
+      {
+        "icon": "fluent:home-heart-20-filled"
+      },
+      {
+        "icon": "fluent:home-heart-20-regular"
+      },
+      {
+        "icon": "fluent:home-heart-24-filled"
+      },
+      {
+        "icon": "fluent:home-heart-24-regular"
+      },
+      {
+        "icon": "fluent:home-heart-32-filled"
+      },
+      {
+        "icon": "fluent:home-heart-32-regular"
+      },
+      {
+        "icon": "fluent:home-more-20-filled"
+      },
+      {
+        "icon": "fluent:home-more-20-regular"
+      },
+      {
+        "icon": "fluent:home-more-24-filled"
+      },
+      {
+        "icon": "fluent:home-more-24-regular"
+      },
+      {
+        "icon": "fluent:home-more-32-filled"
+      },
+      {
+        "icon": "fluent:home-more-32-regular"
+      },
+      {
+        "icon": "fluent:home-more-48-filled"
+      },
+      {
+        "icon": "fluent:home-more-48-regular"
+      },
+      {
+        "icon": "fluent:home-person-20-filled"
+      },
+      {
+        "icon": "fluent:home-person-20-regular"
+      },
+      {
+        "icon": "fluent:home-person-24-filled"
+      },
+      {
+        "icon": "fluent:home-person-24-regular"
+      },
+      {
+        "icon": "fluent:home-split-20-filled"
+      },
+      {
+        "icon": "fluent:home-split-20-regular"
+      },
+      {
+        "icon": "fluent:home-split-24-filled"
+      },
+      {
+        "icon": "fluent:home-split-24-regular"
+      },
+      {
+        "icon": "fluent:home-split-32-filled"
+      },
+      {
+        "icon": "fluent:home-split-32-regular"
+      },
+      {
+        "icon": "fluent:home-split-48-filled"
+      },
+      {
+        "icon": "fluent:home-split-48-regular"
+      },
+      {
+        "icon": "fluent:phone-home-lock-24-filled"
+      },
+      {
+        "icon": "fluent:phone-home-lock-24-regular"
+      },
+      {
+        "icon": "fontisto:home"
+      },
+      {
+        "icon": "fontisto:nursing-home"
+      },
+      {
+        "icon": "foundation:home"
+      },
+      {
+        "icon": "game-icons:home-garage"
+      },
+      {
+        "icon": "gg:home"
+      },
+      {
+        "icon": "gg:home-alt"
+      },
+      {
+        "icon": "gg:home-screen"
+      },
+      {
+        "icon": "gg:smart-home-boiler"
+      },
+      {
+        "icon": "gg:smart-home-cooker"
+      },
+      {
+        "icon": "gg:smart-home-heat"
+      },
+      {
+        "icon": "gg:smart-home-light"
+      },
+      {
+        "icon": "gg:smart-home-refrigerator"
+      },
+      {
+        "icon": "gg:smart-home-wash-machine"
+      },
+      {
+        "icon": "gis:home"
+      },
+      {
+        "icon": "gis:poi-home"
+      },
+      {
+        "icon": "gis:poi-home-o"
+      },
+      {
+        "icon": "gis:search-home"
+      },
+      {
+        "icon": "grommet-icons:home"
+      },
+      {
+        "icon": "grommet-icons:home-option"
+      },
+      {
+        "icon": "grommet-icons:home-rounded"
+      },
+      {
+        "icon": "guidance:home"
+      },
+      {
+        "icon": "guidance:home-2"
+      },
+      {
+        "icon": "healthicons:home"
+      },
+      {
+        "icon": "healthicons:home-alt"
+      },
+      {
+        "icon": "healthicons:home-alt-negative"
+      },
+      {
+        "icon": "healthicons:home-alt-outline"
+      },
+      {
+        "icon": "healthicons:home-negative"
+      },
+      {
+        "icon": "healthicons:home-outline"
+      },
+      {
+        "icon": "healthicons:home-quarantine"
+      },
+      {
+        "icon": "healthicons:home-quarantine-negative"
+      },
+      {
+        "icon": "healthicons:home-quarantine-outline"
+      },
+      {
+        "icon": "heroicons-outline:home"
+      },
+      {
+        "icon": "heroicons-outline:home-modern"
+      },
+      {
+        "icon": "heroicons-solid:home"
+      },
+      {
+        "icon": "heroicons-solid:home-modern"
+      },
+      {
+        "icon": "heroicons:home"
+      },
+      {
+        "icon": "heroicons:home-16-solid"
+      },
+      {
+        "icon": "heroicons:home-20-solid"
+      },
+      {
+        "icon": "heroicons:home-modern"
+      },
+      {
+        "icon": "heroicons:home-modern-16-solid"
+      },
+      {
+        "icon": "heroicons:home-modern-20-solid"
+      },
+      {
+        "icon": "heroicons:home-modern-solid"
+      },
+      {
+        "icon": "heroicons:home-solid"
+      },
+      {
+        "icon": "humbleicons:home"
+      },
+      {
+        "icon": "ic:baseline-add-home"
+      },
+      {
+        "icon": "ic:baseline-add-home-work"
+      },
+      {
+        "icon": "ic:baseline-add-to-home-screen"
+      },
+      {
+        "icon": "ic:baseline-broadcast-on-home"
+      },
+      {
+        "icon": "ic:baseline-home"
+      },
+      {
+        "icon": "ic:baseline-home-max"
+      },
+      {
+        "icon": "ic:baseline-home-mini"
+      },
+      {
+        "icon": "ic:baseline-home-repair-service"
+      },
+      {
+        "icon": "ic:baseline-home-work"
+      },
+      {
+        "icon": "ic:baseline-leave-bags-at-home"
+      },
+      {
+        "icon": "ic:baseline-maps-home-work"
+      },
+      {
+        "icon": "ic:outline-add-home"
+      },
+      {
+        "icon": "ic:outline-add-home-work"
+      },
+      {
+        "icon": "ic:outline-add-to-home-screen"
+      },
+      {
+        "icon": "ic:outline-broadcast-on-home"
+      },
+      {
+        "icon": "ic:outline-home"
+      },
+      {
+        "icon": "ic:outline-home-max"
+      },
+      {
+        "icon": "ic:outline-home-mini"
+      },
+      {
+        "icon": "ic:outline-home-repair-service"
+      },
+      {
+        "icon": "ic:outline-home-work"
+      },
+      {
+        "icon": "ic:outline-leave-bags-at-home"
+      },
+      {
+        "icon": "ic:outline-maps-home-work"
+      },
+      {
+        "icon": "ic:round-add-home"
+      },
+      {
+        "icon": "ic:round-add-home-work"
+      },
+      {
+        "icon": "ic:round-add-to-home-screen"
+      },
+      {
+        "icon": "ic:round-broadcast-on-home"
+      },
+      {
+        "icon": "ic:round-home"
+      },
+      {
+        "icon": "ic:round-home-max"
+      },
+      {
+        "icon": "ic:round-home-mini"
+      },
+      {
+        "icon": "ic:round-home-repair-service"
+      },
+      {
+        "icon": "ic:round-home-work"
+      },
+      {
+        "icon": "ic:round-leave-bags-at-home"
+      },
+      {
+        "icon": "ic:round-maps-home-work"
+      },
+      {
+        "icon": "ic:sharp-add-home"
+      },
+      {
+        "icon": "ic:sharp-add-home-work"
+      },
+      {
+        "icon": "ic:sharp-add-to-home-screen"
+      },
+      {
+        "icon": "ic:sharp-broadcast-on-home"
+      },
+      {
+        "icon": "ic:sharp-home"
+      },
+      {
+        "icon": "ic:sharp-home-max"
+      },
+      {
+        "icon": "ic:sharp-home-mini"
+      },
+      {
+        "icon": "ic:sharp-home-repair-service"
+      },
+      {
+        "icon": "ic:sharp-home-work"
+      },
+      {
+        "icon": "ic:sharp-leave-bags-at-home"
+      },
+      {
+        "icon": "ic:sharp-maps-home-work"
+      },
+      {
+        "icon": "ic:twotone-add-home"
+      },
+      {
+        "icon": "ic:twotone-add-home-work"
+      },
+      {
+        "icon": "ic:twotone-add-to-home-screen"
+      },
+      {
+        "icon": "ic:twotone-broadcast-on-home"
+      },
+      {
+        "icon": "ic:twotone-home"
+      },
+      {
+        "icon": "ic:twotone-home-max"
+      },
+      {
+        "icon": "ic:twotone-home-mini"
+      },
+      {
+        "icon": "ic:twotone-home-repair-service"
+      },
+      {
+        "icon": "ic:twotone-home-work"
+      },
+      {
+        "icon": "ic:twotone-leave-bags-at-home"
+      },
+      {
+        "icon": "ic:twotone-maps-home-work"
+      },
+      {
+        "icon": "icomoon-free:home"
+      },
+      {
+        "icon": "icomoon-free:home2"
+      },
+      {
+        "icon": "icomoon-free:home3"
+      },
+      {
+        "icon": "icon-park-outline:home"
+      },
+      {
+        "icon": "icon-park-outline:home-two"
+      },
+      {
+        "icon": "icon-park-outline:homestay"
+      },
+      {
+        "icon": "icon-park-outline:xiaodu-home"
+      },
+      {
+        "icon": "icon-park-solid:home"
+      },
+      {
+        "icon": "icon-park-solid:home-two"
+      },
+      {
+        "icon": "icon-park-solid:homestay"
+      },
+      {
+        "icon": "icon-park-solid:xiaodu-home"
+      },
+      {
+        "icon": "icon-park-twotone:home"
+      },
+      {
+        "icon": "icon-park-twotone:home-two"
+      },
+      {
+        "icon": "icon-park-twotone:homestay"
+      },
+      {
+        "icon": "icon-park-twotone:xiaodu-home"
+      },
+      {
+        "icon": "icon-park:home"
+      },
+      {
+        "icon": "icon-park:home-two"
+      },
+      {
+        "icon": "icon-park:homestay"
+      },
+      {
+        "icon": "icon-park:xiaodu-home"
+      },
+      {
+        "icon": "iconamoon:home"
+      },
+      {
+        "icon": "iconamoon:home-bold"
+      },
+      {
+        "icon": "iconamoon:home-duotone"
+      },
+      {
+        "icon": "iconamoon:home-fill"
+      },
+      {
+        "icon": "iconamoon:home-light"
+      },
+      {
+        "icon": "iconamoon:home-thin"
+      },
+      {
+        "icon": "iconoir:google-home"
+      },
+      {
+        "icon": "iconoir:home"
+      },
+      {
+        "icon": "iconoir:home-alt"
+      },
+      {
+        "icon": "iconoir:home-alt-slim"
+      },
+      {
+        "icon": "iconoir:home-alt-slim-horiz"
+      },
+      {
+        "icon": "iconoir:home-hospital"
+      },
+      {
+        "icon": "iconoir:home-sale"
+      },
+      {
+        "icon": "iconoir:home-secure"
+      },
+      {
+        "icon": "iconoir:home-shield"
+      },
+      {
+        "icon": "iconoir:home-simple"
+      },
+      {
+        "icon": "iconoir:home-simple-door"
+      },
+      {
+        "icon": "iconoir:home-table"
+      },
+      {
+        "icon": "iconoir:home-temperature-in"
+      },
+      {
+        "icon": "iconoir:home-temperature-out"
+      },
+      {
+        "icon": "iconoir:home-user"
+      },
+      {
+        "icon": "icons8:home"
+      },
+      {
+        "icon": "ion:home"
+      },
+      {
+        "icon": "ion:home-outline"
+      },
+      {
+        "icon": "ion:home-sharp"
+      },
+      {
+        "icon": "ion:ios-home"
+      },
+      {
+        "icon": "ion:ios-home-outline"
+      },
+      {
+        "icon": "ion:md-home"
+      },
+      {
+        "icon": "jam:home"
+      },
+      {
+        "icon": "jam:home-f"
+      },
+      {
+        "icon": "la:home"
+      },
+      {
+        "icon": "la:tachometer-alt"
+      },
+      {
+        "icon": "lets-icons:home"
+      },
+      {
+        "icon": "lets-icons:home-duotone"
+      },
+      {
+        "icon": "lets-icons:home-duotone-line"
+      },
+      {
+        "icon": "lets-icons:home-fill"
+      },
+      {
+        "icon": "lets-icons:home-light"
+      },
+      {
+        "icon": "line-md:home"
+      },
+      {
+        "icon": "line-md:home-md"
+      },
+      {
+        "icon": "line-md:home-md-twotone"
+      },
+      {
+        "icon": "line-md:home-md-twotone-alt"
+      },
+      {
+        "icon": "line-md:home-simple"
+      },
+      {
+        "icon": "line-md:home-simple-filled"
+      },
+      {
+        "icon": "line-md:home-simple-twotone"
+      },
+      {
+        "icon": "line-md:home-twotone"
+      },
+      {
+        "icon": "line-md:home-twotone-alt"
+      },
+      {
+        "icon": "logos:google-home"
+      },
+      {
+        "icon": "logos:homebrew"
+      },
+      {
+        "icon": "ls:home"
+      },
+      {
+        "icon": "lucide:home"
+      },
+      {
+        "icon": "majesticons:home"
+      },
+      {
+        "icon": "majesticons:home-analytics"
+      },
+      {
+        "icon": "majesticons:home-analytics-line"
+      },
+      {
+        "icon": "majesticons:home-line"
+      },
+      {
+        "icon": "majesticons:home-simple"
+      },
+      {
+        "icon": "majesticons:home-simple-line"
+      },
+      {
+        "icon": "maki:home"
+      },
+      {
+        "icon": "maki:home-11"
+      },
+      {
+        "icon": "map:funeral-home"
+      },
+      {
+        "icon": "material-symbols-light:add-home"
+      },
+      {
+        "icon": "material-symbols-light:add-home-outline"
+      },
+      {
+        "icon": "material-symbols-light:add-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:add-home-rounded"
+      },
+      {
+        "icon": "material-symbols-light:add-home-work"
+      },
+      {
+        "icon": "material-symbols-light:add-home-work-outline"
+      },
+      {
+        "icon": "material-symbols-light:add-home-work-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:add-home-work-rounded"
+      },
+      {
+        "icon": "material-symbols-light:add-to-home-screen"
+      },
+      {
+        "icon": "material-symbols-light:add-to-home-screen-outline"
+      },
+      {
+        "icon": "material-symbols-light:add-to-home-screen-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:add-to-home-screen-outline-sharp"
+      },
+      {
+        "icon": "material-symbols-light:add-to-home-screen-rounded"
+      },
+      {
+        "icon": "material-symbols-light:add-to-home-screen-sharp"
+      },
+      {
+        "icon": "material-symbols-light:broadcast-on-home"
+      },
+      {
+        "icon": "material-symbols-light:broadcast-on-home-outline"
+      },
+      {
+        "icon": "material-symbols-light:broadcast-on-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:broadcast-on-home-outline-sharp"
+      },
+      {
+        "icon": "material-symbols-light:broadcast-on-home-rounded"
+      },
+      {
+        "icon": "material-symbols-light:broadcast-on-home-sharp"
+      },
+      {
+        "icon": "material-symbols-light:digital-out-of-home"
+      },
+      {
+        "icon": "material-symbols-light:digital-out-of-home-outline"
+      },
+      {
+        "icon": "material-symbols-light:digital-out-of-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:digital-out-of-home-outline-sharp"
+      },
+      {
+        "icon": "material-symbols-light:digital-out-of-home-rounded"
+      },
+      {
+        "icon": "material-symbols-light:digital-out-of-home-sharp"
+      },
+      {
+        "icon": "material-symbols-light:emergency-home"
+      },
+      {
+        "icon": "material-symbols-light:emergency-home-outline"
+      },
+      {
+        "icon": "material-symbols-light:emergency-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:emergency-home-outline-sharp"
+      },
+      {
+        "icon": "material-symbols-light:emergency-home-rounded"
+      },
+      {
+        "icon": "material-symbols-light:emergency-home-sharp"
+      },
+      {
+        "icon": "material-symbols-light:family-home"
+      },
+      {
+        "icon": "material-symbols-light:family-home-outline"
+      },
+      {
+        "icon": "material-symbols-light:family-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:family-home-rounded"
+      },
+      {
+        "icon": "material-symbols-light:garage-home"
+      },
+      {
+        "icon": "material-symbols-light:garage-home-outline"
+      },
+      {
+        "icon": "material-symbols-light:google-home-devices"
+      },
+      {
+        "icon": "material-symbols-light:google-home-devices-rounded"
+      },
+      {
+        "icon": "material-symbols-light:google-home-devices-sharp"
+      },
+      {
+        "icon": "material-symbols-light:home"
+      },
+      {
+        "icon": "material-symbols-light:home-and-garden"
+      },
+      {
+        "icon": "material-symbols-light:home-and-garden-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-and-garden-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-and-garden-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-app-logo"
+      },
+      {
+        "icon": "material-symbols-light:home-health"
+      },
+      {
+        "icon": "material-symbols-light:home-health-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-health-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-health-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-improvement-and-tools"
+      },
+      {
+        "icon": "material-symbols-light:home-improvement-and-tools-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-improvement-and-tools-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-improvement-and-tools-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-iot-device"
+      },
+      {
+        "icon": "material-symbols-light:home-iot-device-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-iot-device-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-iot-device-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-max"
+      },
+      {
+        "icon": "material-symbols-light:home-max-dots"
+      },
+      {
+        "icon": "material-symbols-light:home-max-dots-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-max-dots-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-max-dots-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-max-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-max-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-max-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-mini"
+      },
+      {
+        "icon": "material-symbols-light:home-mini-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-pin"
+      },
+      {
+        "icon": "material-symbols-light:home-pin-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-pin-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-pin-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-repair-service"
+      },
+      {
+        "icon": "material-symbols-light:home-repair-service-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-repair-service-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-repair-service-outline-sharp"
+      },
+      {
+        "icon": "material-symbols-light:home-repair-service-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-repair-service-sharp"
+      },
+      {
+        "icon": "material-symbols-light:home-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-speaker"
+      },
+      {
+        "icon": "material-symbols-light:home-speaker-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-storage"
+      },
+      {
+        "icon": "material-symbols-light:home-storage-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-storage-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-storage-outline-sharp"
+      },
+      {
+        "icon": "material-symbols-light:home-storage-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-storage-sharp"
+      },
+      {
+        "icon": "material-symbols-light:home-work"
+      },
+      {
+        "icon": "material-symbols-light:home-work-outline"
+      },
+      {
+        "icon": "material-symbols-light:home-work-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:home-work-rounded"
+      },
+      {
+        "icon": "material-symbols-light:in-home-mode"
+      },
+      {
+        "icon": "material-symbols-light:in-home-mode-outline"
+      },
+      {
+        "icon": "material-symbols-light:in-home-mode-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:in-home-mode-rounded"
+      },
+      {
+        "icon": "material-symbols-light:location-home"
+      },
+      {
+        "icon": "material-symbols-light:location-home-outline"
+      },
+      {
+        "icon": "material-symbols-light:location-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:location-home-rounded"
+      },
+      {
+        "icon": "material-symbols-light:wifi-home"
+      },
+      {
+        "icon": "material-symbols-light:wifi-home-outline"
+      },
+      {
+        "icon": "material-symbols-light:wifi-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols-light:wifi-home-rounded"
+      },
+      {
+        "icon": "material-symbols:add-home"
+      },
+      {
+        "icon": "material-symbols:add-home-outline"
+      },
+      {
+        "icon": "material-symbols:add-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:add-home-rounded"
+      },
+      {
+        "icon": "material-symbols:add-home-work"
+      },
+      {
+        "icon": "material-symbols:add-home-work-outline"
+      },
+      {
+        "icon": "material-symbols:add-home-work-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:add-home-work-rounded"
+      },
+      {
+        "icon": "material-symbols:add-to-home-screen"
+      },
+      {
+        "icon": "material-symbols:add-to-home-screen-outline"
+      },
+      {
+        "icon": "material-symbols:add-to-home-screen-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:add-to-home-screen-outline-sharp"
+      },
+      {
+        "icon": "material-symbols:add-to-home-screen-rounded"
+      },
+      {
+        "icon": "material-symbols:add-to-home-screen-sharp"
+      },
+      {
+        "icon": "material-symbols:android-google-home"
+      },
+      {
+        "icon": "material-symbols:broadcast-on-home"
+      },
+      {
+        "icon": "material-symbols:broadcast-on-home-outline"
+      },
+      {
+        "icon": "material-symbols:broadcast-on-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:broadcast-on-home-outline-sharp"
+      },
+      {
+        "icon": "material-symbols:broadcast-on-home-rounded"
+      },
+      {
+        "icon": "material-symbols:broadcast-on-home-sharp"
+      },
+      {
+        "icon": "material-symbols:digital-out-of-home"
+      },
+      {
+        "icon": "material-symbols:digital-out-of-home-outline"
+      },
+      {
+        "icon": "material-symbols:digital-out-of-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:digital-out-of-home-outline-sharp"
+      },
+      {
+        "icon": "material-symbols:digital-out-of-home-rounded"
+      },
+      {
+        "icon": "material-symbols:digital-out-of-home-sharp"
+      },
+      {
+        "icon": "material-symbols:emergency-home"
+      },
+      {
+        "icon": "material-symbols:emergency-home-outline"
+      },
+      {
+        "icon": "material-symbols:emergency-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:emergency-home-outline-sharp"
+      },
+      {
+        "icon": "material-symbols:emergency-home-rounded"
+      },
+      {
+        "icon": "material-symbols:emergency-home-sharp"
+      },
+      {
+        "icon": "material-symbols:family-home"
+      },
+      {
+        "icon": "material-symbols:family-home-outline"
+      },
+      {
+        "icon": "material-symbols:family-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:family-home-rounded"
+      },
+      {
+        "icon": "material-symbols:garage-home"
+      },
+      {
+        "icon": "material-symbols:garage-home-outline"
+      },
+      {
+        "icon": "material-symbols:google-home-devices"
+      },
+      {
+        "icon": "material-symbols:google-home-devices-rounded"
+      },
+      {
+        "icon": "material-symbols:google-home-devices-sharp"
+      },
+      {
+        "icon": "material-symbols:home"
+      },
+      {
+        "icon": "material-symbols:home-and-garden"
+      },
+      {
+        "icon": "material-symbols:home-and-garden-outline"
+      },
+      {
+        "icon": "material-symbols:home-and-garden-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-and-garden-rounded"
+      },
+      {
+        "icon": "material-symbols:home-app-logo"
+      },
+      {
+        "icon": "material-symbols:home-health"
+      },
+      {
+        "icon": "material-symbols:home-health-outline"
+      },
+      {
+        "icon": "material-symbols:home-health-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-health-rounded"
+      },
+      {
+        "icon": "material-symbols:home-improvement-and-tools"
+      },
+      {
+        "icon": "material-symbols:home-improvement-and-tools-outline"
+      },
+      {
+        "icon": "material-symbols:home-improvement-and-tools-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-improvement-and-tools-rounded"
+      },
+      {
+        "icon": "material-symbols:home-iot-device"
+      },
+      {
+        "icon": "material-symbols:home-iot-device-outline"
+      },
+      {
+        "icon": "material-symbols:home-iot-device-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-iot-device-rounded"
+      },
+      {
+        "icon": "material-symbols:home-max"
+      },
+      {
+        "icon": "material-symbols:home-max-dots"
+      },
+      {
+        "icon": "material-symbols:home-max-dots-outline"
+      },
+      {
+        "icon": "material-symbols:home-max-dots-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-max-dots-rounded"
+      },
+      {
+        "icon": "material-symbols:home-max-outline"
+      },
+      {
+        "icon": "material-symbols:home-max-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-max-rounded"
+      },
+      {
+        "icon": "material-symbols:home-mini"
+      },
+      {
+        "icon": "material-symbols:home-mini-outline"
+      },
+      {
+        "icon": "material-symbols:home-outline"
+      },
+      {
+        "icon": "material-symbols:home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-pin"
+      },
+      {
+        "icon": "material-symbols:home-pin-outline"
+      },
+      {
+        "icon": "material-symbols:home-pin-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-pin-rounded"
+      },
+      {
+        "icon": "material-symbols:home-pin-sharp"
+      },
+      {
+        "icon": "material-symbols:home-repair-service"
+      },
+      {
+        "icon": "material-symbols:home-repair-service-outline"
+      },
+      {
+        "icon": "material-symbols:home-repair-service-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-repair-service-outline-sharp"
+      },
+      {
+        "icon": "material-symbols:home-repair-service-rounded"
+      },
+      {
+        "icon": "material-symbols:home-repair-service-sharp"
+      },
+      {
+        "icon": "material-symbols:home-rounded"
+      },
+      {
+        "icon": "material-symbols:home-speaker"
+      },
+      {
+        "icon": "material-symbols:home-speaker-outline"
+      },
+      {
+        "icon": "material-symbols:home-storage"
+      },
+      {
+        "icon": "material-symbols:home-storage-outline"
+      },
+      {
+        "icon": "material-symbols:home-storage-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-storage-outline-sharp"
+      },
+      {
+        "icon": "material-symbols:home-storage-rounded"
+      },
+      {
+        "icon": "material-symbols:home-storage-sharp"
+      },
+      {
+        "icon": "material-symbols:home-work"
+      },
+      {
+        "icon": "material-symbols:home-work-outline"
+      },
+      {
+        "icon": "material-symbols:home-work-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:home-work-rounded"
+      },
+      {
+        "icon": "material-symbols:in-home-mode"
+      },
+      {
+        "icon": "material-symbols:in-home-mode-outline"
+      },
+      {
+        "icon": "material-symbols:in-home-mode-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:in-home-mode-rounded"
+      },
+      {
+        "icon": "material-symbols:in-home-mode-sharp"
+      },
+      {
+        "icon": "material-symbols:location-home"
+      },
+      {
+        "icon": "material-symbols:location-home-outline"
+      },
+      {
+        "icon": "material-symbols:location-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:location-home-rounded"
+      },
+      {
+        "icon": "material-symbols:location-home-sharp"
+      },
+      {
+        "icon": "material-symbols:wifi-home"
+      },
+      {
+        "icon": "material-symbols:wifi-home-outline"
+      },
+      {
+        "icon": "material-symbols:wifi-home-outline-rounded"
+      },
+      {
+        "icon": "material-symbols:wifi-home-rounded"
+      },
+      {
+        "icon": "mdi-light:home"
+      },
+      {
+        "icon": "mdi:folder-home"
+      },
+      {
+        "icon": "mdi:folder-home-outline"
+      },
+      {
+        "icon": "mdi:google-home"
+      },
+      {
+        "icon": "mdi:home"
+      },
+      {
+        "icon": "mdi:home-account"
+      },
+      {
+        "icon": "mdi:home-alert"
+      },
+      {
+        "icon": "mdi:home-alert-outline"
+      },
+      {
+        "icon": "mdi:home-analytics"
+      },
+      {
+        "icon": "mdi:home-assistant"
+      },
+      {
+        "icon": "mdi:home-automation"
+      },
+      {
+        "icon": "mdi:home-battery"
+      },
+      {
+        "icon": "mdi:home-battery-outline"
+      },
+      {
+        "icon": "mdi:home-circle"
+      },
+      {
+        "icon": "mdi:home-circle-outline"
+      },
+      {
+        "icon": "mdi:home-city"
+      },
+      {
+        "icon": "mdi:home-city-outline"
+      },
+      {
+        "icon": "mdi:home-clock"
+      },
+      {
+        "icon": "mdi:home-clock-outline"
+      },
+      {
+        "icon": "mdi:home-currency-usd"
+      },
+      {
+        "icon": "mdi:home-edit"
+      },
+      {
+        "icon": "mdi:home-edit-outline"
+      },
+      {
+        "icon": "mdi:home-export-outline"
+      },
+      {
+        "icon": "mdi:home-flood"
+      },
+      {
+        "icon": "mdi:home-floor-0"
+      },
+      {
+        "icon": "mdi:home-floor-1"
+      },
+      {
+        "icon": "mdi:home-floor-2"
+      },
+      {
+        "icon": "mdi:home-floor-3"
+      },
+      {
+        "icon": "mdi:home-floor-a"
+      },
+      {
+        "icon": "mdi:home-floor-b"
+      },
+      {
+        "icon": "mdi:home-floor-g"
+      },
+      {
+        "icon": "mdi:home-floor-l"
+      },
+      {
+        "icon": "mdi:home-floor-negative-1"
+      },
+      {
+        "icon": "mdi:home-group"
+      },
+      {
+        "icon": "mdi:home-group-minus"
+      },
+      {
+        "icon": "mdi:home-group-plus"
+      },
+      {
+        "icon": "mdi:home-group-remove"
+      },
+      {
+        "icon": "mdi:home-heart"
+      },
+      {
+        "icon": "mdi:home-import-outline"
+      },
+      {
+        "icon": "mdi:home-lightbulb"
+      },
+      {
+        "icon": "mdi:home-lightbulb-outline"
+      },
+      {
+        "icon": "mdi:home-lightning-bolt"
+      },
+      {
+        "icon": "mdi:home-lightning-bolt-outline"
+      },
+      {
+        "icon": "mdi:home-lock"
+      },
+      {
+        "icon": "mdi:home-lock-open"
+      },
+      {
+        "icon": "mdi:home-map-marker"
+      },
+      {
+        "icon": "mdi:home-minus"
+      },
+      {
+        "icon": "mdi:home-minus-outline"
+      },
+      {
+        "icon": "mdi:home-modern"
+      },
+      {
+        "icon": "mdi:home-off"
+      },
+      {
+        "icon": "mdi:home-off-outline"
+      },
+      {
+        "icon": "mdi:home-outline"
+      },
+      {
+        "icon": "mdi:home-percent"
+      },
+      {
+        "icon": "mdi:home-percent-outline"
+      },
+      {
+        "icon": "mdi:home-plus"
+      },
+      {
+        "icon": "mdi:home-plus-outline"
+      },
+      {
+        "icon": "mdi:home-remove"
+      },
+      {
+        "icon": "mdi:home-remove-outline"
+      },
+      {
+        "icon": "mdi:home-roof"
+      },
+      {
+        "icon": "mdi:home-search"
+      },
+      {
+        "icon": "mdi:home-search-outline"
+      },
+      {
+        "icon": "mdi:home-silo"
+      },
+      {
+        "icon": "mdi:home-silo-outline"
+      },
+      {
+        "icon": "mdi:home-sound-in"
+      },
+      {
+        "icon": "mdi:home-sound-in-outline"
+      },
+      {
+        "icon": "mdi:home-sound-out"
+      },
+      {
+        "icon": "mdi:home-sound-out-outline"
+      },
+      {
+        "icon": "mdi:home-switch"
+      },
+      {
+        "icon": "mdi:home-switch-outline"
+      },
+      {
+        "icon": "mdi:home-thermometer"
+      },
+      {
+        "icon": "mdi:home-thermometer-outline"
+      },
+      {
+        "icon": "mdi:home-variant"
+      },
+      {
+        "icon": "mdi:home-variant-outline"
+      },
+      {
+        "icon": "mdi:shield-home"
+      },
+      {
+        "icon": "mdi:shield-home-outline"
+      },
+      {
+        "icon": "memory:home-thatched"
+      },
+      {
+        "icon": "mi:home"
+      },
+      {
+        "icon": "mingcute:home-1-fill"
+      },
+      {
+        "icon": "mingcute:home-1-line"
+      },
+      {
+        "icon": "mingcute:home-2-fill"
+      },
+      {
+        "icon": "mingcute:home-2-line"
+      },
+      {
+        "icon": "mingcute:home-3-fill"
+      },
+      {
+        "icon": "mingcute:home-3-line"
+      },
+      {
+        "icon": "mingcute:home-4-fill"
+      },
+      {
+        "icon": "mingcute:home-4-line"
+      },
+      {
+        "icon": "mingcute:home-5-fill"
+      },
+      {
+        "icon": "mingcute:home-5-line"
+      },
+      {
+        "icon": "mingcute:home-6-fill"
+      },
+      {
+        "icon": "mingcute:home-6-line"
+      },
+      {
+        "icon": "mingcute:home-wifi-fill"
+      },
+      {
+        "icon": "mingcute:home-wifi-line"
+      },
+      {
+        "icon": "mingcute:homepod-fill"
+      },
+      {
+        "icon": "mingcute:homepod-line"
+      },
+      {
+        "icon": "mingcute:homepod-mini-fill"
+      },
+      {
+        "icon": "mingcute:homepod-mini-line"
+      },
+      {
+        "icon": "mono-icons:home"
+      },
+      {
+        "icon": "mynaui:home"
+      },
+      {
+        "icon": "mynaui:home-check"
+      },
+      {
+        "icon": "mynaui:home-minus"
+      },
+      {
+        "icon": "mynaui:home-plus"
+      },
+      {
+        "icon": "mynaui:home-smile"
+      },
+      {
+        "icon": "mynaui:home-x"
+      },
+      {
+        "icon": "nimbus:home"
+      },
+      {
+        "icon": "octicon:home"
+      },
+      {
+        "icon": "octicon:home-16"
+      },
+      {
+        "icon": "octicon:home-24"
+      },
+      {
+        "icon": "octicon:home-fill-24"
+      },
+      {
+        "icon": "oi:home"
+      },
+      {
+        "icon": "ooui:home"
+      },
+      {
+        "icon": "openmoji:home-button"
+      },
+      {
+        "icon": "oui:home"
+      },
+      {
+        "icon": "pajamas:home"
+      },
+      {
+        "icon": "pajamas:tachometer"
+      },
+      {
+        "icon": "pepicons-pencil:smartphone-home-button"
+      },
+      {
+        "icon": "pepicons-pencil:smartphone-home-button-circle"
+      },
+      {
+        "icon": "pepicons-pencil:smartphone-home-button-circle-filled"
+      },
+      {
+        "icon": "pepicons-pencil:smartphone-home-button-circle-off"
+      },
+      {
+        "icon": "pepicons-pencil:smartphone-home-button-off"
+      },
+      {
+        "icon": "pepicons-pop:smartphone-home-button"
+      },
+      {
+        "icon": "pepicons-pop:smartphone-home-button-circle"
+      },
+      {
+        "icon": "pepicons-pop:smartphone-home-button-circle-filled"
+      },
+      {
+        "icon": "pepicons-pop:smartphone-home-button-circle-off"
+      },
+      {
+        "icon": "pepicons-pop:smartphone-home-button-off"
+      },
+      {
+        "icon": "pepicons-print:smartphone-home-button"
+      },
+      {
+        "icon": "pepicons-print:smartphone-home-button-circle"
+      },
+      {
+        "icon": "pepicons-print:smartphone-home-button-circle-filled"
+      },
+      {
+        "icon": "pepicons-print:smartphone-home-button-circle-off"
+      },
+      {
+        "icon": "pepicons-print:smartphone-home-button-off"
+      },
+      {
+        "icon": "pixelarticons:home"
+      },
+      {
+        "icon": "prime:home"
+      },
+      {
+        "icon": "ps:home"
+      },
+      {
+        "icon": "radix-icons:home"
+      },
+      {
+        "icon": "raphael:home"
+      },
+      {
+        "icon": "ri:home-2-fill"
+      },
+      {
+        "icon": "ri:home-2-line"
+      },
+      {
+        "icon": "ri:home-3-fill"
+      },
+      {
+        "icon": "ri:home-3-line"
+      },
+      {
+        "icon": "ri:home-4-fill"
+      },
+      {
+        "icon": "ri:home-4-line"
+      },
+      {
+        "icon": "ri:home-5-fill"
+      },
+      {
+        "icon": "ri:home-5-line"
+      },
+      {
+        "icon": "ri:home-6-fill"
+      },
+      {
+        "icon": "ri:home-6-line"
+      },
+      {
+        "icon": "ri:home-7-fill"
+      },
+      {
+        "icon": "ri:home-7-line"
+      },
+      {
+        "icon": "ri:home-8-fill"
+      },
+      {
+        "icon": "ri:home-8-line"
+      },
+      {
+        "icon": "ri:home-fill"
+      },
+      {
+        "icon": "ri:home-gear-fill"
+      },
+      {
+        "icon": "ri:home-gear-line"
+      },
+      {
+        "icon": "ri:home-heart-fill"
+      },
+      {
+        "icon": "ri:home-heart-line"
+      },
+      {
+        "icon": "ri:home-line"
+      },
+      {
+        "icon": "ri:home-office-fill"
+      },
+      {
+        "icon": "ri:home-office-line"
+      },
+      {
+        "icon": "ri:home-smile-2-fill"
+      },
+      {
+        "icon": "ri:home-smile-2-line"
+      },
+      {
+        "icon": "ri:home-smile-fill"
+      },
+      {
+        "icon": "ri:home-smile-line"
+      },
+      {
+        "icon": "ri:home-wifi-fill"
+      },
+      {
+        "icon": "ri:home-wifi-line"
+      },
+      {
+        "icon": "si-glyph:home-page"
+      },
+      {
+        "icon": "simple-icons:esphome"
+      },
+      {
+        "icon": "simple-icons:googlehome"
+      },
+      {
+        "icon": "simple-icons:homeadvisor"
+      },
+      {
+        "icon": "simple-icons:homeassistant"
+      },
+      {
+        "icon": "simple-icons:homeassistantcommunitystore"
+      },
+      {
+        "icon": "simple-icons:homebrew"
+      },
+      {
+        "icon": "simple-icons:homebridge"
+      },
+      {
+        "icon": "simple-icons:petsathome"
+      },
+      {
+        "icon": "simple-line-icons:home"
+      },
+      {
+        "icon": "solar:home-2-bold"
+      },
+      {
+        "icon": "solar:home-2-bold-duotone"
+      },
+      {
+        "icon": "solar:home-2-broken"
+      },
+      {
+        "icon": "solar:home-2-line-duotone"
+      },
+      {
+        "icon": "solar:home-2-linear"
+      },
+      {
+        "icon": "solar:home-2-outline"
+      },
+      {
+        "icon": "solar:home-add-angle-bold"
+      },
+      {
+        "icon": "solar:home-add-angle-bold-duotone"
+      },
+      {
+        "icon": "solar:home-add-angle-broken"
+      },
+      {
+        "icon": "solar:home-add-angle-line-duotone"
+      },
+      {
+        "icon": "solar:home-add-angle-linear"
+      },
+      {
+        "icon": "solar:home-add-angle-outline"
+      },
+      {
+        "icon": "solar:home-add-bold"
+      },
+      {
+        "icon": "solar:home-add-bold-duotone"
+      },
+      {
+        "icon": "solar:home-add-broken"
+      },
+      {
+        "icon": "solar:home-add-line-duotone"
+      },
+      {
+        "icon": "solar:home-add-linear"
+      },
+      {
+        "icon": "solar:home-add-outline"
+      },
+      {
+        "icon": "solar:home-angle-2-bold"
+      },
+      {
+        "icon": "solar:home-angle-2-bold-duotone"
+      },
+      {
+        "icon": "solar:home-angle-2-broken"
+      },
+      {
+        "icon": "solar:home-angle-2-line-duotone"
+      },
+      {
+        "icon": "solar:home-angle-2-linear"
+      },
+      {
+        "icon": "solar:home-angle-2-outline"
+      },
+      {
+        "icon": "solar:home-angle-bold"
+      },
+      {
+        "icon": "solar:home-angle-bold-duotone"
+      },
+      {
+        "icon": "solar:home-angle-broken"
+      },
+      {
+        "icon": "solar:home-angle-line-duotone"
+      },
+      {
+        "icon": "solar:home-angle-linear"
+      },
+      {
+        "icon": "solar:home-angle-outline"
+      },
+      {
+        "icon": "solar:home-bold"
+      },
+      {
+        "icon": "solar:home-bold-duotone"
+      },
+      {
+        "icon": "solar:home-broken"
+      },
+      {
+        "icon": "solar:home-line-duotone"
+      },
+      {
+        "icon": "solar:home-linear"
+      },
+      {
+        "icon": "solar:home-outline"
+      },
+      {
+        "icon": "solar:home-smile-angle-bold"
+      },
+      {
+        "icon": "solar:home-smile-angle-bold-duotone"
+      },
+      {
+        "icon": "solar:home-smile-angle-broken"
+      },
+      {
+        "icon": "solar:home-smile-angle-line-duotone"
+      },
+      {
+        "icon": "solar:home-smile-angle-linear"
+      },
+      {
+        "icon": "solar:home-smile-angle-outline"
+      },
+      {
+        "icon": "solar:home-smile-bold"
+      },
+      {
+        "icon": "solar:home-smile-bold-duotone"
+      },
+      {
+        "icon": "solar:home-smile-broken"
+      },
+      {
+        "icon": "solar:home-smile-line-duotone"
+      },
+      {
+        "icon": "solar:home-smile-linear"
+      },
+      {
+        "icon": "solar:home-smile-outline"
+      },
+      {
+        "icon": "solar:home-wifi-angle-bold"
+      },
+      {
+        "icon": "solar:home-wifi-angle-bold-duotone"
+      },
+      {
+        "icon": "solar:home-wifi-angle-broken"
+      },
+      {
+        "icon": "solar:home-wifi-angle-line-duotone"
+      },
+      {
+        "icon": "solar:home-wifi-angle-linear"
+      },
+      {
+        "icon": "solar:home-wifi-angle-outline"
+      },
+      {
+        "icon": "solar:home-wifi-bold"
+      },
+      {
+        "icon": "solar:home-wifi-bold-duotone"
+      },
+      {
+        "icon": "solar:home-wifi-broken"
+      },
+      {
+        "icon": "solar:home-wifi-line-duotone"
+      },
+      {
+        "icon": "solar:home-wifi-linear"
+      },
+      {
+        "icon": "solar:home-wifi-outline"
+      },
+      {
+        "icon": "solar:smart-home-angle-bold"
+      },
+      {
+        "icon": "solar:smart-home-angle-bold-duotone"
+      },
+      {
+        "icon": "solar:smart-home-angle-broken"
+      },
+      {
+        "icon": "solar:smart-home-angle-line-duotone"
+      },
+      {
+        "icon": "solar:smart-home-angle-linear"
+      },
+      {
+        "icon": "solar:smart-home-angle-outline"
+      },
+      {
+        "icon": "solar:smart-home-bold"
+      },
+      {
+        "icon": "solar:smart-home-bold-duotone"
+      },
+      {
+        "icon": "solar:smart-home-broken"
+      },
+      {
+        "icon": "solar:smart-home-line-duotone"
+      },
+      {
+        "icon": "solar:smart-home-linear"
+      },
+      {
+        "icon": "solar:smart-home-outline"
+      },
+      {
+        "icon": "streamline:business-profession-home-office"
+      },
+      {
+        "icon": "streamline:business-profession-home-office-solid"
+      },
+      {
+        "icon": "streamline:home-3"
+      },
+      {
+        "icon": "streamline:home-3-solid"
+      },
+      {
+        "icon": "streamline:home-4"
+      },
+      {
+        "icon": "streamline:home-4-solid"
+      },
+      {
+        "icon": "streamline:interface-calendar-home-calendar-date-day-home-house-month"
+      },
+      {
+        "icon": "streamline:interface-dashboard-layout-3-app-application-dashboard-home-layout"
+      },
+      {
+        "icon": "streamline:interface-dashboard-layout-circle-app-application-dashboard-home-layout-circle"
+      },
+      {
+        "icon": "streamline:interface-dashboard-layout-square-app-application-dashboard-home-layout-square"
+      },
+      {
+        "icon": "streamline:interface-home-1-home-house-map-roof"
+      },
+      {
+        "icon": "streamline:interface-home-2-door-entrance-home-house-map-roof-round"
+      },
+      {
+        "icon": "streamline:interface-home-3-home-house-map-roof"
+      },
+      {
+        "icon": "streamline:interface-home-4-door-entrnace-map"
+      },
+      {
+        "icon": "streamline:interface-home-5-door-entrance-home-house-map-roof-round-window"
+      },
+      {
+        "icon": "streamline:interface-user-home-home-geometric-human-person-single-user"
+      },
+      {
+        "icon": "streamline:shopping-building-real-home-tower-building-house-estate"
+      },
+      {
+        "icon": "subway:home"
+      },
+      {
+        "icon": "subway:home-1"
+      },
+      {
+        "icon": "subway:home-2"
+      },
+      {
+        "icon": "subway:home-3"
+      },
+      {
+        "icon": "system-uicons:home"
+      },
+      {
+        "icon": "system-uicons:home-alt"
+      },
+      {
+        "icon": "system-uicons:home-check"
+      },
+      {
+        "icon": "system-uicons:home-door"
+      },
+      {
+        "icon": "tabler:brand-google-home"
+      },
+      {
+        "icon": "tabler:home"
+      },
+      {
+        "icon": "tabler:home-2"
+      },
+      {
+        "icon": "tabler:home-bolt"
+      },
+      {
+        "icon": "tabler:home-cancel"
+      },
+      {
+        "icon": "tabler:home-check"
+      },
+      {
+        "icon": "tabler:home-cog"
+      },
+      {
+        "icon": "tabler:home-dollar"
+      },
+      {
+        "icon": "tabler:home-dot"
+      },
+      {
+        "icon": "tabler:home-down"
+      },
+      {
+        "icon": "tabler:home-eco"
+      },
+      {
+        "icon": "tabler:home-edit"
+      },
+      {
+        "icon": "tabler:home-exclamation"
+      },
+      {
+        "icon": "tabler:home-hand"
+      },
+      {
+        "icon": "tabler:home-heart"
+      },
+      {
+        "icon": "tabler:home-infinity"
+      },
+      {
+        "icon": "tabler:home-link"
+      },
+      {
+        "icon": "tabler:home-minus"
+      },
+      {
+        "icon": "tabler:home-move"
+      },
+      {
+        "icon": "tabler:home-off"
+      },
+      {
+        "icon": "tabler:home-plus"
+      },
+      {
+        "icon": "tabler:home-question"
+      },
+      {
+        "icon": "tabler:home-ribbon"
+      },
+      {
+        "icon": "tabler:home-search"
+      },
+      {
+        "icon": "tabler:home-share"
+      },
+      {
+        "icon": "tabler:home-shield"
+      },
+      {
+        "icon": "tabler:home-signal"
+      },
+      {
+        "icon": "tabler:home-star"
+      },
+      {
+        "icon": "tabler:home-stats"
+      },
+      {
+        "icon": "tabler:home-up"
+      },
+      {
+        "icon": "tabler:home-x"
+      },
+      {
+        "icon": "tabler:smart-home"
+      },
+      {
+        "icon": "tabler:smart-home-off"
+      },
+      {
+        "icon": "tdesign:home"
+      },
+      {
+        "icon": "teenyicons:home-alt-outline"
+      },
+      {
+        "icon": "teenyicons:home-alt-solid"
+      },
+      {
+        "icon": "teenyicons:home-outline"
+      },
+      {
+        "icon": "teenyicons:home-solid"
+      },
+      {
+        "icon": "topcoat:home"
+      },
+      {
+        "icon": "typcn:home"
+      },
+      {
+        "icon": "typcn:home-outline"
+      },
+      {
+        "icon": "uil:home"
+      },
+      {
+        "icon": "uil:home-alt"
+      },
+      {
+        "icon": "uil:tachometer-fast"
+      },
+      {
+        "icon": "uil:tachometer-fast-alt"
+      },
+      {
+        "icon": "uiw:home"
+      },
+      {
+        "icon": "vaadin:home"
+      },
+      {
+        "icon": "vaadin:home-o"
+      },
+      {
+        "icon": "vscode-icons:file-type-esphome"
+      },
+      {
+        "icon": "vscode-icons:file-type-homeassistant"
+      },
+      {
+        "icon": "vscode-icons:file-type-light-esphome"
+      },
+      {
+        "icon": "whh:home"
+      },
+      {
+        "icon": "whh:homealt"
+      },
+      {
+        "icon": "zmdi:home"
+      },
+      {
+        "icon": "zondicons:home"
+      }
+    ],
+    "total": 911
+  }
+}

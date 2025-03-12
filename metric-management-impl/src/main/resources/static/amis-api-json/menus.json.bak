@@ -1,0 +1,371 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+      "[39.29 ms] select * from `cache` where `key` = 'admin_has_table_admin_relationships' limit 1",
+      "[12.22 ms] select * from `cache` where `key` = 'admin_relationships' limit 1",
+      "[11.53 ms] select * from `personal_access_tokens` where `personal_access_tokens`.`id` = 3 limit 1",
+      "[12.24 ms] select * from `admin_users` where `admin_users`.`id` = 1 limit 1",
+      "[12.61 ms] select `admin_roles`.*, `admin_role_users`.`user_id` as `pivot_user_id`, `admin_role_users`.`role_id` as `pivot_role_id`, `admin_role_users`.`created_at` as `pivot_created_at`, `admin_role_users`.`updated_at` as `pivot_updated_at` from `admin_roles` inner join `admin_role_users` on `admin_roles`.`id` = `admin_role_users`.`role_id` where `admin_role_users`.`user_id` = 1",
+      "[11.9 ms] select * from `admin_menus` order by `order` asc"
+    ]
+  },
+  "data": [
+    {
+      "name": "[1]",
+      "path": "\/dashboard",
+      "component": "amis",
+      "is_home": 1,
+      "iframe_url": "",
+      "url_type": 1,
+      "keep_alive": 0,
+      "is_full": 0,
+      "is_link": false,
+      "page_sign": "",
+      "meta": {
+        "title": "\u63a7\u5236\u53f0",
+        "icon": "mdi:chart-line",
+        "hide": false,
+        "order": 0
+      }
+    },
+    {
+      "name": "[2]",
+      "path": "\/system",
+      "component": "amis",
+      "is_home": 0,
+      "iframe_url": "",
+      "url_type": 1,
+      "keep_alive": 0,
+      "is_full": 0,
+      "is_link": false,
+      "page_sign": "",
+      "meta": {
+        "title": "\u7cfb\u7edf\u7ba1\u7406",
+        "icon": "material-symbols:settings-outline",
+        "hide": false,
+        "order": 0
+      },
+      "children": [
+        {
+          "name": "[2]-[3]",
+          "path": "\/system\/admin_users",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u7ba1\u7406\u5458",
+            "icon": "ph:user-gear",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[3]-create",
+          "path": "\/system\/admin_users\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ph:user-gear",
+            "title": "\u7ba1\u7406\u5458 - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[3]-show",
+          "path": "\/system\/admin_users\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ph:user-gear",
+            "title": "\u7ba1\u7406\u5458 - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[3]-edit",
+          "path": "\/system\/admin_users\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ph:user-gear",
+            "title": "\u7ba1\u7406\u5458 - \u7f16\u8f91"
+          }
+        },
+        {
+          "name": "[2]-[4]",
+          "path": "\/system\/admin_roles",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u89d2\u8272",
+            "icon": "carbon:user-role",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[4]-create",
+          "path": "\/system\/admin_roles\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "carbon:user-role",
+            "title": "\u89d2\u8272 - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[4]-show",
+          "path": "\/system\/admin_roles\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "carbon:user-role",
+            "title": "\u89d2\u8272 - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[4]-edit",
+          "path": "\/system\/admin_roles\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "carbon:user-role",
+            "title": "\u89d2\u8272 - \u7f16\u8f91"
+          }
+        },
+        {
+          "name": "[2]-[5]",
+          "path": "\/system\/admin_permissions",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u6743\u9650",
+            "icon": "fluent-mdl2:permissions",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[5]-create",
+          "path": "\/system\/admin_permissions\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "fluent-mdl2:permissions",
+            "title": "\u6743\u9650 - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[5]-show",
+          "path": "\/system\/admin_permissions\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "fluent-mdl2:permissions",
+            "title": "\u6743\u9650 - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[5]-edit",
+          "path": "\/system\/admin_permissions\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "fluent-mdl2:permissions",
+            "title": "\u6743\u9650 - \u7f16\u8f91"
+          }
+        },
+        {
+          "name": "[2]-[6]",
+          "path": "\/system\/admin_menus",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u83dc\u5355",
+            "icon": "ant-design:menu-unfold-outlined",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[6]-create",
+          "path": "\/system\/admin_menus\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ant-design:menu-unfold-outlined",
+            "title": "\u83dc\u5355 - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[6]-show",
+          "path": "\/system\/admin_menus\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ant-design:menu-unfold-outlined",
+            "title": "\u83dc\u5355 - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[6]-edit",
+          "path": "\/system\/admin_menus\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "ant-design:menu-unfold-outlined",
+            "title": "\u83dc\u5355 - \u7f16\u8f91"
+          }
+        },
+        {
+          "name": "[2]-[7]",
+          "path": "\/system\/settings",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "\u8bbe\u7f6e",
+            "icon": "akar-icons:settings-horizontal",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[2]-[7]-create",
+          "path": "\/system\/settings\/create",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "akar-icons:settings-horizontal",
+            "title": "\u8bbe\u7f6e - \u65b0\u589e"
+          }
+        },
+        {
+          "name": "[2]-[7]-show",
+          "path": "\/system\/settings\/:id",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "akar-icons:settings-horizontal",
+            "title": "\u8bbe\u7f6e - \u67e5\u770b"
+          }
+        },
+        {
+          "name": "[2]-[7]-edit",
+          "path": "\/system\/settings\/:id\/edit",
+          "component": "amis",
+          "meta": {
+            "hide": true,
+            "icon": "akar-icons:settings-horizontal",
+            "title": "\u8bbe\u7f6e - \u7f16\u8f91"
+          }
+        }
+      ]
+    },
+    {
+      "name": "user_setting",
+      "path": "\/user_setting",
+      "component": "amis",
+      "meta": {
+        "hide": true,
+        "title": "\u4e2a\u4eba\u8bbe\u7f6e",
+        "icon": "material-symbols:manage-accounts",
+        "singleLayout": "basic"
+      }
+    },
+    {
+      "name": "dev_tools",
+      "path": "\/dev_tools",
+      "component": "amis",
+      "meta": {
+        "title": "\u5f00\u53d1",
+        "icon": "fluent:window-dev-tools-20-regular"
+      },
+      "children": [
+        {
+          "name": "dev_tools_extensions",
+          "path": "\/dev_tools\/extensions",
+          "component": "amis",
+          "meta": {
+            "title": "\u6269\u5c55",
+            "icon": "ion:extension-puzzle-outline"
+          }
+        },
+        {
+          "name": "dev_tools_pages",
+          "path": "\/dev_tools\/pages",
+          "component": "amis",
+          "meta": {
+            "title": "\u9875\u9762\u7ba1\u7406",
+            "icon": "iconoir:multiple-pages"
+          }
+        },
+        {
+          "name": "dev_tools_relationships",
+          "path": "\/dev_tools\/relationships",
+          "component": "amis",
+          "meta": {
+            "title": "\u52a8\u6001\u5173\u8054",
+            "icon": "ant-design:node-index-outlined"
+          }
+        },
+        {
+          "name": "dev_tools_apis",
+          "path": "\/dev_tools\/apis",
+          "component": "amis",
+          "meta": {
+            "title": "\u52a8\u6001API",
+            "icon": "ant-design:api-outlined"
+          }
+        },
+        {
+          "name": "dev_tools_code_generator",
+          "path": "\/dev_tools\/code_generator",
+          "component": "amis",
+          "meta": {
+            "title": "\u4ee3\u7801\u751f\u6210\u5668",
+            "icon": "ic:baseline-code"
+          }
+        },
+        {
+          "name": "dev_tools_editor",
+          "path": "\/dev_tools\/editor",
+          "component": "editor",
+          "meta": {
+            "title": "\u53ef\u89c6\u5316\u7f16\u8f91\u5668",
+            "icon": "mdi:monitor-edit"
+          }
+        }
+      ]
+    }
+  ]
+}

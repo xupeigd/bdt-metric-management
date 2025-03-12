@@ -1,0 +1,269 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+    ]
+  },
+  "data": {
+    "type": "page",
+    "className": "m:overflow-auto pb-48",
+    "body": {
+      "type": "crud",
+      "perPage": 999999,
+      "affixHeader": false,
+      "filterTogglable": false,
+      "filterDefaultVisible": false,
+      "api": "/amis/permissions",
+      "bulkActions": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "label": "\u5220\u9664",
+          "icon": "fa-solid fa-trash-can",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u5220\u9664",
+            "className": "py-2",
+            "actions": [
+              {
+                "type": "action",
+                "actionType": "cancel",
+                "label": "\u53d6\u6d88"
+              },
+              {
+                "type": "action",
+                "actionType": "submit",
+                "label": "\u5220\u9664",
+                "level": "danger"
+              }
+            ],
+            "body": [
+              {
+                "type": "form",
+                "wrapWithPanel": false,
+                "api": "delete:\/amis\/permissions\/${ids}",
+                "body": [
+                  {
+                    "type": "tpl",
+                    "className": "py-2",
+                    "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "perPageAvailable": [
+        10,
+        20,
+        50
+      ],
+      "footerToolbar": [],
+      "headerToolbar": [
+        {
+          "type": "button",
+          "actionType": "dialog",
+          "dialog": {
+            "type": "dialog",
+            "title": "\u65b0\u589e",
+            "body": {
+              "type": "form",
+              "panelClassName": "px-48 m:px-0",
+              "title": " ",
+              "mode": "horizontal",
+              "promptPageLeave": true,
+              "onEvent": [],
+              "body": [
+                {
+                  "type": "input-text",
+                  "name": "name",
+                  "label": "\u540d\u79f0",
+                  "required": true
+                },
+                {
+                  "type": "input-text",
+                  "name": "code",
+                  "label": "\u6807\u8bc6",
+                  "required": true
+                },
+                {
+                  "type": "tree-select",
+                  "name": "parentId",
+                  "label": "\u7236\u7ea7",
+                  "labelField": "name",
+                  "valueField": "id",
+                  "value": 0,
+                  "source": "\/amis\/permissions"
+                },
+                {
+                  "type": "input-number",
+                  "name": "serial",
+                  "label": "\u6392\u5e8f",
+                  "required": true,
+                  "labelRemark": "\u5347\u5e8f\u6392\u5e8f",
+                  "displayMode": "enhance",
+                  "min": 0,
+                  "value": 0
+                }
+              ],
+              "canAccessSuperData": false,
+              "api": "post:\/amis\/permissions"
+            },
+            "size": "md"
+          },
+          "label": "\u65b0\u589e",
+          "icon": "fa fa-add",
+          "level": "primary"
+        },
+        "bulkActions",
+        {
+          "type": "reload",
+          "align": "right"
+        },
+        {
+          "type": "filter-toggler",
+          "align": "right"
+        }
+      ],
+      "primaryField": "id",
+      "loadDataOnce": true,
+      "columns": [
+        {
+          "name": "id",
+          "label": "ID",
+          "sortable": true
+        },
+        {
+          "name": "name",
+          "label": "\u540d\u79f0"
+        },
+        {
+          "name": "code",
+          "label": "\u6807\u8bc6"
+        },
+        {
+          "name": "path",
+          "label": "路径"
+        },
+        {
+          "type": "operation",
+          "label": "\u64cd\u4f5c",
+          "buttons": [
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "dialog": {
+                "type": "dialog",
+                "title": "\u7f16\u8f91",
+                "body": {
+                  "type": "form",
+                  "panelClassName": "px-48 m:px-0",
+                  "title": " ",
+                  "mode": "horizontal",
+                  "promptPageLeave": true,
+                  "onEvent": [],
+                  "body": [
+                    {
+                      "type": "input-text",
+                      "name": "id",
+                      "label": "ID",
+                      "required": true,
+                      "disabled": true
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "name",
+                      "label": "\u540d\u79f0",
+                      "required": true
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "code",
+                      "label": "\u6807\u8bc6",
+                      "required": true,
+                      "disabled": true
+                    },
+                    {
+                      "type": "input-text",
+                      "name": "path",
+                      "label": "路径",
+                      "disabled": true
+                    },
+                    {
+                      "type": "tree-select",
+                      "name": "parentId",
+                      "label": "\u7236\u7ea7",
+                      "labelField": "name",
+                      "valueField": "id",
+                      "value": 0,
+                      "source": "\/amis\/permissions"
+                    },
+                    {
+                      "type": "input-number",
+                      "name": "serial",
+                      "label": "\u6392\u5e8f",
+                      "required": true,
+                      "labelRemark": "\u5347\u5e8f\u6392\u5e8f",
+                      "displayMode": "enhance",
+                      "min": 0,
+                      "value": 0
+                    }
+                  ],
+                  "api": "put:\/amis\/permissions\/${id}",
+                  "initApi": "\/amis\/permissions\/${id}",
+                  "redirect": ""
+                },
+                "size": "md"
+              },
+              "label": "\u7f16\u8f91",
+              "icon": "fa-regular fa-pen-to-square",
+              "level": "link"
+            },
+            {
+              "type": "button",
+              "actionType": "dialog",
+              "label": "\u5220\u9664",
+              "icon": "fa-regular fa-trash-can",
+              "level": "link",
+              "dialog": {
+                "type": "dialog",
+                "title": "",
+                "className": "py-2",
+                "actions": [
+                  {
+                    "type": "action",
+                    "actionType": "cancel",
+                    "label": "\u53d6\u6d88"
+                  },
+                  {
+                    "type": "action",
+                    "actionType": "submit",
+                    "label": "\u5220\u9664",
+                    "level": "danger"
+                  }
+                ],
+                "body": [
+                  {
+                    "type": "form",
+                    "wrapWithPanel": false,
+                    "api": "delete:\/amis\/permissions\/${id}",
+                    "body": [
+                      {
+                        "type": "tpl",
+                        "className": "py-2",
+                        "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "dimensions": [
+    "name",
+    "mobile",
+    "email"
+  ],
+  "metricIds": [
+    1
+  ],
+  // name = 'hsu'
+  "condition": {
+    "name": "name",
+    "symbol": 0,
+    //0 等于 1不等于 10大于等于 11大于 20小于等于 21小于 30区间(BETWEEN) 40IN 41NOT IN 50LIKE 51NOT LIKE 100 AND 101 OR
+    "hitValues": [
+      "hsu"
+    ]
+  }
+
+  // name in ('hsu','zhao')
+  "condition": {
+    "name": "name",
+    "symbol": 40,
+    "hitValues": [
+      "hsu",
+      "zhao"
+    ]
+  },
+  //  count > 100
+  "condition": {
+    "name": "count",
+    "symbol": 11,
+    "hitValues": [
+      "100"
+    ]
+  }
+
+  //  name like '%hsu%'
+  "condition": {
+    "name": "count",
+    "symbol": 50,
+    "hitValues": [
+      "hsu"
+    ]
+  }
+
+  //  name like '%hsu%' AND cout >= 100
+  "condition": {
+    "left": {
+      "name": "name",
+      "symbol": 50,
+      "hitValues": [
+        "hsu"
+      ]
+    },
+    "right": {
+      "name": "count",
+      "symbol": 11,
+      "hitValues": [
+        "100"
+      ]
+    },
+    "symbol": 100
+  },
+  "sorts": [
+    {
+      "name": "name",
+      "asc": false
+    },
+    {
+      "name": "mobile",
+      "asc": true
+    }
+  ]
+}
+
+
+// A = 1 AND B = 100 AND D = 100
+{
+  "left": {
+    "left": {
+      "name": "A",
+      "symbol": 0,
+      "hitValues": [
+        "1"
+      ]
+    },
+    "right": {
+      "name": "B",
+      "symbol": 0,
+      "hitValues": [
+        "100"
+      ]
+    },
+    "symbol": 100
+  },
+  "right": {
+    "name": "D",
+    "symbol": 0,
+    "hitValues": [
+      "100"
+    ]
+  },
+  "symbol": 100
+}

@@ -1,0 +1,11 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {
+    "sql": [
+      "[9.9 ms] select * from `personal_access_tokens` where `token` = '74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b' limit 1"
+    ]
+  },
+  "data": []
+}
