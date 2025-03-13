@@ -1,4 +1,4 @@
-// package com.quicksand.bigdata.metric.management.identify.dbvos;
+package com.quicksand.bigdata.metric.management.identify.dbvos;// package com.quicksand.bigdata.metric.management.identify.dbvos;
 //
 // import com.quicksand.bigdata.metric.management.consts.DataStatus;
 // import com.quicksand.bigdata.metric.management.consts.PermissionGrantType;

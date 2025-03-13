@@ -1,4 +1,4 @@
-// package com.quicksand.bigdata.metric.management.configs;
+package com.quicksand.bigdata.metric.management.configs;// package com.quicksand.bigdata.metric.management.configs;
 //
 // import io.swagger.annotations.ApiOperation;
 // import org.springframework.context.annotation.Bean;

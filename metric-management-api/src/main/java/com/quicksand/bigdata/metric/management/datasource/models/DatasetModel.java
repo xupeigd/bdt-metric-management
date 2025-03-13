@@ -2,7 +2,6 @@ package com.quicksand.bigdata.metric.management.datasource.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.quicksand.bigdata.metric.management.consts.DataStatus;
 import com.quicksand.bigdata.metric.management.identify.models.UserOverviewModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * DatasetModifyModel
+ * DatasetModel
  *
  * @author page
  * @date 2022/7/28
@@ -43,7 +42,7 @@ public class DatasetModel {
     List<UserOverviewModel> owners;
 
     @Schema(description = "")
-    ClusterInfoModel cluster;
+    ClusterInfoModel clusterInfo;
 
     Integer createUserId;
 
@@ -60,14 +59,6 @@ public class DatasetModel {
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     Date updateTime;
-
-    /**
-     * 状态
-     * 0 删除 1 可用
-     */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-    DataStatus status;
 
     /**
      * 可变性
@@ -88,11 +79,9 @@ public class DatasetModel {
     @Schema(description = "")
     List<String> foreignKeys;
 
-    // @JsonProperty
-    // public List<String> owners() {
-    //     return !CollectionUtils.isEmpty(owners)
-    //             ? owners.stream().map(UserOverviewModel::getName).collect(Collectors.toList())
-    //             : Collections.emptyList();
-    // }
+    /**
+     * 选中字段
+     */
+    String includedColumns;
 
 }

@@ -913,7 +913,7 @@ public class MetricServiceImpl
         if (measuresBuilderList.size() > 1) {
             metricType = MetricType.expr.getYamlValue();
             List<String> nameList = measuresBuilderList.stream().map(MeasuresSegment.Measures::getName).collect(Collectors.toList());
-            typeParams.setExpr(org.apache.commons.lang3.StringUtils.join(nameList, '+'));
+            typeParams.setExpr(StringUtils.join(nameList, '+'));
             typeParams.setMeasures(nameList);
         } else {
             //选中第一个度量为指标默认代理度量
@@ -988,7 +988,6 @@ public class MetricServiceImpl
         MetricCatalogDBVO businessDomain = metricCatalogDataManager.findById(businessDomainId);
         Assert.notNull(topDomain, "主题域不存在");
         Assert.notNull(businessDomain, "业务域不存在");
-        Assert.isTrue(StringUtils.isNotBlank(topDomain.getBusinessCode()), "主题域未配置业务代码");
         Assert.isTrue(StringUtils.isNotBlank(topDomain.getBusinessCode()), "主题域未配置业务代码");
         Assert.isTrue(StringUtils.isNotBlank(businessDomain.getBusinessCode()), "业务域未配置业务代码");
         String maxSerialNumberByTopicAndBusiness = metricDataManager.getMaxSerialNumberByTopicAndBusiness(topDomain.getId(), businessDomain.getId());

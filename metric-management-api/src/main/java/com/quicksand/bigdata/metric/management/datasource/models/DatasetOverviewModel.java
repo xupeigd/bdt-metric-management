@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.quicksand.bigdata.metric.management.consts.DataStatus;
 import com.quicksand.bigdata.metric.management.identify.models.UserOverviewModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -65,14 +64,6 @@ public class DatasetOverviewModel {
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     Date updateTime;
-
-    /**
-     * 状态
-     * 0 删除 1 可用
-     */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-    DataStatus status;
 
     /**
      * 可变性
