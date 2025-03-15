@@ -8,7 +8,6 @@ import com.quicksand.bigdata.metric.management.datasource.models.DatasetModifyMo
 import com.quicksand.bigdata.metric.management.datasource.models.DatasetOverviewModel;
 import com.quicksand.bigdata.metric.management.datasource.rests.DatasetManageRestService;
 import com.quicksand.bigdata.metric.management.datasource.rests.DatasetRestService;
-import com.quicksand.bigdata.metric.management.datasource.services.DatasetService;
 import com.quicksand.bigdata.vars.http.model.Response;
 import com.quicksand.bigdata.vars.util.PageImpl;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,8 +32,6 @@ import java.util.Objects;
 @RestController
 public class DatasetAmisRestController {
 
-    @Resource
-    DatasetService datasetService;
     @Resource
     DatasetRestService datasetRestService;
     @Resource

@@ -20,7 +20,7 @@ public class DatasetRestControllerTest {
         dmm.setCluster(1);
         dmm.setName("Mock_Dataset");
         dmm.setDescription("虚拟的Dataset");
-//        dmm.setOwners(Collections.singletonList(1));
+        dmm.setOwners(Collections.singletonList(1));
         dmm.setTableName("t_identify_users");
         dmm.setPrimaryKey("id");
         System.out.println(JsonUtils.toJsonString(dmm));

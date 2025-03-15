@@ -358,6 +358,16 @@
             },
             {
               "type": "button",
+              "actionType": "dialog",
+              "dialog": {
+                "type": "dialog",
+                "title": "探查数据",
+                "body": {
+                  "type": "crud",
+                  "api": "\/amis\/query\/datasets\/${id}"
+                },
+                "size": "lg"
+              },
               "label": "探查",
               "icon": "fa-solid fa-xmarks-lines",
               "level": "link"

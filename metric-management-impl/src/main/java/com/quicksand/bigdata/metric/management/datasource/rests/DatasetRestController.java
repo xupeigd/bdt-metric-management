@@ -18,6 +18,7 @@ import com.quicksand.bigdata.metric.management.identify.utils.AuthUtil;
 import com.quicksand.bigdata.metric.management.metric.dbvos.MetricDBVO;
 import com.quicksand.bigdata.metric.management.metric.dms.MetricDataManager;
 import com.quicksand.bigdata.metric.management.metric.models.MetricQueryModel;
+import com.quicksand.bigdata.metric.management.utils.DatasetUtil;
 import com.quicksand.bigdata.metric.management.utils.PageableUtil;
 import com.quicksand.bigdata.metric.management.utils.YamlUtil;
 import com.quicksand.bigdata.metric.management.yaml.dbvos.SegmentDBVO;
@@ -183,24 +184,7 @@ public class DatasetRestController
             return Response.notfound();
         }
         return Response.ok(JsonUtils.transfrom(dataset, DatasetModel.class, r -> {
-            List<String> includedColumns = new ArrayList<>();
-            if (!CollectionUtils.isEmpty(dataset.getIdentifiers()) || !CollectionUtils.isEmpty(dataset.getColumns())) {
-                if (!CollectionUtils.isEmpty(dataset.getIdentifiers())) {
-                    for (IdentifierDBVO identifier : dataset.getIdentifiers()) {
-                        if (!includedColumns.contains(identifier.getName())) {
-                            includedColumns.add(identifier.getName());
-                        }
-                    }
-                }
-                if (!CollectionUtils.isEmpty(dataset.getColumns())) {
-                    for (DatasetColumnDBVO column : dataset.getColumns()) {
-                        if (Objects.equals(column.getIncluded(), DataStatus.ENABLE)
-                                && !includedColumns.contains(column.getName())) {
-                            includedColumns.add(column.getName());
-                        }
-                    }
-                }
-            }
+            List<String> includedColumns = DatasetUtil.resolvingFields(dataset);
             r.setIncludedColumns(StringUtils.collectionToCommaDelimitedString(includedColumns));
             if (null != dataset.getCluster()) {
                 r.setClusterInfo(JsonUtils.transfrom(dataset.getCluster(), ClusterInfoModel.class));
