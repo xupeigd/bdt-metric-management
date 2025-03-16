@@ -134,9 +134,9 @@ public class ClusterInfoAmisRestController {
                     //清理密码
                     model.setPassword(null);
                     return model;
-                }).collect(Collectors.toList()), null, 0, "success");
+                })
+                .collect(Collectors.toList()), null, 0, "success");
     }
-
 
     @Data
     public static final class Select {
@@ -208,6 +208,5 @@ public class ClusterInfoAmisRestController {
                 .collect(Collectors.toList()));
         return FrameworkResponse.extend(Response.ok(optionModel));
     }
-
 
 }

@@ -283,7 +283,7 @@
     },
     {
       "name": "[3]",
-      "path": "\/metric_market",
+      "path": "\/metrics_market",
       "component": "amis",
       "meta": {
         "hide": false,
@@ -317,6 +317,24 @@
           "meta": {
             "title": "指标域",
             "icon": "mdi:set-split",
+            "hide": false,
+            "order": 0
+          }
+        },
+        {
+          "name": "[4]-[2]",
+          "path": "\/metrics_manage",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "指标管理",
+            "icon": "mdi:store-cog",
             "hide": false,
             "order": 0
           }

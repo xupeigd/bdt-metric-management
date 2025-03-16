@@ -1,0 +1,147 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {},
+  "data": {
+    "type": "page",
+    "body": {
+      "type": "flex",
+      "items": [
+        {
+          "type": "card",
+          "className": "w-1\/4 mr-5 mb-0",
+          "body": [
+            {
+              "name": "static",
+              "type": "static",
+              "label": "指标域",
+              "value": ""
+            },
+            {
+              "type": "form",
+              "id": "treeForm",
+              "wrapWithPanel": false,
+              "body": {
+                "type": "input-tree",
+                "name": "selectedNode",
+                "source": "\/amis\/metric-catalogs",
+                "labelField": "name",
+                "valueField": "code",
+                "showIcon": false,
+                "onEvent": {
+                  "change": {
+                    "actions": [
+                      {
+                        "actionType": "reload",
+                        "componentId": "rightTable",
+                        "args": {
+                          "selectedNode": "${event.data.selectedNode}"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "page",
+          "className": "m:overflow-auto",
+          "body": [
+            [],
+            {
+              "type": "crud",
+              "id": "rightTable",
+              "placeholder": "请先选择左侧目录",
+              "perPage": 20,
+              "alwaysShowPagination": true,
+              "affixHeader": false,
+              "filterTogglable": false,
+              "filterDefaultVisible": false,
+              "api": "\/amis\/metrics?input=${selectedNode}",
+              "bulkActions": [
+                {
+                  "type": "button",
+                  "actionType": "dialog",
+                  "label": "Delete",
+                  "icon": "fa-solid fa-trash-can",
+                  "dialog": {
+                    "type": "dialog",
+                    "title": "Delete",
+                    "className": "py-2",
+                    "actions": [
+                      {
+                        "type": "action",
+                        "actionType": "cancel",
+                        "label": "Cancel"
+                      },
+                      {
+                        "type": "action",
+                        "actionType": "submit",
+                        "label": "Delete",
+                        "level": "danger"
+                      }
+                    ],
+                    "body": [
+                      {
+                        "type": "form",
+                        "wrapWithPanel": false,
+                        "api": "delete:\/metrics_manage\/left_tree_right_table\/${ids}",
+                        "body": [
+                          {
+                            "type": "tpl",
+                            "className": "py-2",
+                            "tpl": "Confirm Delete Selected Items?"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "footerToolbar": [],
+              "headerToolbar": [
+              ],
+              "primaryField": "id",
+              "columns": [
+                {
+                  "name": "id",
+                  "label": "ID"
+                },
+                {
+                  "name": "title",
+                  "label": "\u540d\u79f0"
+                },
+                {
+                  "name": "state",
+                  "label": "\u72b6\u6001",
+                  "type": "status"
+                },
+                {
+                  "name": "image",
+                  "label": "\u56fe\u7247",
+                  "type": "image"
+                },
+                {
+                  "name": "created_at",
+                  "label": "admin.created_at",
+                  "type": "datetime"
+                },
+                {
+                  "name": "updated_at",
+                  "label": "admin.updated_at",
+                  "type": "datetime"
+                }
+              ]
+            },
+            [],
+            [],
+            []
+          ]
+        }
+      ]
+    }
+  }
+}
