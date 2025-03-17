@@ -13,48 +13,7 @@
       "affixHeader": false,
       "filterTogglable": false,
       "filterDefaultVisible": false,
-      "api": "\/amis\/clusters",
-      "bulkActions": [
-        {
-          "type": "button",
-          "actionType": "dialog",
-          "label": "\u5220\u9664",
-          "icon": "fa-solid fa-trash-can",
-          "dialog": {
-            "type": "dialog",
-            "title": "\u5220\u9664",
-            "className": "py-2",
-            "actions": [
-              {
-                "type": "action",
-                "actionType": "cancel",
-                "label": "\u53d6\u6d88"
-              },
-              {
-                "type": "action",
-                "actionType": "submit",
-                "label": "\u5220\u9664",
-                "level": "danger"
-              }
-            ],
-            "body": [
-              {
-                "type": "form",
-                "wrapWithPanel": false,
-                "api": "delete:\/amis\/clusters\/${ids}",
-                "body": [
-                  {
-                    "type": "tpl",
-                    "className": "py-2",
-                    "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
-                  }
-                ]
-              }
-            ]
-          },
-          "reload": "window"
-        }
-      ],
+      "api": "\/amis\/datasource\/datasets",
       "perPageAvailable": [
         10,
         20,
@@ -70,89 +29,157 @@
           "type": "button",
           "actionType": "dialog",
           "dialog": {
-            "type": "dialog",
-            "title": "\u65b0\u589e",
+            "title": "新建数据集",
+            "actions": [],
             "body": {
-              "type": "card",
-              "body": {
-                "type": "wizard",
-                "steps": [
-                  {
-                    "type": "form",
-                    "title": "选择集群",
-                    "mode": "horizontal",
-                    "body": [
+              "type": "form",
+              "body": [
+                {
+                  "type": "card",
+                  "body": {
+                    "type": "wizard",
+                    "steps": [
                       {
-                        "type": "select",
-                        "name": "cluster",
-                        "label": "数据集群",
-                        "searchable": true,
-                        "multiple": false,
-                        "labelField": "name",
-                        "valueField": "id",
-                        "joinValues": false,
-                        "extractValue": true,
-                        "source": "\/amis\/clusters?perPage=9999"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "form",
-                    "title": "选择数据表",
-                    "mode": "horizontal",
-                    "body": [
-                      {
-                        "type": "select",
-                        "name": "table",
-                        "label": "数据表",
-                        "searchable": true,
-                        "multiple": false,
-                        "labelField": "name",
-                        "valueField": "value",
-                        "joinValues": false,
-                        "extractValue": true,
-                        "source": "\/amis\/datasource\/clusters\/${cluster}\/tables"
-                      }
-                    ]
-                  },
-                  {
-                    "$schema": "https://houtai.baidu.com/v2/schemas/page.json#",
-                    "type": "form",
-                    "title": "选择字段",
-                    "mode": "horizontal",
-                    "controls": [
-                      {
-                        "type": "transfer",
-                        "name": "transfer3",
-                        "selectMode": "table",
-                        "columns": [
+                        "type": "form",
+                        "title": "选择集群",
+                        "mode": "horizontal",
+                        "body": [
                           {
-                            "name": "name",
-                            "label": "名称"
-                          },
-                          {
-                            "name": "type",
-                            "label": "类型"
-                          },
-                          {
-                            "name": "comment",
-                            "label": "备注"
+                            "type": "select",
+                            "name": "cluster",
+                            "label": "数据集群",
+                            "searchable": true,
+                            "multiple": false,
+                            "labelField": "name",
+                            "valueField": "id",
+                            "joinValues": false,
+                            "extractValue": true,
+                            "source": "\/amis\/clusters?perPage=9999",
+                            "required": true
                           }
-                        ],
-                        "source": "\/amis\/datasource\/clusters\/${cluster}\/tables\/${table}\/columns"
+                        ]
+                      },
+                      {
+                        "type": "form",
+                        "title": "选择数据表",
+                        "mode": "horizontal",
+                        "body": [
+                          {
+                            "type": "select",
+                            "name": "tableName",
+                            "label": "数据表",
+                            "searchable": true,
+                            "multiple": false,
+                            "labelField": "name",
+                            "valueField": "value",
+                            "joinValues": false,
+                            "extractValue": true,
+                            "source": "\/amis\/datasource\/clusters\/${cluster}\/tables",
+                            "required": true
+                          }
+                        ]
+                      },
+                      {
+                        "$schema": "https://houtai.baidu.com/v2/schemas/page.json#",
+                        "type": "form",
+                        "title": "确认字段信息",
+                        "mode": "horizontal",
+                        "body": [
+                          {
+                            "type": "select",
+                            "name": "primaryKey",
+                            "label": "主键",
+                            "searchable": false,
+                            "multiple": false,
+                            "labelField": "name",
+                            "valueField": "value",
+                            "joinValues": false,
+                            "extractValue": true,
+                            "source": "\/amis\/datasource\/clusters\/${cluster}\/tables\/${tableName}\/columns"
+                          },
+                          {
+                            "type": "select",
+                            "name": "foreignKeys",
+                            "label": "外键",
+                            "searchable": true,
+                            "multiple": true,
+                            "labelField": "name",
+                            "valueField": "value",
+                            "joinValues": false,
+                            "extractValue": true,
+                            "source": "\/amis\/datasource\/clusters\/${cluster}\/tables\/${tableName}\/columns"
+                          },
+                          {
+                            "label": "可用字段",
+                            "type": "transfer",
+                            "name": "columns",
+                            "selectMode": "table",
+                            "joinValues": false,
+                            "extractValue": true,
+                            "columns": [
+                              {
+                                "name": "name",
+                                "label": "名称"
+                              },
+                              {
+                                "name": "type",
+                                "label": "类型"
+                              },
+                              {
+                                "name": "comment",
+                                "label": "备注"
+                              }
+                            ],
+                            "source": "\/amis\/datasource\/clusters\/${cluster}\/tables\/${tableName}\/columns"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "form",
+                        "title": "数据集信息",
+                        "mode": "horizontal",
+                        "api": "post:\/amis\/datasource\/datasets",
+                        "reload": "window",
+                        "body": [
+                          {
+                            "type": "input-text",
+                            "label": "名称",
+                            "placeholder": "名称",
+                            "name": "name",
+                            "required": true
+                          },
+                          {
+                            "type": "select",
+                            "name": "owner",
+                            "label": "负责人",
+                            "placeholder": "数据集负责人",
+                            "labelField": "name",
+                            "valueField": "id",
+                            "joinValues": false,
+                            "extractValue": true,
+                            "source": "\/amis\/users?perPage=9999"
+                          },
+                          {
+                            "type": "textarea",
+                            "label": "数据集描述",
+                            "name": "description",
+                            "placeholder": "数据集描述",
+                            "required": true
+                          }
+                        ]
                       }
                     ]
                   }
-                ]
-              }
+                }
+              ]
             },
-            "size": "lg"
+            "size": "xl"
           },
+          "reload": "window",
           "label": "\u65b0\u589e",
           "icon": "fa fa-add",
           "level": "primary"
         },
-        "bulkActions",
         {
           "type": "reload",
           "align": "right"
@@ -177,16 +204,18 @@
           "label": "\u540d\u79f0"
         },
         {
-          "name": "type",
-          "label": "类型"
+          "name": "owners",
+          "label": "负责人",
+          "type": "each",
+          "items": {
+            "type": "tag",
+            "label": "${item}",
+            "className": "my-1"
+          }
         },
         {
-          "name": "createTime",
-          "label": "创建时间"
-        },
-        {
-          "name": "updateTime",
-          "label": "更新时间"
+          "name": "description",
+          "label": "描述"
         },
         {
           "type": "operation",
@@ -207,109 +236,119 @@
                   "onEvent": [],
                   "body": [
                     {
-                      "type": "group",
-                      "body": [
-                        {
-                          "type": "input-text",
-                          "name": "id",
-                          "label": "ID",
-                          "disabled": true,
-                          "required": true
-                        }
-                      ]
+                      "type": "input-text",
+                      "label": "ID",
+                      "name": "id",
+                      "required": true,
+                      "disabled": true
                     },
                     {
-                      "type": "group",
-                      "body": [
-                        {
-                          "type": "input-text",
-                          "name": "name",
-                          "label": "\u540d\u79f0",
-                          "required": true
-                        },
-                        {
-                          "type": "select",
-                          "name": "type",
-                          "label": "类型",
-                          "options": [
-                            {
-                              "label": "MySql",
-                              "value": "MySql"
-                            },
-                            {
-                              "label": "Hive",
-                              "value": "Hive"
-                            },
-                            {
-                              "label": "Clickhouse",
-                              "value": "Clickhouse"
-                            },
-                            {
-                              "label": "Doris",
-                              "value": "Doris"
-                            },
-                            {
-                              "label": "StarRocks",
-                              "value": "StarRocks"
-                            }
-                          ]
-                        }
-                      ]
+                      "type": "input-text",
+                      "label": "名称",
+                      "name": "name",
+                      "required": true,
+                      "disabled": true
                     },
                     {
-                      "type": "group",
-                      "body": [
-                        {
-                          "type": "input-text",
-                          "name": "address",
-                          "label": "链接地址",
-                          "required": true
-                        }
-                      ]
+                      "type": "select",
+                      "name": "cluster",
+                      "value": "${clusterInfo.id}",
+                      "label": "数据集群",
+                      "searchable": true,
+                      "multiple": false,
+                      "labelField": "name",
+                      "valueField": "id",
+                      "joinValues": false,
+                      "extractValue": true,
+                      "source": "\/amis\/clusters?perPage=9999",
+                      "required": true,
+                      "disabled": true
                     },
                     {
-                      "type": "group",
-                      "body": [
-                        {
-                          "type": "input-text",
-                          "name": "defaultDatabase",
-                          "label": "默认数据库",
-                          "required": true
-                        },
-                        {
-                          "type": "input-text",
-                          "name": "defaultSchema",
-                          "label": "默认Schema",
-                          "required": true
-                        }
-                      ]
+                      "type": "select",
+                      "name": "tableName",
+                      "label": "数据表",
+                      "searchable": true,
+                      "multiple": false,
+                      "labelField": "name",
+                      "valueField": "value",
+                      "joinValues": false,
+                      "extractValue": true,
+                      "source": "\/amis\/datasource\/clusters\/${clusterInfo.id}\/tables",
+                      "required": true,
+                      "disabled": true
                     },
                     {
-                      "type": "group",
-                      "body": [
-                        {
-                          "type": "input-text",
-                          "name": "username",
-                          "label": "账户名",
-                          "required": true
-                        },
-                        {
-                          "type": "input-password",
-                          "name": "password",
-                          "label": "密码",
-                          "required": true
-                        }
-                      ]
+                      "type": "select",
+                      "name": "owner",
+                      "value": "${owners[0].id}",
+                      "label": "负责人",
+                      "placeholder": "数据集负责人",
+                      "labelField": "name",
+                      "valueField": "id",
+                      "joinValues": false,
+                      "extractValue": true,
+                      "source": "\/amis\/users?perPage=9999"
                     },
                     {
                       "type": "textarea",
-                      "name": "comment",
-                      "label": "备注"
+                      "label": "数据集描述",
+                      "name": "description",
+                      "placeholder": "数据集描述",
+                      "required": true
+                    },
+                    {
+                      "type": "select",
+                      "name": "primaryKey",
+                      "label": "主键",
+                      "searchable": false,
+                      "multiple": false,
+                      "labelField": "name",
+                      "valueField": "value",
+                      "joinValues": false,
+                      "extractValue": true,
+                      "source": "\/amis\/datasource\/clusters\/${clusterInfo.id}\/tables\/${tableName}\/columns"
+                    },
+                    {
+                      "type": "select",
+                      "name": "foreignKeys",
+                      "label": "外键",
+                      "searchable": true,
+                      "multiple": true,
+                      "labelField": "name",
+                      "valueField": "value",
+                      "joinValues": false,
+                      "extractValue": true,
+                      "source": "\/amis\/datasource\/clusters\/${clusterInfo.id}\/tables\/${tableName}\/columns"
+                    },
+                    {
+                      "label": "可用字段",
+                      "type": "transfer",
+                      "name": "includedColumns",
+                      "values": "includedColumns",
+                      "selectMode": "table",
+                      "joinValues": true,
+                      "extractValue": true,
+                      "columns": [
+                        {
+                          "name": "name",
+                          "label": "名称"
+                        },
+                        {
+                          "name": "type",
+                          "label": "类型"
+                        },
+                        {
+                          "name": "comment",
+                          "label": "备注"
+                        }
+                      ],
+                      "source": "\/amis\/datasource\/clusters\/${clusterInfo.id}\/tables\/${tableName}\/columns"
                     }
                   ],
                   "canAccessSuperData": false,
-                  "initApi": "/amis/clusters/${id}",
-                  "api": "put:\/amis\/clusters\/${id}"
+                  "initApi": "\/amis\/datasource\/datasets\/${id}",
+                  "api": "put:\/amis\/datasource\/datasets\/${id}"
                 },
                 "size": "lg"
               },
@@ -319,7 +358,17 @@
             },
             {
               "type": "button",
-              "label": " 测试链接",
+              "actionType": "dialog",
+              "dialog": {
+                "type": "dialog",
+                "title": "探查数据",
+                "body": {
+                  "type": "crud",
+                  "api": "\/amis\/query\/datasets\/${id}"
+                },
+                "size": "lg"
+              },
+              "label": "探查",
               "icon": "fa-solid fa-xmarks-lines",
               "level": "link"
             },
@@ -350,7 +399,7 @@
                   {
                     "type": "form",
                     "wrapWithPanel": false,
-                    "api": "delete:\/amis\/clusters\/${id}",
+                    "api": "delete:\/amis\/datasource\/datasets\/${id}",
                     "body": [
                       {
                         "type": "tpl",

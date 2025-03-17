@@ -60,20 +60,15 @@ public class DatasetModifyModel {
     String tableName;
 
     /**
-     * 负责人
+     * 负责人(单个)
      */
-    @Schema(description = "")
-    // @NotEmpty(message = "必须提供负责人Id! ", groups = {Insert.class, Update.class})
-            // @NotNull(message = "必须提供负责人Id! ", groups = {Insert.class, Update.class})
-            List<Integer> owners;
+    Integer owner;
 
     /**
      * 主键字段
      */
     @Schema(description = "")
-    // @Length(min = 2, max = 64, message = "primaryKey长度必须在2 ~ 64 之间! ", groups = {Insert.class, Update.class})
-            // @NotBlank(message = "表名称不能为空! ", groups = {Insert.class, Update.class})
-            String primaryKey;
+    String primaryKey;
 
     /**
      * 外键字段
@@ -95,5 +90,10 @@ public class DatasetModifyModel {
     @Schema(description = "")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     MutabilityModel mutability;
+
+    /**
+     * 选中字段
+     */
+    String includedColumns;
 
 }

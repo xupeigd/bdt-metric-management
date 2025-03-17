@@ -76,16 +76,6 @@ public class DatasetColumnModel {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     Date updateTime;
 
-    /**
-     * 状态
-     * 0 删除 1 可用
-     *
-     * @see DataStatus
-     */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-    DataStatus status;
-
     @JsonProperty
     public String tableName() {
         return null == dataset ? "" : dataset.getTableName();

@@ -1,0 +1,339 @@
+{
+  "status": 0,
+  "msg": "",
+  "doNotDisplayToast": 0,
+  "_debug": {},
+  "data": {
+    "type": "page",
+    "body": {
+      "type": "flex",
+      "items": [
+        {
+          "type": "card",
+          "className": "w-1\/4 mr-5 mb-0",
+          "body": [
+            {
+              "name": "static",
+              "type": "static",
+              "label": "指标域"
+            },
+            {
+              "type": "form",
+              "id": "treeForm",
+              "wrapWithPanel": false,
+              "body": {
+                "type": "input-tree",
+                "name": "selectedNode",
+                "source": "\/amis\/metric-catalogs",
+                "labelField": "name",
+                "valueField": "id",
+                "showIcon": false,
+                "onEvent": {
+                  "change": {
+                    "actions": [
+                      {
+                        "actionType": "reload",
+                        "componentId": "rightTable",
+                        "args": {
+                          "selectedNode": "${event.data.selectedNode}"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "page",
+          "className": "m:overflow-auto",
+          "body": [
+            [],
+            {
+              "type": "crud",
+              "id": "rightTable",
+              "name": "rightTable",
+              "placeholder": "请先选择左侧目录",
+              "perPage": 20,
+              "alwaysShowPagination": true,
+              "affixHeader": false,
+              "filterTogglable": false,
+              "filterDefaultVisible": false,
+              "api": "\/amis\/metrics?businessCatalog=${selectedNode}",
+              "bulkActions": [
+              ],
+              "perPageAvailable": [
+                10,
+                20,
+                50
+              ],
+              "footerToolbar": [],
+              "headerToolbar": [
+              ],
+              "primaryField": "id",
+              "columns": [
+                {
+                  "name": "id",
+                  "label": "ID"
+                },
+                {
+                  "name": "cnName",
+                  "label": "中文名称"
+                },
+                {
+                  "name": "enName",
+                  "label": "英文名称"
+                },
+                {
+                  "name": "serialNumber",
+                  "label": "指标编码"
+                },
+                {
+                  "name": "${dataset.name}",
+                  "label": "数据集"
+                },
+                {
+                  "name": "${businessOwners[0].name}",
+                  "label": "业务负责人"
+                },
+                {
+                  "name": "${techOwners[0].name}",
+                  "label": "技术负责人"
+                },
+                {
+                  "type": "select",
+                  "name": "pubsub",
+                  "label": "是否上线",
+                  "disabled": true,
+                  "options": [
+                    {
+                      "label": "未上线",
+                      "value": 0
+                    },
+                    {
+                      "label": "已发布",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "operation",
+                  "label": "\u64cd\u4f5c",
+                  "buttons": [
+                    {
+                      "type": "button",
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "试算",
+                        "body": {
+                          "type": "page",
+                          "body": [
+                            {
+                              "type": "service",
+                              "className": "mb-4",
+                              "title": "试算SQL",
+                              "api": "\/amis\/metrics\/${id}\/previewSql",
+                              "body": {
+                                "type": "textarea",
+                                "name": "previewSql",
+                                "value": "${content}",
+                                "disabled": true,
+                                "minRows": 10,
+                                "maxRows": 15
+                              }
+                            },
+                            {
+                              "type": "crud",
+                              "title": "试算数据",
+                              "className": "mt-4",
+                              "api": "\/amis\/query\/metrics\/${id}\/preview"
+                            }
+                          ]
+                        },
+                        "size": "xl"
+                      },
+                      "label": "试算",
+                      "icon": "fa-solid fa-calculator",
+                      "level": "link",
+                      "hiddenOn": "${type == 1 || type == 2 }"
+                    },
+                    {
+                      "type": "button",
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "编辑",
+                        "body": {
+                          "type": "form",
+                          "panelClassName": "px-48 m:px-0",
+                          "title": " ",
+                          "mode": "horizontal",
+                          "promptPageLeave": true,
+                          "onEvent": [],
+                          "body": [
+                            {
+                              "type": "input-text",
+                              "label": "ID",
+                              "name": "id",
+                              "required": true,
+                              "disabled": true
+                            },
+                            {
+                              "type": "input-text",
+                              "label": "\u540d\u79f0",
+                              "name": "name",
+                              "required": true
+                            },
+                            {
+                              "type": "input-text",
+                              "label": "\u6807\u8bc6",
+                              "name": "code",
+                              "description": "\u89d2\u8272\u7684\u552f\u4e00\u6807\u8bc6, \u4e0d\u53ef\u91cd\u590d",
+                              "required": true,
+                              "disabled": true
+                            }
+                          ],
+                          "api": "put:\/amis\/roles\/${id}",
+                          "initApi": "\/amis\/roles\/${id}",
+                          "redirect": ""
+                        },
+                        "size": ""
+                      },
+                      "label": "\u7f16\u8f91",
+                      "icon": "fa-regular fa-pen-to-square",
+                      "level": "link",
+                      "hiddenOn": "${1 == pubsub}"
+                    },
+                    {
+                      "type": "button",
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "下线${name}",
+                        "body": "确定要下线指标吗？<br/>(指标下线后将无法被调用)",
+                        "actions": [
+                          {
+                            "type": "action",
+                            "actionType": "cancel",
+                            "label": "\u53d6\u6d88"
+                          },
+                          {
+                            "label": "确认下线",
+                            "actionType": "ajax",
+                            "close": true,
+                            "primary": true,
+                            "type": "button",
+                            "level": "danger",
+                            "api": "put:\/amis\/metrics\/${id}\/0",
+                            "reload": "rightTable"
+                          }
+                        ]
+                      },
+                      "label": "下线",
+                      "icon": "fa-regular fa-pen-to-square",
+                      "level": "link",
+                      "hiddenOn": "${0 == pubsub}",
+                      "size": "md"
+                    },
+                    {
+                      "type": "button",
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "编辑",
+                        "body": {
+                          "type": "form",
+                          "panelClassName": "px-48 m:px-0",
+                          "title": " ",
+                          "mode": "horizontal",
+                          "promptPageLeave": true,
+                          "onEvent": [],
+                          "body": [
+                            {
+                              "type": "input-text",
+                              "label": "ID",
+                              "name": "id",
+                              "required": true,
+                              "disabled": true
+                            },
+                            {
+                              "type": "input-text",
+                              "label": "\u540d\u79f0",
+                              "name": "name",
+                              "required": true
+                            },
+                            {
+                              "type": "input-text",
+                              "label": "\u6807\u8bc6",
+                              "name": "code",
+                              "description": "\u89d2\u8272\u7684\u552f\u4e00\u6807\u8bc6, \u4e0d\u53ef\u91cd\u590d",
+                              "required": true,
+                              "disabled": true
+                            }
+                          ],
+                          "api": "put:\/amis\/roles\/${id}",
+                          "initApi": "\/amis\/roles\/${id}",
+                          "redirect": ""
+                        },
+                        "size": ""
+                      },
+                      "label": "发布",
+                      "icon": "fa-regular fa-pen-to-square",
+                      "level": "link",
+                      "hiddenOn": "${1 == pubsub}"
+                    },
+                    {
+                      "type": "button",
+                      "actionType": "dialog",
+                      "label": "删除",
+                      "icon": "fa-regular fa-trash-can",
+                      "level": "link",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "",
+                        "className": "py-2",
+                        "actions": [
+                          {
+                            "type": "action",
+                            "actionType": "cancel",
+                            "label": "\u53d6\u6d88"
+                          },
+                          {
+                            "type": "action",
+                            "actionType": "submit",
+                            "label": "\u5220\u9664",
+                            "level": "danger"
+                          }
+                        ],
+                        "body": [
+                          {
+                            "type": "form",
+                            "wrapWithPanel": false,
+                            "api": "delete:\/amis\/roles\/${id}",
+                            "body": [
+                              {
+                                "type": "tpl",
+                                "className": "py-2",
+                                "tpl": "\u786e\u8ba4\u5220\u9664\u9009\u4e2d\u9879\uff1f"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "hiddenOn": "${1 == pubsub}"
+                    }
+                  ]
+                }
+              ]
+            },
+            [],
+            [],
+            []
+          ]
+        }
+      ]
+    }
+  }
+}

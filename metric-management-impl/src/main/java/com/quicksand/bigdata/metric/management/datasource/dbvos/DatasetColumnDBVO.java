@@ -71,25 +71,25 @@ public class DatasetColumnDBVO {
     /**
      * 注释
      */
-    @Column(columnDefinition = " VARCHAR(255) NOT NULL DEFAULT '' COMMENT '注释/描述' ")
+    @Column(columnDefinition = "VARCHAR(255) NOT NULL DEFAULT '' COMMENT '注释/描述' ")
     String comment;
 
-    @Column(name = "create_user_id", columnDefinition = " bigint(11) NOT NULL DEFAULT 0 COMMENT '创建用户Id' ")
+    @Column(name = "create_user_id", columnDefinition = "bigint(11) NOT NULL DEFAULT 0 COMMENT '创建用户Id' ")
     Integer createUserId;
 
     /**
      * 创建时间
      */
-    @Column(name = "create_time", columnDefinition = " datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ")
+    @Column(name = "create_time", columnDefinition = "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ")
     Date createTime;
 
-    @Column(name = "update_user_id", columnDefinition = " bigint(11) NOT NULL DEFAULT 0 COMMENT '更新用户Id' ")
+    @Column(name = "update_user_id", columnDefinition = "bigint(11) NOT NULL DEFAULT 0 COMMENT '更新用户Id' ")
     Integer updateUserId;
 
     /**
      * 更新时间
      */
-    @Column(name = "update_time", columnDefinition = " datetime  NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间' ")
+    @Column(name = "update_time", columnDefinition = "datetime  NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间' ")
     Date updateTime;
 
     /**
@@ -101,5 +101,11 @@ public class DatasetColumnDBVO {
     @Enumerated(EnumType.ORDINAL)
     @Column(columnDefinition = "tinyint(2) NOT NULL DEFAULT 1 COMMENT '数据状态 0删除 1 可用' ")
     DataStatus status;
+
+    /**
+     * 选中状态表示可用使用（控制可用）
+     */
+    @Column(columnDefinition = "tinyint(2) NOT NULL DEFAULT 1 COMMENT '是否选中 0否 1是' ")
+    DataStatus included;
 
 }

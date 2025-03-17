@@ -1,4 +1,4 @@
-// package com.quicksand.bigdata.metric.management.consts;
+package com.quicksand.bigdata.metric.management.consts;// package com.quicksand.bigdata.metric.management.consts;
 //
 // import org.springframework.util.StringUtils;
 //

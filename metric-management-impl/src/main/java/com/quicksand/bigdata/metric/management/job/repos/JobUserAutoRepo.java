@@ -1,4 +1,4 @@
-// package com.quicksand.bigdata.metric.management.jobs.repo;
+package com.quicksand.bigdata.metric.management.job.repos;// package com.quicksand.bigdata.metric.management.jobs.repo;
 //
 // import com.quicksand.bigdata.metric.management.jobs.core.model.JobUser;
 // import org.springframework.data.domain.Page;

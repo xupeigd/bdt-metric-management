@@ -85,10 +85,6 @@ public class MetricOverviewModel {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     List<UserOverviewModel> businessOwners;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-    DataStatus status;
-
     /**
      * 上线/下线
      * <p>

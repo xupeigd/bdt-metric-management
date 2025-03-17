@@ -18,6 +18,7 @@ import com.quicksand.bigdata.metric.management.identify.utils.AuthUtil;
 import com.quicksand.bigdata.metric.management.metric.dbvos.MetricDBVO;
 import com.quicksand.bigdata.metric.management.metric.dms.MetricDataManager;
 import com.quicksand.bigdata.metric.management.metric.models.MetricQueryModel;
+import com.quicksand.bigdata.metric.management.utils.DatasetUtil;
 import com.quicksand.bigdata.metric.management.utils.PageableUtil;
 import com.quicksand.bigdata.metric.management.utils.YamlUtil;
 import com.quicksand.bigdata.metric.management.yaml.dbvos.SegmentDBVO;
@@ -37,12 +38,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.vavr.control.Try;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -183,6 +184,11 @@ public class DatasetRestController
             return Response.notfound();
         }
         return Response.ok(JsonUtils.transfrom(dataset, DatasetModel.class, r -> {
+            List<String> includedColumns = DatasetUtil.resolvingFields(dataset);
+            r.setIncludedColumns(StringUtils.collectionToCommaDelimitedString(includedColumns));
+            if (null != dataset.getCluster()) {
+                r.setClusterInfo(JsonUtils.transfrom(dataset.getCluster(), ClusterInfoModel.class));
+            }
             if (!CollectionUtils.isEmpty(dataset.getOwners())) {
                 r.setOwners(
                         dataset.getOwners().stream()
@@ -331,10 +337,10 @@ public class DatasetRestController
         if (null == clusterInfoDataManager.findClusterInfo(model.getCluster())) {
             return Response.response(HttpStatus.BAD_REQUEST, "集群参数错误! ");
         }
-        if (!CollectionUtils.isEmpty(model.getOwners())
-                && CollectionUtils.isEmpty(userDataManager.findUsers(model.getOwners()))) {
-            return Response.response(HttpStatus.BAD_REQUEST, "负责人参数错误! ");
-        }
+//        if (!CollectionUtils.isEmpty(model.getOwners())
+//                && CollectionUtils.isEmpty(userDataManager.findUsers(model.getOwners()))) {
+//            return Response.response(HttpStatus.BAD_REQUEST, "负责人参数错误! ");
+//        }
         if (null != datasetDataManager.findDatasetByName(model.getName())) {
             return Response.response(HttpStatus.BAD_REQUEST, "存在重名数据集! ");
         }
@@ -362,10 +368,10 @@ public class DatasetRestController
         if (null == clusterInfoDataManager.findClusterInfo(model.getCluster())) {
             return Response.response(HttpStatus.BAD_REQUEST, "集群参数错误! ");
         }
-        if (!CollectionUtils.isEmpty(model.getOwners())
-                && CollectionUtils.isEmpty(userDataManager.findUsers(model.getOwners()))) {
-            return Response.response(HttpStatus.BAD_REQUEST, "负责人参数错误! ");
-        }
+//        if (!CollectionUtils.isEmpty(model.getOwners())
+//                && CollectionUtils.isEmpty(userDataManager.findUsers(model.getOwners()))) {
+//            return Response.response(HttpStatus.BAD_REQUEST, "负责人参数错误! ");
+//        }
         DatasetDBVO dataset = datasetDataManager.findDatasetById(model.getId());
         if (null == dataset) {
             return Response.response(HttpStatus.NOT_FOUND);
@@ -401,8 +407,11 @@ public class DatasetRestController
         //如果存在有效指标引用不能删除
         MetricQueryModel queryModel = MetricQueryModel.builder().datasetIds(Collections.singletonList(dataset.getId())).build();
         Pageable pageable = PageRequest.of(0, 20);
-        org.springframework.data.domain.Page<MetricDBVO> metricDBVOS = metricDataManager.queryAllMetricsByConditions(queryModel, pageable);
-        Assert.isTrue(CollectionUtils.isEmpty(metricDBVOS.getContent()), "数据集下存在引用指标，无法删除");
+        Page<MetricDBVO> metricDBVOS = metricDataManager.queryAllMetricsByConditions(queryModel, pageable);
+        if (!CollectionUtils.isEmpty(metricDBVOS.getContent())) {
+            return Response.response(HttpStatus.BAD_REQUEST, "数据集下存在引用指标，无法删除");
+        }
+//        Assert.isTrue(CollectionUtils.isEmpty(metricDBVOS.getContent()), "数据集下存在引用指标，无法删除");
         //消除重名
         dataset.setName(String.format("%s-%d", dataset.getName(), datasetId));
         dataset.setUpdateUserId(null == userDetail ? 0 : userDetail.getId());

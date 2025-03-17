@@ -1,4 +1,4 @@
-// package com.quicksand.bigdata.metric.management.identify.repos;
+package com.quicksand.bigdata.metric.management.identify.repos;// package com.quicksand.bigdata.metric.management.identify.repos;
 //
 // import com.quicksand.bigdata.metric.management.identify.dbvos.RelationOfUserAndPermissionDBVO;
 // import org.springframework.data.jpa.repository.JpaRepository;

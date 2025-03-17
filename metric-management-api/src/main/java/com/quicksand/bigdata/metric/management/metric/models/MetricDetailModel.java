@@ -135,15 +135,6 @@ public class MetricDetailModel {
     @Schema(description = "")
     List<UserOverviewModel> techOwners;
 
-//    /**
-//     * 纬度列数据
-//     */
-//    List<DatasetColumnModel> dimensions;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-    @Schema(description = "")
-    DataStatus status;
     /**
      * 上线/下线
      * <p>

@@ -57,7 +57,7 @@ public class SegmentDBVO {
      * 关联的指标
      */
     @NotFound(action = NotFoundAction.IGNORE)
-    @ManyToOne(targetEntity = MetricDBVO.class)
+    @OneToOne(targetEntity = MetricDBVO.class)
     @JoinColumn(name = "metric_id",
             referencedColumnName = "id",
             columnDefinition = " bigint(11) DEFAULT 0 COMMENT '关联指标Id' ",
@@ -90,9 +90,6 @@ public class SegmentDBVO {
      */
     @Column(name = "create_time", columnDefinition = " datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ")
     Date createTime;
-
-//    @Column(name = "update_user_id", columnDefinition = " bigint(11) NOT NULL DEFAULT 0 COMMENT '更新用户Id' ")
-//    Integer updateUserId;
 
     /**
      * 更新用户

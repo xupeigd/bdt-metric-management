@@ -1,5 +1,6 @@
 package com.quicksand.bigdata.metric.management.datasource.services.impls;
 
+import com.google.common.collect.Lists;
 import com.quicksand.bigdata.metric.management.consts.DataStatus;
 import com.quicksand.bigdata.metric.management.consts.IdentifierType;
 import com.quicksand.bigdata.metric.management.consts.Mutability;
@@ -80,12 +81,14 @@ public class DatasetServiceImpl
                 })
                 .onFailure(ex -> log.error(String.format("upsertDataset error ! cluster:%d,table:%s", clusterInfo.getId(), model.getTableName()), ex))
                 .getOrElseThrow(x -> x);
+        List<String> includedColumns = new ArrayList<>(StringUtils.hasText(model.getIncludedColumns())
+                ? Lists.newArrayList(model.getIncludedColumns().split(",")) : Collections.emptyList());
         if (isCreate) {
             DatasetDBVO newInstance = DatasetDBVO.builder()
                     .name(model.getName())
                     .tableName(model.getTableName())
                     .cluster(clusterInfo)
-                    .owners(userDataManager.findUsers(model.getOwners()))
+                    .owners(userDataManager.findUsers(Lists.newArrayList(model.getOwner())))
                     .description(StringUtils.hasText(model.getDescription()) ? model.getDescription() : "")
                     .updateTime(operationTime)
                     .createTime(operationTime)
@@ -109,7 +112,14 @@ public class DatasetServiceImpl
                             .build())
                     .build();
             rePrePersistIdentifiers(newInstance, model, true);
-            rePrePersistColumns(newInstance, true);
+            if (!CollectionUtils.isEmpty(newInstance.getIdentifiers())) {
+                for (IdentifierDBVO identifier : newInstance.getIdentifiers()) {
+                    if (!includedColumns.contains(identifier.getName())) {
+                        includedColumns.add(identifier.getName());
+                    }
+                }
+            }
+            rePrePersistColumns(newInstance, true, includedColumns);
             datasetDataManager.saveDataset(newInstance);
             ret = JsonUtils.transfrom(newInstance, DatasetVO.class);
             //生成/更新yaml片段
@@ -130,7 +140,6 @@ public class DatasetServiceImpl
                 dataset.setName(model.getName());
                 dataset.setTableName(model.getTableName());
                 dataset.setCluster(clusterInfo);
-                dataset.setOwners(userDataManager.findUsers(model.getOwners()));
                 dataset.setDescription(StringUtils.hasText(model.getDescription()) ? model.getDescription() : "");
                 dataset.setUpdateUserId(null == userDetail ? 0 : userDetail.getId());
                 dataset.setUpdateTime(operationTime);
@@ -152,7 +161,14 @@ public class DatasetServiceImpl
                             .build());
                 }
                 rePrePersistIdentifiers(dataset, model, false);
-                rePrePersistColumns(dataset, false);
+                if (!CollectionUtils.isEmpty(dataset.getIdentifiers())) {
+                    for (IdentifierDBVO identifier : dataset.getIdentifiers()) {
+                        if (!includedColumns.contains(identifier.getName())) {
+                            includedColumns.add(identifier.getName());
+                        }
+                    }
+                }
+                rePrePersistColumns(dataset, false, includedColumns);
                 datasetDataManager.saveDataset(dataset);
                 ret = JsonUtils.transfrom(dataset, DatasetVO.class);
                 //生成/更新yaml片段
@@ -238,7 +254,7 @@ public class DatasetServiceImpl
      * @param dataset dataset实体
      * @param isNew
      */
-    private void rePrePersistColumns(DatasetDBVO dataset, boolean isNew) {
+    private void rePrePersistColumns(DatasetDBVO dataset, boolean isNew, List<String> includedColumns) {
         List<DatasetColumnDBVO> dbvos = new ArrayList<>();
         Date operationTime = new Date();
         UserSecurityDetails opUser = AuthUtil.getUserDetail();
@@ -270,6 +286,7 @@ public class DatasetServiceImpl
                                         .createUserId(null == opUser ? 0 : opUser.getId())
                                         .updateTime(operationTime)
                                         .updateUserId(null == opUser ? 0 : opUser.getId())
+                                        .included(includedColumns.contains(v.getName()) ? DataStatus.ENABLE : DataStatus.DISABLE)
                                         .status(DataStatus.ENABLE)
                                         .build())
                                 .collect(Collectors.toList());

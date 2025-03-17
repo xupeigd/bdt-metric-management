@@ -106,14 +106,6 @@ public class InvokeApplyDetailModel {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     Date updateTime;
 
-    /**
-     * 状态
-     * 0删除 1 可用
-     *
-     * @see DataStatus
-     */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    DataStatus status;
 
     /**
      * 每日请求次数
