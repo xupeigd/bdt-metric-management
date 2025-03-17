@@ -2,15 +2,24 @@ package com.quicksand.bigdata.metric.management.admin.amis.rests;
 
 import com.quicksand.bigdata.metric.management.admin.amis.consts.Vars;
 import com.quicksand.bigdata.metric.management.admin.amis.model.FrameworkResponse;
+import com.quicksand.bigdata.metric.management.consts.DataStatus;
 import com.quicksand.bigdata.metric.management.consts.Update;
+import com.quicksand.bigdata.metric.management.datasource.dbvos.DatasetColumnDBVO;
+import com.quicksand.bigdata.metric.management.datasource.dbvos.DatasetDBVO;
+import com.quicksand.bigdata.metric.management.datasource.dms.DatasetDataManager;
+import com.quicksand.bigdata.metric.management.datasource.models.DatasetColumnModel;
 import com.quicksand.bigdata.metric.management.datasource.models.DatasetModel;
 import com.quicksand.bigdata.metric.management.datasource.models.DatasetModifyModel;
 import com.quicksand.bigdata.metric.management.datasource.models.DatasetOverviewModel;
 import com.quicksand.bigdata.metric.management.datasource.rests.DatasetManageRestService;
 import com.quicksand.bigdata.metric.management.datasource.rests.DatasetRestService;
 import com.quicksand.bigdata.vars.http.model.Response;
+import com.quicksand.bigdata.vars.util.JsonUtils;
 import com.quicksand.bigdata.vars.util.PageImpl;
 import io.swagger.v3.oas.annotations.Parameter;
+import lombok.Data;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +27,11 @@ import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Class DatasetAmisRestController
@@ -36,6 +48,8 @@ public class DatasetAmisRestController {
     DatasetRestService datasetRestService;
     @Resource
     DatasetManageRestService datasetManageRestService;
+    @Resource
+    DatasetDataManager datasetDataManager;
 
     @GetMapping
     public FrameworkResponse<PageImpl<DatasetOverviewModel>, Void> listDatasets(@Min(1) @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNo,
@@ -94,6 +108,48 @@ public class DatasetAmisRestController {
                                                                        @Max(value = Integer.MAX_VALUE, message = "不存在的数据集") int datasetId,
                                                                        @RequestBody @Validated({Update.class}) DatasetModifyModel model) {
         return FrameworkResponse.extend(datasetManageRestService.modifyDataset(datasetId, model));
+    }
+
+    @Data
+    public static final class DatasetColumnOptionModel extends DatasetColumnModel {
+        String label;
+        String value;
+    }
+
+    @GetMapping("/{datasetId}/columns")
+    public FrameworkResponse<List<DatasetColumnOptionModel>, Void> queryColumns(@PathVariable("datasetId") int datasetId,
+                                                                                @RequestParam(name = "nameKeyword", required = false, defaultValue = "")
+                                                                                @Parameter(name = "字段名称关键字，可选") String nameKeyword,
+                                                                                @RequestParam(name = "dataTypes", required = false, defaultValue = "")
+                                                                                @Parameter(name = "数据类型(可选，多个使用半角逗号分隔)") String dataTypes,
+                                                                                @RequestParam(name = "selectedColumns", required = false) List<String> selectedColumns) {
+        DatasetDBVO dataset = datasetDataManager.findDatasetById(datasetId);
+        if (null == dataset) {
+            return FrameworkResponse.frameworkResponse(1, "无效的的数据集! ");
+        }
+        List<String> reqTypes = StringUtils.hasText(dataTypes)
+                ? new ArrayList<>(Arrays.stream(dataTypes.split(","))
+                .filter(StringUtils::hasText)
+                .map(String::toUpperCase)
+                .collect(Collectors.toSet()))
+                : new ArrayList<>();
+        List<DatasetColumnDBVO> columns = dataset.getColumns().stream()
+                .filter(v -> Objects.equals(DataStatus.ENABLE, v.getIncluded()))
+                .filter(v -> CollectionUtils.isEmpty(selectedColumns) || selectedColumns.contains(v.getName()))
+                .collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(columns)) {
+            columns = columns.stream()
+                    .filter(v -> !StringUtils.hasText(nameKeyword) || v.getName().contains(nameKeyword))
+                    .filter(v -> reqTypes.isEmpty() || reqTypes.stream().anyMatch(v.getType().toUpperCase()::contains))
+                    .collect(Collectors.toList());
+        }
+        DatasetOverviewModel transfrom = JsonUtils.transfrom(dataset, DatasetOverviewModel.class);
+        return FrameworkResponse.frameworkResponse(columns.stream()
+                .map(v -> JsonUtils.transfrom(v, DatasetColumnOptionModel.class))
+                .peek(v -> v.setDataset(transfrom))
+                .peek(v -> v.setLabel(v.getName()))
+                .peek(v -> v.setValue(v.getName()))
+                .collect(Collectors.toList()), null, 0, "success !");
     }
 
 }

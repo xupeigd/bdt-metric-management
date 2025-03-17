@@ -80,7 +80,6 @@
                         ]
                       },
                       {
-                        "$schema": "https://houtai.baidu.com/v2/schemas/page.json#",
                         "type": "form",
                         "title": "确认字段信息",
                         "mode": "horizontal",

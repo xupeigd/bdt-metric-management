@@ -179,7 +179,7 @@
                     "type": "form",
                     "api": {
                       "method": "put",
-                      "url" : "\/amis\/permissions\/roles\/${id}",
+                      "url": "\/amis\/permissions\/roles\/${id}",
                       "data": {
                         "&": "$$",
                         "type": "0"
@@ -231,7 +231,7 @@
                     "type": "form",
                     "api": {
                       "method": "put",
-                      "url" : "\/amis\/permissions\/roles\/${id}",
+                      "url": "\/amis\/permissions\/roles\/${id}",
                       "data": {
                         "&": "$$",
                         "type": "0"
@@ -283,7 +283,7 @@
                     "type": "form",
                     "api": {
                       "method": "put",
-                      "url" : "\/amis\/permissions\/roles\/${id}",
+                      "url": "\/amis\/permissions\/roles\/${id}",
                       "data": {
                         "&": "$$",
                         "type": "1"

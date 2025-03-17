@@ -15,8 +15,7 @@
             {
               "name": "static",
               "type": "static",
-              "label": "指标域",
-              "value": ""
+              "label": "指标域"
             },
             {
               "type": "form",
@@ -27,7 +26,7 @@
                 "name": "selectedNode",
                 "source": "\/amis\/metric-catalogs",
                 "labelField": "name",
-                "valueField": "code",
+                "valueField": "id",
                 "showIcon": false,
                 "onEvent": {
                   "change": {
@@ -54,52 +53,20 @@
             {
               "type": "crud",
               "id": "rightTable",
+              "name": "rightTable",
               "placeholder": "请先选择左侧目录",
               "perPage": 20,
               "alwaysShowPagination": true,
               "affixHeader": false,
               "filterTogglable": false,
               "filterDefaultVisible": false,
-              "api": "\/amis\/metrics?input=${selectedNode}",
+              "api": "\/amis\/metrics?businessCatalog=${selectedNode}",
               "bulkActions": [
-                {
-                  "type": "button",
-                  "actionType": "dialog",
-                  "label": "Delete",
-                  "icon": "fa-solid fa-trash-can",
-                  "dialog": {
-                    "type": "dialog",
-                    "title": "Delete",
-                    "className": "py-2",
-                    "actions": [
-                      {
-                        "type": "action",
-                        "actionType": "cancel",
-                        "label": "Cancel"
-                      },
-                      {
-                        "type": "action",
-                        "actionType": "submit",
-                        "label": "Delete",
-                        "level": "danger"
-                      }
-                    ],
-                    "body": [
-                      {
-                        "type": "form",
-                        "wrapWithPanel": false,
-                        "api": "delete:\/metrics_manage\/left_tree_right_table\/${ids}",
-                        "body": [
-                          {
-                            "type": "tpl",
-                            "className": "py-2",
-                            "tpl": "Confirm Delete Selected Items?"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
+              ],
+              "perPageAvailable": [
+                10,
+                20,
+                50
               ],
               "footerToolbar": [],
               "headerToolbar": [
@@ -111,28 +78,88 @@
                   "label": "ID"
                 },
                 {
-                  "name": "title",
-                  "label": "\u540d\u79f0"
+                  "name": "cnName",
+                  "label": "中文名称"
                 },
                 {
-                  "name": "state",
-                  "label": "\u72b6\u6001",
-                  "type": "status"
+                  "name": "enName",
+                  "label": "英文名称"
                 },
                 {
-                  "name": "image",
-                  "label": "\u56fe\u7247",
-                  "type": "image"
+                  "name": "serialNumber",
+                  "label": "指标编码"
                 },
                 {
-                  "name": "created_at",
-                  "label": "admin.created_at",
-                  "type": "datetime"
+                  "name": "${dataset.name}",
+                  "label": "数据集"
                 },
                 {
-                  "name": "updated_at",
-                  "label": "admin.updated_at",
-                  "type": "datetime"
+                  "name": "${businessOwners[0].name}",
+                  "label": "业务负责人"
+                },
+                {
+                  "name": "${techOwners[0].name}",
+                  "label": "技术负责人"
+                },
+                {
+                  "type": "select",
+                  "name": "pubsub",
+                  "label": "是否上线",
+                  "disabled": true,
+                  "options": [
+                    {
+                      "label": "未上线",
+                      "value": 0
+                    },
+                    {
+                      "label": "已发布",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "operation",
+                  "label": "\u64cd\u4f5c",
+                  "buttons": [
+                    {
+                      "type": "button",
+                      "actionType": "dialog",
+                      "dialog": {
+                        "type": "dialog",
+                        "title": "试算",
+                        "body": {
+                          "type": "page",
+                          "body": [
+                            {
+                              "type": "service",
+                              "className": "mb-4",
+                              "title": "试算SQL",
+                              "api": "\/amis\/metrics\/${id}\/previewSql",
+                              "body": {
+                                "type": "textarea",
+                                "name": "previewSql",
+                                "value": "${content}",
+                                "disabled": true,
+                                "minRows": 10,
+                                "maxRows": 15
+                              }
+                            },
+                            {
+                              "type": "crud",
+                              "title": "试算数据",
+                              "className": "mt-4",
+                              "api": "\/amis\/query\/metrics\/${id}\/preview"
+                            }
+                          ]
+                        },
+                        "size": "xl"
+                      },
+                      "label": "试算",
+                      "icon": "fa-solid fa-calculator",
+                      "level": "link",
+                      "hiddenOn": "${type == 1 || type == 2 }"
+                    }
+                  ]
                 }
               ]
             },
