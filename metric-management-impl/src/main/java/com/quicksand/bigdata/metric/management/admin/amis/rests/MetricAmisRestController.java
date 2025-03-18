@@ -60,6 +60,7 @@ public class MetricAmisRestController {
     @Data
     public static final class Content<T> {
         T content;
+        T value;
     }
 
     @GetMapping("/{metricId}/previewSql")
@@ -77,7 +78,7 @@ public class MetricAmisRestController {
             //不重新获取
             return FrameworkResponse.frameworkResponse(1, "指标状态异常：不存在或已被删除！");
         }
-        return FrameworkResponse.frameworkResponse(new Content<>(transformSql), null, 0, "sucess!");
+        return FrameworkResponse.frameworkResponse(new Content<>(transformSql, null), null, 0, "sucess!");
     }
 
     @Transactional
@@ -93,7 +94,27 @@ public class MetricAmisRestController {
             return FrameworkResponse.frameworkResponse(1, "额度不能小于0!");
         }
         PubsubStatus pubsubStatus = metricService.modifyMetricPubsubStatus(id, newStatus, metricQuota);
-        return FrameworkResponse.frameworkResponse(new Content<>(pubsubStatus), null, 0, "success");
+        return FrameworkResponse.frameworkResponse(new Content<>(pubsubStatus, null), null, 0, "success");
+    }
+
+    /**
+     * 根据主题域和业务域自动生成指标编码
+     *
+     * @return 指标编码字符串
+     */
+    @PreAuthorize("hasAuthority('OP_METRICS_CREATE') " +
+            "|| @varsSecurityUtilService.isAnonymousUser(authentication) " +
+            "|| @appSecurityUtilService.hasSeniorAuthority(authentication) " +
+            "|| @appSecurityUtilService.hasMetric(authentication,#id) ")
+    @GetMapping("/serialNumber")
+    public FrameworkResponse<Content<String>, Void> getSerialNumber(@Parameter(name = "topicId", required = false)
+                                                                    @Min(value = 1L, message = "不存在的主题域! ")
+                                                                    @RequestParam(name = "topicId", required = false) Integer topicId,
+                                                                    @Parameter(name = "businessId", required = false)
+                                                                    @Min(value = 1L, message = "不存在的业务域! ")
+                                                                    @RequestParam(name = "businessId", required = false) Integer businessId) {
+        String metricSerialNumber = null != topicId && null != businessId ? metricService.getMetricSerialNumber(topicId, businessId) : "";
+        return FrameworkResponse.frameworkResponse(new Content<>(null, metricSerialNumber), null, 0, "success ! ");
     }
 
 }

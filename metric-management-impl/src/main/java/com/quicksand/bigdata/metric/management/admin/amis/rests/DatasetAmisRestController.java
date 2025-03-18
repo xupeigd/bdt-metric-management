@@ -114,6 +114,8 @@ public class DatasetAmisRestController {
     public static final class DatasetColumnOptionModel extends DatasetColumnModel {
         String label;
         String value;
+        String description;
+        String function;
     }
 
     @GetMapping("/{datasetId}/columns")

@@ -102,14 +102,18 @@
                       },
                       {
                         "type": "form",
-                        "data": {
-                          "sharedData": {}
-                        },
                         "body": [
                           {
                             "type": "card",
                             "body": {
                               "type": "wizard",
+                              "id": "metricwizard",
+                              "data": {
+                                "hitTopicId": 0,
+                                "hitMetricSn": "",
+                                "dimColumnsJson": {},
+                                "measureColumnsJson": {}
+                              },
                               "steps": [
                                 {
                                   "type": "form",
@@ -162,6 +166,7 @@
                                           "label": "备注"
                                         }
                                       ],
+                                      "required": true,
                                       "source": "\/amis\/datasource\/datasets\/${dataset}\/columns"
                                     }
                                   ]
@@ -169,12 +174,30 @@
                                 {
                                   "type": "form",
                                   "title": "维度信息",
+                                  "name": "dimensionForm",
                                   "mode": "horizontal",
                                   "body": [
                                     {
                                       "type": "crud",
-                                      "name": "dimensions",
+                                      "name": "dimensionCrud",
                                       "className": "m:overflow-auto pb-48",
+                                      "quickSaveApi": {
+                                        "url": "\/amis\/un",
+                                        "method": "post",
+                                        "data": "${rows}"
+                                      },
+                                      "onEvent": {
+                                        "quickSaveFail": {
+                                          "actions": [
+                                            {
+                                              "actionType": "toast",
+                                              "args": {
+                                                "msg": ">>> ${event.data|json}"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      },
                                       "columns": [
                                         {
                                           "name": "serial",
@@ -191,10 +214,10 @@
                                         {
                                           "name": "description",
                                           "label": "描述",
+                                          "value": "${name}",
                                           "quickEdit": {
                                             "type": "input-text",
                                             "mode": "inline",
-                                            "value": "${name}",
                                             "validateOnChange": true,
                                             "validations": {
                                               "minLength": 2,
@@ -213,17 +236,30 @@
                                               "minLength": 2,
                                               "maxLength": 16
                                             },
-                                            "value": "",
                                             "options": [
                                               {
                                                 "label": "NONE",
                                                 "value": ""
                                               }
-                                            ]
+                                            ],
+                                            "onEvent": {
+                                              "blur": {
+                                                "actions": [
+                                                  {
+                                                    "actionType": "toast",
+                                                    "args": {
+                                                      "msg": ">>> ${items|json}"
+                                                    }
+                                                  }
+                                                ]
+                                              }
+                                            }
                                           }
                                         }
                                       ],
-                                      "api": "\/amis\/datasource\/datasets\/${dataset}\/columns?selectedColumns=${dimensions}"
+                                      "api": "get:\/amis\/datasource\/datasets\/${dataset}\/columns?selectedColumns=${dimensions}"
+                                    },
+                                    {
                                     }
                                   ]
                                 },
@@ -238,6 +274,7 @@
                                       "selectMode": "table",
                                       "joinValues": true,
                                       "extractValue": true,
+                                      "required": true,
                                       "columns": [
                                         {
                                           "name": "serial",
@@ -256,7 +293,13 @@
                                           "label": "备注"
                                         }
                                       ],
-                                      "source": "\/amis\/datasource\/datasets\/${dataset}\/columns"
+                                      "source": {
+                                        "url": "\/amis\/datasource\/datasets\/${dataset}\/columns",
+                                        "method": "post",
+                                        "data": {
+                                          "items": "${dimensionForm|json}"
+                                        }
+                                      }
                                     }
                                   ]
                                 },
@@ -267,7 +310,7 @@
                                   "body": [
                                     {
                                       "type": "crud",
-                                      "name": "dimensions",
+                                      "name": "measureInfos",
                                       "className": "m:overflow-auto pb-48",
                                       "columns": [
                                         {
@@ -349,7 +392,6 @@
                                             "label": "中文名称",
                                             "required": true,
                                             "placeholder": "请输入指标的中文名称",
-                                            "value": "测试专用",
                                             "validations": {
                                               "minLength": 2,
                                               "maxLength": 16
@@ -370,13 +412,17 @@
                                           {
                                             "type": "input-text",
                                             "name": "serialNumber",
-                                            "value": "测试专用",
+                                            "id": "serialNumber",
+                                            "value": "${hitMetricSn}",
                                             "label": "指标编码",
                                             "disabled": true,
+                                            "required": true,
                                             "validations": {
                                               "minLength": 2,
                                               "maxLength": 16
-                                            }
+                                            },
+                                            "source": "get:\/amis\/metrics\/serialNumber?topicId=${hitTopicId}&businessId=${buinessDomain}",
+                                            "initFetchOn": "buinessDomain"
                                           },
                                           {
                                             "type": "select",
@@ -499,22 +545,24 @@
                                             "label": "主题域",
                                             "labelField": "name",
                                             "valueField": "code",
+                                            "clearable": true,
+                                            "value": "",
+                                            "required": true,
                                             "onEvent": {
                                               "change": {
                                                 "actions": [
                                                   {
                                                     "actionType": "setValue",
-                                                    "componentId": "description",
+                                                    "componentId": "metricwizard",
                                                     "args": {
-                                                      "value": "当前选择：SKU ${event.data.value}, ID ${event.data.item.id}, 价格 ${event.data.item.price} 元"
+                                                      "value": {
+                                                        "hitTopicId": "${event.data.selectedItems.id}"
+                                                      }
                                                     }
                                                   },
                                                   {
-                                                    "actionType": "toast",
-                                                    "args": {
-                                                      "msgType": "info",
-                                                      "msg": "派发鼠标移入事件 ${event.data.value} + ${event.data.item.id} + ${event.data.item.oid} + ${event.data.item|json}"
-                                                    }
+                                                    "actionType": "clear",
+                                                    "componentId": "buinessDomain"
                                                   }
                                                 ]
                                               }
@@ -522,17 +570,43 @@
                                             "source": {
                                               "method": "get",
                                               "url": "\/amis\/metric-catalogs",
-                                              "adaptor": "return { status:0, \ndata: { options: payload.data.map( item => ({ label: item.name+'a', value: item.code, id: item.id, oid: item.id } ) ) }}}"
+                                              "adaptor": "return { status:0, \ndata: { options: payload.data.map( item => ({ label: item.name+'a', value: item.code, id: item.id} ) ) }}}"
                                             }
                                           },
                                           {
                                             "type": "select",
+                                            "id": "buinessDomain",
                                             "name": "buinessDomain",
                                             "label": "业务域",
+                                            "clearable": true,
                                             "labelField": "name",
                                             "valueField": "id",
                                             "disabledOn": "${topicDomain == ''}",
-                                            "source": "\/amis\/metric-catalogs?type=1&&parentCode=${topicDomain}"
+                                            "required": true,
+                                            "source": {
+                                              "method": "get",
+                                              "url": "\/amis\/metric-catalogs?type=1&&parentCode=${topicDomain}&topicDomainId=${hitTopicId}",
+                                              "sendOn": "${hitTopicId != 0}"
+                                            },
+                                            "onEvent": {
+                                              "change": {
+                                                "actions": [
+                                                  {
+                                                    "expression": "buinessDomain != ''",
+                                                    "actionType": "ajax",
+                                                    "api": {
+                                                      "method": "get",
+                                                      "url": "\/amis\/metrics\/serialNumber?topicId=${hitTopicId}&businessId=${buinessDomain}",
+                                                      "responseData": {
+                                                        "&": "$$",
+                                                        "hitMetricSn": "${content}"
+                                                      },
+                                                      "reload": "serialNumber"
+                                                    }
+                                                  }
+                                                ]
+                                              }
+                                            }
                                           },
                                           {
                                             "type": "select",
@@ -600,6 +674,7 @@
                                           {
                                             "type": "textarea",
                                             "name": "description",
+                                            "id": "description",
                                             "label": "描述"
                                           }
                                         ]
@@ -626,7 +701,7 @@
                                         "metricLevel": "${metricLevel}",
                                         "dataSecurityLevel": "${dataSecurityLevel}",
                                         "statisticPeriods": "${statPeriod}",
-                                        "topicDomainId": "${topicDomain}",
+                                        "topicDomainId": "${topicDomainId}",
                                         "businessDomainId": "${buinessDomain}",
                                         "datasetId": "${dataset}",
                                         "clusterType": "${validity}",
@@ -634,8 +709,8 @@
                                         "metricAccumulative": "${cumulation}",
                                         "metricAuthentication": "${metricAuthentication}"
                                       },
-                                      "dimColumns": "${dimColumnsJson}",
-                                      "measureColumns": "${measureColumnsJson}"
+                                      "dimColumns": "${dimensionInfos}",
+                                      "measureColumns": "${measureInfos}"
                                     }
                                   },
                                   "body": [
