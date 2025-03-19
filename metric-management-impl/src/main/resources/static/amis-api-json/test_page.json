@@ -1,0 +1,702 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "type": "page",
+    "title": "创建指标",
+    "actions": [],
+    "body": [
+      {
+        "type": "page",
+        "body": [
+          {
+            "title": "",
+            "type": "form",
+            "actions": [],
+            "body": [
+              {
+                "name": "buildMode",
+                "type": "radios",
+                "label": "选择创建模式",
+                "inline": false,
+                "columnsCount": 2,
+                "options": [
+                  {
+                    "label": "可视化",
+                    "value": 1
+                  },
+                  {
+                    "label": "Yaml",
+                    "value": 2,
+                    "disabled": true
+                  }
+                ],
+                "hiddenOn": "${1 == buildMode || 2 == buildMode}"
+              },
+              {
+                "type": "wizard",
+                "id": "metricwizard",
+                "data": {
+                  "hitTopicId": 0,
+                  "hitMetricSn": "",
+                  "dimColumnsJson": {},
+                  "measureColumnsJson": {}
+                },
+                "steps": [
+                  {
+                    "title": "选择数据集",
+                    "mode": "horizontal",
+                    "body": [
+                      {
+                        "type": "select",
+                        "name": "dataset",
+                        "label": "数据集",
+                        "columnsCount": 2,
+                        "searchable": true,
+                        "multiple": false,
+                        "labelField": "name",
+                        "valueField": "id",
+                        "joinValues": false,
+                        "extractValue": true,
+                        "source": "\/amis\/datasource\/datasets?perPage=99999",
+                        "required": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "选择维度",
+                    "body": [
+                      {
+                        "label": "选择维度",
+                        "type": "transfer",
+                        "name": "dimensions",
+                        "selectMode": "table",
+                        "joinValues": true,
+                        "extractValue": true,
+                        "columns": [
+                          {
+                            "name": "serial",
+                            "label": "序号"
+                          },
+                          {
+                            "name": "name",
+                            "label": "名称"
+                          },
+                          {
+                            "name": "type",
+                            "label": "类型"
+                          },
+                          {
+                            "name": "comment",
+                            "label": "备注"
+                          }
+                        ],
+                        "required": true,
+                        "source": "\/amis\/datasource\/datasets\/${dataset}\/columns"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "维度信息",
+                    "mode": "horizontal",
+                    "actions": [],
+                    "body": [
+                      {
+                        "type": "crud",
+                        "syncLocation": false,
+                        "api": "\/amis\/datasource\/datasets\/${dataset}\/columns?selectedColumns=${dimensions}&selectType=1",
+                        "className": "m:overflow-auto pb-48",
+                        "columns": [
+                          {
+                            "name": "serial",
+                            "label": "ID"
+                          },
+                          {
+                            "name": "name",
+                            "label": "名称"
+                          },
+                          {
+                            "name": "type",
+                            "label": "类型"
+                          },
+                          {
+                            "name": "description",
+                            "label": "描述",
+                            "type": "input-text",
+                            "required": true,
+                            "validations": {
+                              "minLength": 2,
+                              "maxLength": 16
+                            }
+                          },
+                          {
+                            "name": "aggregationType",
+                            "label": "函数",
+                            "value": "",
+                            "type": "select",
+                            "required": true,
+                            "options": [
+                              {
+                                "label": "NONE",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        ],
+                        "footerToolbar": [
+                          {
+                            "type": "action",
+                            "actionType": "prev",
+                            "label": "上一步",
+                            "disabledOn": "${currentStep === 1}"
+                          },
+                          {
+                            "label": "下一步",
+                            "type": "button",
+                            "level": "primary",
+                            "actionType": "next",
+                            "onEvent": {
+                              "click": {
+                                "actions": [
+                                  {
+                                  },
+                                  {
+                                    "actionType": "setValue",
+                                    "componentId": "metricwizard",
+                                    "args": {
+                                      "value": {
+                                        "dimColumnsJson": "${items}"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "title": "选择度量",
+                    "body": [
+                      {
+                        "label": "选择度量",
+                        "type": "transfer",
+                        "name": "measures",
+                        "selectMode": "table",
+                        "joinValues": true,
+                        "extractValue": true,
+                        "required": true,
+                        "columns": [
+                          {
+                            "name": "serial",
+                            "label": "序号"
+                          },
+                          {
+                            "name": "name",
+                            "label": "名称"
+                          },
+                          {
+                            "name": "type",
+                            "label": "类型"
+                          },
+                          {
+                            "name": "comment",
+                            "label": "备注"
+                          }
+                        ],
+                        "source": "\/amis\/datasource\/datasets\/${dataset}\/columns"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "度量信息",
+                    "actions": [],
+                    "body": [
+                      {
+                        "type": "crud",
+                        "className": "m:overflow-auto pb-48",
+                        "columns": [
+                          {
+                            "name": "serial",
+                            "label": "ID"
+                          },
+                          {
+                            "name": "name",
+                            "label": "名称"
+                          },
+                          {
+                            "name": "type",
+                            "label": "类型"
+                          },
+                          {
+                            "name": "description",
+                            "label": "描述",
+                            "value": "${name}_measure",
+                            "quickEdit": {
+                              "type": "input-text",
+                              "mode": "inline",
+                              "validateOnChange": true,
+                              "validations": {
+                                "minLength": 2,
+                                "maxLength": 16
+                              }
+                            }
+                          },
+                          {
+                            "name": "aggregationType",
+                            "label": "函数",
+                            "value": "SUM",
+                            "quickEdit": {
+                              "type": "select",
+                              "mode": "inline",
+                              "validateOnChange": true,
+                              "validations": {
+                                "minLength": 2,
+                                "maxLength": 16
+                              },
+                              "options": [
+                                {
+                                  "label": "SUM",
+                                  "value": "SUM"
+                                },
+                                {
+                                  "label": "MAX",
+                                  "value": "MAX"
+                                },
+                                {
+                                  "label": "MIN",
+                                  "value": "MIN"
+                                },
+                                {
+                                  "label": "AVG",
+                                  "value": "AVG"
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "api": "\/amis\/datasource\/datasets\/${dataset}\/columns?selectedColumns=${measures}&selectType=2",
+                        "footerToolbar": [
+                          {
+                            "type": "action",
+                            "actionType": "prev",
+                            "label": "上一步",
+                            "disabledOn": "${currentStep === 1}"
+                          },
+                          {
+                            "label": "下一步",
+                            "type": "button",
+                            "level": "primary",
+                            "actionType": "next",
+                            "onEvent": {
+                              "click": {
+                                "actions": [
+                                  {
+                                    "actionType": "setValue",
+                                    "componentId": "metricwizard",
+                                    "args": {
+                                      "value": {
+                                        "measureColumnsJson": "${items}"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "title": "指标信息",
+                    "mode": "horizontal",
+                    "body": {
+                      "type": "grid",
+                      "columns": [
+                        {
+                          "columnClassName": "p-r-md",
+                          "body": [
+                            {
+                              "type": "input-text",
+                              "name": "cnName",
+                              "label": "中文名称",
+                              "value": "mertic_test",
+                              "required": true,
+                              "placeholder": "请输入指标的中文名称",
+                              "validations": {
+                                "minLength": 2,
+                                "maxLength": 16
+                              }
+                            },
+                            {
+                              "type": "input-text",
+                              "name": "enName",
+                              "label": "英文名称",
+                              "value": "测试专用",
+                              "required": true,
+                              "placeholder": "请输入指标的英文名称",
+                              "validations": {
+                                "minLength": 2,
+                                "maxLength": 16
+                              }
+                            },
+                            {
+                              "type": "input-text",
+                              "name": "serialNumber",
+                              "id": "serialNumber",
+                              "value": "${hitMetricSn}",
+                              "label": "指标编码",
+                              "disabled": true,
+                              "required": true,
+                              "validations": {
+                                "minLength": 2,
+                                "maxLength": 16
+                              },
+                              "source": "get:\/amis\/metrics\/serialNumber?topicId=${hitTopicId}&businessId=${buinessDomain}",
+                              "initFetchOn": "buinessDomain"
+                            },
+                            {
+                              "type": "select",
+                              "name": "businessOwners",
+                              "label": "业务负责人",
+                              "placeholder": "业务负责人",
+                              "value": 1,
+                              "multiple": true,
+                              "labelField": "name",
+                              "valueField": "id",
+                              "joinValues": false,
+                              "extractValue": true,
+                              "source": "\/amis\/users?perPage=9999"
+                            },
+                            {
+                              "type": "select",
+                              "name": "techOwners",
+                              "label": "技术负责人",
+                              "placeholder": "技术负责人",
+                              "value": 1,
+                              "multiple": true,
+                              "labelField": "name",
+                              "valueField": "id",
+                              "joinValues": false,
+                              "extractValue": true,
+                              "source": "\/amis\/users?perPage=9999"
+                            },
+                            {
+                              "type": "select",
+                              "name": "metricLevel",
+                              "label": "指标级别",
+                              "value": 1,
+                              "options": [
+                                {
+                                  "label": "T1",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "T2",
+                                  "value": 2
+                                },
+                                {
+                                  "label": "T3",
+                                  "value": 3
+                                }
+                              ]
+                            },
+                            {
+                              "type": "select",
+                              "name": "dataSecurityLevel",
+                              "label": "安全级别",
+                              "value": 1,
+                              "options": [
+                                {
+                                  "label": "L1",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "L2",
+                                  "value": 2
+                                },
+                                {
+                                  "label": "L3",
+                                  "value": 3
+                                }
+                              ]
+                            },
+                            {
+                              "type": "select",
+                              "name": "metricAggregationType",
+                              "label": "指标类型",
+                              "value": 1,
+                              "options": [
+                                {
+                                  "label": "原子指标",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "衍生指标",
+                                  "value": 2
+                                },
+                                {
+                                  "label": "组合指标",
+                                  "value": 3
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "columnClassName": "p-l-md",
+                          "body": [
+                            {
+                              "type": "input-text",
+                              "name": "cnAlias",
+                              "label": "中文别名",
+                              "value": "测试专用",
+                              "required": true,
+                              "placeholder": "请输入指标的中文别名",
+                              "validations": {
+                                "minLength": 2,
+                                "maxLength": 16
+                              }
+                            },
+                            {
+                              "type": "input-text",
+                              "name": "enAlias",
+                              "label": "英文别名",
+                              "value": "enAlias",
+                              "required": true,
+                              "placeholder": "请输入指标的英文别名",
+                              "validations": {
+                                "minLength": 2,
+                                "maxLength": 16
+                              }
+                            },
+                            {
+                              "type": "select",
+                              "name": "topicDomain",
+                              "label": "主题域",
+                              "labelField": "name",
+                              "valueField": "code",
+                              "clearable": true,
+                              "value": "",
+                              "required": true,
+                              "onEvent": {
+                                "change": {
+                                  "actions": [
+                                    {
+                                      "actionType": "setValue",
+                                      "componentId": "metricwizard",
+                                      "args": {
+                                        "value": {
+                                          "hitTopicId": "${event.data.selectedItems.id}"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "actionType": "clear",
+                                      "componentId": "buinessDomain"
+                                    }
+                                  ]
+                                }
+                              },
+                              "source": {
+                                "method": "get",
+                                "url": "\/amis\/metric-catalogs",
+                                "adaptor": "return { status:0, \ndata: { options: payload.data.map( item => ({ label: item.name+'a', value: item.code, id: item.id} ) ) }}}"
+                              }
+                            },
+                            {
+                              "type": "select",
+                              "id": "buinessDomain",
+                              "name": "buinessDomain",
+                              "label": "业务域",
+                              "clearable": true,
+                              "labelField": "name",
+                              "valueField": "id",
+                              "disabledOn": "${topicDomain == ''}",
+                              "required": true,
+                              "source": {
+                                "method": "get",
+                                "url": "\/amis\/metric-catalogs?type=1&&parentCode=${topicDomain}&topicDomainId=${hitTopicId}",
+                                "sendOn": "${hitTopicId != 0}"
+                              },
+                              "onEvent": {
+                                "change": {
+                                  "actions": [
+                                    {
+                                      "expression": "buinessDomain != ''",
+                                      "actionType": "ajax",
+                                      "api": {
+                                        "method": "get",
+                                        "url": "\/amis\/metrics\/serialNumber?topicId=${hitTopicId}&businessId=${buinessDomain}",
+                                        "responseData": {
+                                          "&": "$$",
+                                          "hitMetricSn": "${content}"
+                                        },
+                                        "reload": "serialNumber"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "type": "select",
+                              "name": "statPeriod",
+                              "label": "统计周期",
+                              "placeholder": "统计周期",
+                              "multiple": true,
+                              "value": 3,
+                              "joinValues": false,
+                              "extractValue": true,
+                              "options": [
+                                {
+                                  "label": "Year",
+                                  "value": 0
+                                },
+                                {
+                                  "label": "Quarter",
+                                  "value": 4
+                                },
+                                {
+                                  "label": "Month",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "Week",
+                                  "value": 2
+                                },
+                                {
+                                  "label": "Day",
+                                  "value": 3
+                                }
+                              ]
+                            },
+                            {
+                              "type": "select",
+                              "name": "validity",
+                              "label": "时效",
+                              "multiple": false,
+                              "value": 0,
+                              "options": [
+                                {
+                                  "label": "离线",
+                                  "value": 0
+                                },
+                                {
+                                  "label": "实时",
+                                  "value": 1
+                                }
+                              ]
+                            },
+                            {
+                              "type": "radios",
+                              "name": "cumulation",
+                              "label": "累加",
+                              "value": 1,
+                              "options": [
+                                {
+                                  "label": "可累加",
+                                  "value": 1
+                                },
+                                {
+                                  "label": "不可累加",
+                                  "value": 0
+                                }
+                              ]
+                            },
+                            {
+                              "type": "textarea",
+                              "name": "description",
+                              "id": "description",
+                              "label": "描述"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "title": "Yaml预览",
+                    "initApi": {
+                      "url": "\/amis\/metrics\/build",
+                      "method": "post",
+                      "data": {
+                        "baseInfo": {
+                          "cnName": "${cnName}",
+                          "enName": "${cnName}",
+                          "serialNumber": "${serialNumber}",
+                          "cnAlias": "${cnAlias}",
+                          "enAlias": "${enAlias}",
+                          "techOwners": "${techOwners}",
+                          "businessOwners": "${businessOwners}",
+                          "description": "${description}",
+                          "metricLevel": "${metricLevel}",
+                          "dataSecurityLevel": "${dataSecurityLevel}",
+                          "statisticPeriods": "${statPeriod}",
+                          "topicDomainId": "${hitTopicId}",
+                          "businessDomainId": "${buinessDomain}",
+                          "datasetId": "${dataset}",
+                          "clusterType": "${validity}",
+                          "metricAggregationType": "${metricAggregationType}",
+                          "metricAccumulative": "${cumulation}",
+                          "metricAuthentication": 1
+                        },
+                        "dimColumns": "${dimColumnsJson}",
+                        "measureColumns": "${measureColumnsJson}"
+                      },
+                      "responseData": {
+                        "yaml": "${value}"
+                      }
+                    },
+                    "body": [
+                      {
+                        "type": "textarea",
+                        "name": "yaml"
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "action",
+                        "actionType": "prev",
+                        "label": "上一步",
+                        "disabledOn": "${currentStep === 1}"
+                      },
+                      {
+                        "label": "完成",
+                        "type": "button",
+                        "level": "primary",
+                        "actionType": "next",
+                        "onEvent": {
+                          "click": {
+                            "actions": [
+                              {
+                                "actionType": "ajax",
+                                "api": {
+                                  "method": "post",
+                                  "url": "\/amis\/metrics",
+                                  "data": {
+                                    "yamlSegment": "${yaml}"
+                                  },
+                                  "reload": "windows"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "hiddenOn": "${buildMode != 1}"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "size": "xl"
+  }
+}

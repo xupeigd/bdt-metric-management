@@ -16,6 +16,7 @@ import com.quicksand.bigdata.query.models.QueryRespModel;
 import com.quicksand.bigdata.vars.security.service.VarsSecurityUtilService;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -51,6 +52,8 @@ public class QueryAmisRestController {
     MetricService metricService;
     @Resource
     VarsSecurityUtilService varsSecurityUtilService;
+    @Value("${metricflow.enable}")
+    boolean metricflowEnable;
 
     @Data
     public static final class ColumnMeta {
@@ -147,8 +150,12 @@ public class QueryAmisRestController {
         String transformSql = metricService.getMetricQuerySql(metricId);
         //获取sql
         if (!StringUtils.hasText(transformSql)) {
-            //不重新获取
-            return FrameworkResponse.frameworkResponse(1, "指标状态异常：不存在或已被删除！");
+            if (Objects.equals(false, metricflowEnable)) {
+                transformSql = String.format("select 1+1 as %s", metric.getEnName());
+            } else {
+                //不重新获取
+                return FrameworkResponse.frameworkResponse(1, "指标状态异常：不存在或已被删除！");
+            }
         }
         //转换sql db
         String mayName0 = String.format(" %s ", metric.getDataset().getTableName());

@@ -122,7 +122,7 @@ public class YamlServiceImpl
                 .dataset(JsonUtils.transfrom(metricVO.getDataset(), DatasetVO.class))
                 .type(type)
                 .content(storeContent) //固定格式存储
-                .contentMd5(DigestUtils.md5DigestAsHex(storeContent.getBytes()))
+                .contentMd5(DigestUtils.md5DigestAsHex((StringUtils.hasText(storeContent) ? storeContent : "").getBytes()))
                 .build();
     }
 

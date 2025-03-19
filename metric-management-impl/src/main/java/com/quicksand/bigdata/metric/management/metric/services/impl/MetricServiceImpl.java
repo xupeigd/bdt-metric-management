@@ -39,6 +39,7 @@ import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,9 @@ public class MetricServiceImpl
     MetricTransformService metricTransformService;
     @Resource
     CacheService cacheService;
+
+    @Value("${metricflow.enable}")
+    boolean metricflowEnable;
 
     private static void inspectDimPartInfo(MetricMergeSegment metricMergeSegment, Map<String, List<DatasetColumnVO>> allColumnMap, Set<String> identifierSet, Set<String> measureNameSet) {
         Set<String> dimNameSet = new HashSet<>();
@@ -254,7 +258,6 @@ public class MetricServiceImpl
             DatasetSegment datasetSegment = yamlService.getDatasetSegment(datasetVO);
             String explainSql = getExplainSql(datasetVO, datasetSegment, metricMergeSegment);
             Assert.notNull(explainSql, "底层执行生成sql异常");
-            metricMergeSegment.setSqlContent(explainSql);
         }
         metricMergeSegment.setVerifySuccess(true);
         stopWatch.stop();
@@ -550,15 +553,19 @@ public class MetricServiceImpl
             Try<String> option = Try.of(() -> {
                         stopWatch.stop();
                         stopWatch.start("Process阶段执行");
-                        String explainSql = MetricFlowProcessUtil.getMetricFlowParseSql(metricMergeSegment);
-                        if (StringUtils.isBlank(explainSql)) {
-                            metricFileService.keepYamlFiles(userDetail.getUsername(), metricName);
+                        if (Objects.equals(true, metricflowEnable)) {
+                            String explainSql = MetricFlowProcessUtil.getMetricFlowParseSql(metricMergeSegment);
+                            if (StringUtils.isBlank(explainSql)) {
+                                metricFileService.keepYamlFiles(userDetail.getUsername(), metricName);
+                            }
+                            if (explainSql.contains("ERROR")) {
+                                log.error("explainSql result :{}", explainSql);
+                                metricFileService.keepYamlFiles(userDetail.getUsername(), metricName);
+                            }
+                            return explainSql;
+                        } else {
+                            return "Success . query completed after . SELECT 1+1 as " + metricName;
                         }
-                        if (explainSql.contains("ERROR")) {
-                            log.error("explainSql result :{}", explainSql);
-                            metricFileService.keepYamlFiles(userDetail.getUsername(), metricName);
-                        }
-                        return explainSql;
                     })
                     .onFailure(ex -> {
                         metricFileService.keepYamlFiles(userDetail.getUsername(), metricName);
@@ -585,8 +592,8 @@ public class MetricServiceImpl
 
     @Override
     public String getMetricQuerySql(Integer metricId) {
-        List<SegmentDBVO> segmentByMetricId = segmentDataManager.findSegmentByMetricId(YamlSegmentType.Sql, metricId);
-        return segmentByMetricId.isEmpty() ? "" : segmentByMetricId.get(0).getContent();
+        List<SegmentDBVO> segmentDBVOList = segmentDataManager.findSegmentByMetricId(YamlSegmentType.Sql, metricId);
+        return segmentDBVOList.isEmpty() ? "" : segmentDBVOList.get(0).getContent();
     }
 
     /**

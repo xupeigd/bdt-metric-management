@@ -1,5 +1,6 @@
 package com.quicksand.bigdata.metric.management.admin.amis.rests;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.quicksand.bigdata.metric.management.admin.amis.consts.Vars;
 import com.quicksand.bigdata.metric.management.admin.amis.model.FrameworkResponse;
 import com.quicksand.bigdata.metric.management.consts.DataStatus;
@@ -112,10 +113,16 @@ public class DatasetAmisRestController {
 
     @Data
     public static final class DatasetColumnOptionModel extends DatasetColumnModel {
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         String label;
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         String value;
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         String description;
-        String function;
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        String aggregationType;
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        DatasetColumnModel columnModel;
     }
 
     @GetMapping("/{datasetId}/columns")
@@ -124,7 +131,8 @@ public class DatasetAmisRestController {
                                                                                 @Parameter(name = "字段名称关键字，可选") String nameKeyword,
                                                                                 @RequestParam(name = "dataTypes", required = false, defaultValue = "")
                                                                                 @Parameter(name = "数据类型(可选，多个使用半角逗号分隔)") String dataTypes,
-                                                                                @RequestParam(name = "selectedColumns", required = false) List<String> selectedColumns) {
+                                                                                @RequestParam(name = "selectedColumns", required = false) List<String> selectedColumns,
+                                                                                @RequestParam(name = "selectType", required = false) Integer selectType) {
         DatasetDBVO dataset = datasetDataManager.findDatasetById(datasetId);
         if (null == dataset) {
             return FrameworkResponse.frameworkResponse(1, "无效的的数据集! ");
@@ -151,6 +159,18 @@ public class DatasetAmisRestController {
                 .peek(v -> v.setDataset(transfrom))
                 .peek(v -> v.setLabel(v.getName()))
                 .peek(v -> v.setValue(v.getName()))
+                .peek(v -> {
+                    if (null != selectType) {
+                        v.setDescription(String.format("%s_%s%d", v.getName(), Objects.equals(1, selectType) ? "dim" : "mea", v.getSerial()));
+                        // todo 可用增加函数默认逻辑
+                        v.setAggregationType(Objects.equals(1, selectType) ? "" : "SUM");
+                        DatasetColumnModel columnModel = new DatasetColumnModel();
+                        columnModel.setName(v.getName());
+                        columnModel.setType(v.getType());
+                        columnModel.setDataset(JsonUtils.transfrom(dataset, DatasetOverviewModel.class));
+                        v.setColumnModel(columnModel);
+                    }
+                })
                 .collect(Collectors.toList()), null, 0, "success !");
     }
 

@@ -418,6 +418,24 @@
             "hide": false,
             "order": 0
           }
+        },
+        {
+          "name": "[6]-[1]",
+          "path": "\/test_page",
+          "component": "amis",
+          "is_home": 0,
+          "iframe_url": "",
+          "url_type": 1,
+          "keep_alive": 0,
+          "is_full": 0,
+          "is_link": false,
+          "page_sign": "",
+          "meta": {
+            "title": "测试页面",
+            "icon": "mdi:list-status",
+            "hide": false,
+            "order": 0
+          }
         }
       ]
     }

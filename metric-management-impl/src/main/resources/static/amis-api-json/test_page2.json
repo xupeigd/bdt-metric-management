@@ -1,0 +1,63 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "type": "page",
+    "body": {
+      "type": "crud",
+      "syncLocation": false,
+      "api": "\/amis\/datasource\/datasets\/702\/columns?selectedColumns=name",
+      "className": "m:overflow-auto pb-48",
+      "headerToolbar": [
+        {
+          "type": "tpl",
+          "tpl": "一共有${count}条数据"
+        }
+      ],
+      "footerToolbar": [
+        {
+          "type": "action",
+          "actionType": "dialog",
+          "label": "底部工具栏按钮",
+          "dialog": {
+            "title": "一个弹框",
+            "body": {
+              "type": "tpl",
+              "tpl": "一个简单的弹框 ${items|json}"
+            }
+          }
+        }
+      ],
+      "columns": [
+        {
+          "name": "serial",
+          "label": "ID"
+        },
+        {
+          "name": "name",
+          "label": "name"
+        },
+        {
+          "name": "type",
+          "label": "type"
+        },
+        {
+          "name": "description",
+          "label": "description",
+          "quickEdit": {
+            "mode": "inline",
+            "type": "input-text"
+          }
+        },
+        {
+          "name": "function",
+          "label": "function",
+          "quickEdit": {
+            "mode": "inline",
+            "type": "input-text"
+          }
+        }
+      ]
+    }
+  }
+}
