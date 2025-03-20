@@ -7,6 +7,7 @@ import com.quicksand.bigdata.metric.management.admin.amis.model.SqlDebugModel;
 import com.quicksand.bigdata.metric.management.admin.amis.model.UserMenusModel;
 import com.quicksand.bigdata.vars.security.vos.UserSecurityDetails;
 import com.quicksand.bigdata.vars.util.JsonUtils;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.core.io.ClassPathResource;
@@ -29,6 +30,7 @@ import java.nio.file.Paths;
  * @Description: 设置
  */
 @RestController
+@Tag(name = "系统设置", description = "提供系统设置和用户菜单配置接口")
 public class SettingsRestController {
 
     @Data
@@ -49,7 +51,8 @@ public class SettingsRestController {
         ClassPathResource resource = new ClassPathResource("/static/amis-api-json/_settings.json");
         Path path = Paths.get(resource.getURI());
         byte[] content = Files.readAllBytes(path);
-        FrameworkResponse<SettingModel, SqlDebugModel> frameworkResponse = JsonUtils.parseTo(new String(content), SettingResponse.class);
+        FrameworkResponse<SettingModel, SqlDebugModel> frameworkResponse = JsonUtils.parseTo(new String(content),
+                SettingResponse.class);
         assert null != frameworkResponse;
         if (null != frameworkResponse.getData() && null != frameworkResponse.getData().getLocaleOptions()) {
             frameworkResponse.getData().setLocaleOptions(null);
@@ -64,7 +67,8 @@ public class SettingsRestController {
         ClassPathResource resource = new ClassPathResource("/static/amis-api-json/current-user.json");
         Path path = Paths.get(resource.getURI());
         byte[] content = Files.readAllBytes(path);
-        FrameworkResponse<UserMenusModel, SqlDebugModel> frameworkResponse = JsonUtils.parseTo(new String(content), UserMenusResponse.class);
+        FrameworkResponse<UserMenusModel, SqlDebugModel> frameworkResponse = JsonUtils.parseTo(new String(content),
+                UserMenusResponse.class);
         if (null != SecurityContextHolder.getContext()
                 && null != SecurityContextHolder.getContext().getAuthentication()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -80,6 +84,5 @@ public class SettingsRestController {
         }
         return frameworkResponse;
     }
-
 
 }

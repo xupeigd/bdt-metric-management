@@ -11,6 +11,7 @@ import com.quicksand.bigdata.vars.util.PageImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@Tag(name = "角色管理", description = "提供角色的CRUD操作接口")
 public class RoleAmisRestController {
 
     @Resource
@@ -31,10 +33,12 @@ public class RoleAmisRestController {
             @ApiResponse(responseCode = "200", description = "operation success ! ")
     })
     @GetMapping(Vars.PATH_ROOT + "/amis/roles")
-    public FrameworkResponse<PageImpl<RoleOverviewModel>, Void> listRoles(@RequestParam(name = "page", defaultValue = "1") int pageNo,
-                                                                          @RequestParam(name = "perPage", defaultValue = "20") int pageSize) {
+    public FrameworkResponse<PageImpl<RoleOverviewModel>, Void> listRoles(
+            @RequestParam(name = "page", defaultValue = "1") int pageNo,
+            @RequestParam(name = "perPage", defaultValue = "20") int pageSize) {
         PageImpl<RoleVO> page = roleService.queryRoleByPage(pageNo, pageSize);
-        PageImpl<RoleOverviewModel> pageModel = PageImpl.build(page.getPageNo(), page.getPageSize(), page.getTotalPage(), page.getTotal(),
+        PageImpl<RoleOverviewModel> pageModel = PageImpl.build(page.getPageNo(), page.getPageSize(),
+                page.getTotalPage(), page.getTotal(),
                 page.getItems().stream()
                         .map(v -> RoleOverviewModel.builder()
                                 .id(v.getId())
@@ -59,7 +63,8 @@ public class RoleAmisRestController {
         if (null == vo) {
             return FrameworkResponse.extend(Response.response(HttpStatus.NOT_FOUND));
         }
-        return FrameworkResponse.frameworkResponse(RoleModelAdapter.cover2OverviewModel(vo), null, 0, "success");
+        return FrameworkResponse.frameworkResponse(RoleModelAdapter.cover2OverviewModel(vo), null, 0,
+                "success");
     }
 
     @Operation(description = "修改角色")
@@ -71,7 +76,8 @@ public class RoleAmisRestController {
     @PutMapping(Vars.PATH_ROOT + "/amis/roles/{id}")
     public FrameworkResponse<RoleOverviewModel, Void> modifyRole(@PathVariable("id") Integer id,
                                                                  @RequestBody RoleOverviewModel model) {
-        return FrameworkResponse.frameworkResponse(RoleModelAdapter.cover2OverviewModel(roleService.modifyName(id, model.getName())),
+        return FrameworkResponse.frameworkResponse(
+                RoleModelAdapter.cover2OverviewModel(roleService.modifyName(id, model.getName())),
                 null, 0, "success");
     }
 
@@ -95,7 +101,9 @@ public class RoleAmisRestController {
     @Transactional
     @PostMapping(Vars.PATH_ROOT + "/amis/roles")
     public FrameworkResponse<RoleOverviewModel, Void> createRole(@RequestBody RoleOverviewModel model) {
-        return FrameworkResponse.frameworkResponse(RoleModelAdapter.cover2OverviewModel(roleService.createRole(model.getName(),model.getCode())),
+        return FrameworkResponse.frameworkResponse(
+                RoleModelAdapter.cover2OverviewModel(
+                        roleService.createRole(model.getName(), model.getCode())),
                 null, 0, "success");
     }
 

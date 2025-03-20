@@ -709,7 +709,7 @@
                                           "data": {
                                             "baseInfo": {
                                               "cnName": "${cnName}",
-                                              "enName": "${cnName}",
+                                              "enName": "${enName}",
                                               "serialNumber": "${serialNumber}",
                                               "cnAlias": "${cnAlias}",
                                               "enAlias": "${enAlias}",

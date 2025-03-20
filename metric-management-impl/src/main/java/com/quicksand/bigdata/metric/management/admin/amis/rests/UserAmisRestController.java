@@ -15,6 +15,7 @@ import com.quicksand.bigdata.vars.util.PageImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +31,11 @@ import java.util.stream.Collectors;
  *
  * @Author: page
  * @Date: 2025/3/4
- * @Description:
+ * @Description: 用户管理控制器
  */
 @RestController
+@Tag(name = "用户管理", description = "提供用户的CRUD操作接口")
 public class UserAmisRestController {
-
 
     @Resource
     UserService userService;
@@ -49,10 +50,12 @@ public class UserAmisRestController {
             @ApiResponse(responseCode = "200", description = "operation success ! ")
     })
     @GetMapping(Vars.PATH_ROOT + "/amis/users")
-    public FrameworkResponse<PageImpl<UserDetailsModel>, Void> listUses(@RequestParam(name = "page", defaultValue = "1") int pageNo,
-                                                                        @RequestParam(name = "perPage", defaultValue = "20") int pageSize,
-                                                                        @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword) {
-        Response<PageImpl<UserDetailsModel>> pageRestResponse = userRestService.listUserDetails(pageNo, pageSize, keyword, null);
+    public FrameworkResponse<PageImpl<UserDetailsModel>, Void> listUses(
+            @RequestParam(name = "page", defaultValue = "1") int pageNo,
+            @RequestParam(name = "perPage", defaultValue = "20") int pageSize,
+            @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword) {
+        Response<PageImpl<UserDetailsModel>> pageRestResponse = userRestService.listUserDetails(pageNo, pageSize,
+                keyword, null);
         return FrameworkResponse.extend(pageRestResponse);
     }
 
@@ -68,7 +71,8 @@ public class UserAmisRestController {
                 .map(UserModifyModel.RoleSelected::getId)
                 .collect(Collectors.toList()))
                 : Collections.emptyList();
-        UserVO user = userService.createUser(model.getName(), model.getEmail(), model.getMobile(), model.getPassword(), roleVOS);
+        UserVO user = userService.createUser(model.getName(), model.getEmail(), model.getMobile(), model.getPassword(),
+                roleVOS);
         return FrameworkResponse.frameworkResponse(UserModelAdapter.cover2DetailModel(user), null, 0, "success");
     }
 

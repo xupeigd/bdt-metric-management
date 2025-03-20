@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -32,9 +33,10 @@ import java.util.List;
  *
  * @Author: page
  * @Date: 2025/3/7
- * @Description:
+ * @Description: 指标目录管理控制器
  */
 @RestController
+@Tag(name = "指标目录管理", description = "提供指标目录的CRUD操作接口")
 public class MetricCatalogAmisRestController {
 
     @Resource
@@ -62,15 +64,10 @@ public class MetricCatalogAmisRestController {
             "|| @varsSecurityUtilService.isAnonymousUser(authentication) " +
             "|| @appSecurityUtilService.hasSeniorAuthority(authentication) ")
     @GetMapping(Vars.PATH_ROOT + "/amis/metric-catalogs")
-    public FrameworkResponse<List<MetricCatalogModel>, Void> listMetricCatalogs(@RequestParam(name = "parentCode", required = false)
-                                                                                @Parameter(name = "parentCode", description = "父节点的code，可选，默认无", required = false) String parentCode,
-                                                                                @RequestParam(name = "mode", required = false, defaultValue = "1")
-                                                                                @Parameter(name = "mode", description = "模式 0仅当级 1带子 2 带父 可选 默认1")
-                                                                                @Min(value = 0L, message = "不支持的模式！")
-                                                                                @Max(value = 2L, message = "不支持的模式！") int mode,
-                                                                                @RequestParam(name = "type", required = false, defaultValue = "-1")
-                                                                                @Parameter(name = "type", description = "类型 0 主题域 1 业务域 可选 默认 -1 不限制")
-                                                                                @Min(-1L) @Max(1L) int type) {
+    public FrameworkResponse<List<MetricCatalogModel>, Void> listMetricCatalogs(
+            @RequestParam(name = "parentCode", required = false) @Parameter(name = "parentCode", description = "父节点的code，可选，默认无", required = false) String parentCode,
+            @RequestParam(name = "mode", required = false, defaultValue = "1") @Parameter(name = "mode", description = "模式 0仅当级 1带子 2 带父 可选 默认1") @Min(value = 0L, message = "不支持的模式！") @Max(value = 2L, message = "不支持的模式！") int mode,
+            @RequestParam(name = "type", required = false, defaultValue = "-1") @Parameter(name = "type", description = "类型 0 主题域 1 业务域 可选 默认 -1 不限制") @Min(-1L) @Max(1L) int type) {
         return FrameworkResponse.extend(metricCatalogRestService.queryMetricCatalogs(parentCode, mode, type));
     }
 
@@ -102,7 +99,8 @@ public class MetricCatalogAmisRestController {
     @PreAuthorize("hasAuthority('OP_METRICS_CATALOGS_CREATE') " +
             "|| @varsSecurityUtilService.isAnonymousUser(authentication) ")
     @PostMapping(Vars.PATH_ROOT + "/amis/metric-catalogs")
-    public FrameworkResponse<MetricCatalogModel, Void> createMetricCatalog(@RequestBody @Validated({Insert.class}) MetricCatalogModifyModel model) {
+    public FrameworkResponse<MetricCatalogModel, Void> createMetricCatalog(
+            @RequestBody @Validated({Insert.class}) MetricCatalogModifyModel model) {
         return FrameworkResponse.extend(metricCatalogManageRestService.createMetricCatalog(model));
     }
 
@@ -124,8 +122,9 @@ public class MetricCatalogAmisRestController {
     @PreAuthorize("hasAuthority('OP_METRICS_CATALOGS_MODIFY') " +
             "|| @varsSecurityUtilService.isAnonymousUser(authentication) ")
     @PutMapping(Vars.PATH_ROOT + "/amis/metric-catalogs/{id}")
-    public FrameworkResponse<MetricCatalogModel, Void> modifyMetricCatalog(@PathVariable("id") @Min(value = 1L, message = "不存在的目录实体！") int id,
-                                                                           @RequestBody MetricCatalogAmisModifyModel model) {
+    public FrameworkResponse<MetricCatalogModel, Void> modifyMetricCatalog(
+            @PathVariable("id") @Min(value = 1L, message = "不存在的目录实体！") int id,
+            @RequestBody MetricCatalogAmisModifyModel model) {
         MetricCatalogModifyModel build = MetricCatalogModifyModel.builder()
                 .id(model.getId())
                 .name(model.getName())

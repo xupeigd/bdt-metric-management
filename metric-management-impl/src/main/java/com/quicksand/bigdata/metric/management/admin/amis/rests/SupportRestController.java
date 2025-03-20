@@ -9,6 +9,7 @@ import com.quicksand.bigdata.metric.management.identify.rests.AuthenticationCont
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,6 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @RestController
+@Tag(name = "支持服务", description = "提供登录和静态资源访问接口")
 public class SupportRestController {
 
     @Resource
@@ -38,10 +40,16 @@ public class SupportRestController {
     })
     @CrossOrigin
     @PostMapping(Vars.PATH_ROOT + "/login")
-    public FrameworkResponse<UserAuthModel, SqlDebugModel> frameworkLogin(@RequestBody @Validated UserLoginModel model) {
+    public FrameworkResponse<UserAuthModel, SqlDebugModel> frameworkLogin(
+            @RequestBody @Validated UserLoginModel model) {
         return FrameworkResponse.extend(authenticationController.login(model));
     }
 
+    @Operation(description = "获取静态JSON资源")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "operation success ! "),
+            @ApiResponse(responseCode = "404", description = "资源不存在 !")
+    })
     @GetMapping({"/admin-api/{resources}",
             "/admin-api/system/{resources}",
             "/admin-api/system/{resources}/{id}/edit"})
@@ -54,18 +62,26 @@ public class SupportRestController {
         Path path = Paths.get(resource.getURI());
         byte[] content = Files.readAllBytes(path);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, String.format("inline;filename=/admin-api/%s", resource))
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        String.format("inline;filename=/admin-api/%s", resource))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(content);
     }
 
+    @Operation(description = "提交资源操作")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "operation success ! "),
+            @ApiResponse(responseCode = "404", description = "资源不存在 !")
+    })
     @PostMapping("/admin-api/{resources}")
     public ResponseEntity<byte[]> postAction(@PathVariable("resources") String resources) throws IOException {
-        ClassPathResource resource = new ClassPathResource(String.format("/static/amis-api-json/%s-action.json", resources));
+        ClassPathResource resource = new ClassPathResource(
+                String.format("/static/amis-api-json/%s-action.json", resources));
         Path path = Paths.get(resource.getURI());
         byte[] content = Files.readAllBytes(path);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, String.format("inline;filename=/admin-api/%s", resource))
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        String.format("inline;filename=/admin-api/%s", resource))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(content);
     }

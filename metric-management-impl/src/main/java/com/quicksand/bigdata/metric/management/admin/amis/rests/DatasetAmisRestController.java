@@ -17,7 +17,13 @@ import com.quicksand.bigdata.metric.management.datasource.rests.DatasetRestServi
 import com.quicksand.bigdata.vars.http.model.Response;
 import com.quicksand.bigdata.vars.util.JsonUtils;
 import com.quicksand.bigdata.vars.util.PageImpl;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Data;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -35,14 +41,15 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Class DatasetAmisRestController
+ * 数据集AMIS接口控制器
  *
  * @Author: page
  * @Date: 2025/3/13
- * @Description:
+ * @Description: 提供数据集的CRUD操作和相关查询功能
  */
-@RequestMapping(Vars.PATH_ROOT + "/amis/datasource/datasets")
 @RestController
+@Tag(name = "数据集管理", description = "数据集的增删改查和相关操作接口")
+@RequestMapping(Vars.PATH_ROOT + "/amis/datasource/datasets")
 public class DatasetAmisRestController {
 
     @Resource
@@ -52,37 +59,69 @@ public class DatasetAmisRestController {
     @Resource
     DatasetDataManager datasetDataManager;
 
+    @Operation(summary = "获取数据集列表", description = "分页获取所有数据集信息列表，支持多种过滤条件")
+    @CrossOrigin
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "操作成功", content = @Content(schema = @Schema(implementation = PageImpl.class))),
+            @ApiResponse(responseCode = "403", description = "未授权的访问")
+    })
     @GetMapping
-    public FrameworkResponse<PageImpl<DatasetOverviewModel>, Void> listDatasets(@Min(1) @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNo,
-                                                                                @Min(1) @RequestParam(name = "perPage", required = false, defaultValue = "20") Integer pageSize,
+    public FrameworkResponse<PageImpl<DatasetOverviewModel>, Void> listDatasets(@Min(1) @RequestParam(name = "page", required = false, defaultValue = "1")
+                                                                                @Parameter(description = "页码，默认为1") Integer pageNo,
+                                                                                @Min(1) @RequestParam(name = "perPage", required = false, defaultValue = "20")
+                                                                                @Parameter(description = "每页记录数，默认为20") Integer pageSize,
                                                                                 @RequestParam(name = "nameKeyword", required = false, defaultValue = "")
-                                                                                @Parameter(name = "nameKeyword", description = "名称关键字") String nameKeyword,
+                                                                                @Parameter(description = "数据集名称关键字") String nameKeyword,
                                                                                 @RequestParam(name = "clusterIds", required = false)
-                                                                                @Parameter(name = "clusterIds", description = "集群Ids(多个采用半角逗号分隔)") List<Integer> clusterIds,
+                                                                                @Parameter(description = "集群ID列表(多个采用半角逗号分隔)") List<Integer> clusterIds,
                                                                                 @RequestParam(name = "clusterNameKeyword", required = false, defaultValue = "")
-                                                                                @Parameter(name = "clusterNameKeyword", description = "集群名称") String clusterNameKeyword,
+                                                                                @Parameter(description = "集群名称关键字") String clusterNameKeyword,
                                                                                 @RequestParam(name = "ownerIds", required = false)
-                                                                                @Parameter(name = "ownerIds", description = "负责人ids(多个采用半角逗号分隔)") List<Integer> ownerIds,
+                                                                                @Parameter(description = "负责人ID列表(多个采用半角逗号分隔)") List<Integer> ownerIds,
                                                                                 @RequestParam(name = "ownerNameKeyword", required = false, defaultValue = "")
-                                                                                @Parameter(name = "ownerNameKeyword", description = "负责人名称关键字(可模糊搜索)") String ownerNameKeyword) {
+                                                                                @Parameter(description = "负责人名称关键字(可模糊搜索)") String ownerNameKeyword) {
         Response<PageImpl<DatasetOverviewModel>> pageResponse = datasetRestService.queryDatasets(pageNo, pageSize, nameKeyword, clusterIds, clusterNameKeyword, ownerIds, ownerNameKeyword);
         return FrameworkResponse.extend(pageResponse);
     }
 
+    @Operation(summary = "创建数据集", description = "创建新的数据集记录")
+    @CrossOrigin
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "操作成功", content = @Content(schema = @Schema(implementation = DatasetOverviewModel.class))),
+            @ApiResponse(responseCode = "400", description = "请求参数错误"),
+            @ApiResponse(responseCode = "403", description = "未授权的访问")
+    })
     @Transactional
     @PostMapping
-    public FrameworkResponse<DatasetOverviewModel, Void> createDatasets(@RequestBody DatasetModifyModel model) {
+    public FrameworkResponse<DatasetOverviewModel, Void> createDatasets(
+            @Parameter(description = "数据集修改模型", required = true) @RequestBody DatasetModifyModel model) {
         return FrameworkResponse.extend(datasetManageRestService.createDataset(model));
     }
 
+    @Operation(summary = "按ID查找数据集", description = "根据数据集ID查询单个数据集的详细信息")
+    @CrossOrigin
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "操作成功", content = @Content(schema = @Schema(implementation = DatasetModel.class))),
+            @ApiResponse(responseCode = "404", description = "数据集不存在"),
+            @ApiResponse(responseCode = "403", description = "未授权的访问")
+    })
     @GetMapping("/{id}")
-    public FrameworkResponse<DatasetModel, Void> queryDataset(@PathVariable("id") Integer id) {
+    public FrameworkResponse<DatasetModel, Void> queryDataset(
+            @Parameter(description = "数据集ID", required = true) @PathVariable("id") Integer id) {
         return FrameworkResponse.extend(datasetRestService.queryDataset(id));
     }
 
+    @Operation(summary = "删除数据集", description = "根据数据集ID删除数据集信息")
+    @CrossOrigin
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "操作成功", content = @Content(schema = @Schema(implementation = Integer.class))),
+            @ApiResponse(responseCode = "400", description = "请求参数错误"),
+            @ApiResponse(responseCode = "403", description = "未授权的访问")
+    })
     @Transactional
     @DeleteMapping("/{id}")
-    public FrameworkResponse<Integer, Void> deleteDataset(@PathVariable("id") Integer id) {
+    public FrameworkResponse<Integer, Void> deleteDataset(
+            @Parameter(description = "数据集ID", required = true) @PathVariable("id") Integer id) {
         try {
             Response<Void> voidResponse = datasetManageRestService.deleteDataset(id);
             if (Objects.equals("200", voidResponse.getCode())) {
@@ -103,11 +142,22 @@ public class DatasetAmisRestController {
      * @param model     修改参数
      * @return instance of DatasetOverviewModel
      */
+    @Operation(summary = "修改数据集", description = "根据数据集ID更新数据集信息")
+    @CrossOrigin
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "操作成功", content = @Content(schema = @Schema(implementation = DatasetOverviewModel.class))),
+            @ApiResponse(responseCode = "400", description = "请求参数错误"),
+            @ApiResponse(responseCode = "404", description = "数据集不存在"),
+            @ApiResponse(responseCode = "403", description = "未授权的访问")
+    })
     @Transactional
     @PutMapping("/{datasetId}")
-    public FrameworkResponse<DatasetOverviewModel, Void> modifyDataset(@PathVariable("datasetId") @Min(value = 0L, message = "不存在的数据集")
-                                                                       @Max(value = Integer.MAX_VALUE, message = "不存在的数据集") int datasetId,
-                                                                       @RequestBody @Validated({Update.class}) DatasetModifyModel model) {
+    public FrameworkResponse<DatasetOverviewModel, Void> modifyDataset(
+            @Parameter(description = "数据集ID", required = true)
+            @PathVariable("datasetId") @Min(value = 0L, message = "不存在的数据集")
+            @Max(value = Integer.MAX_VALUE, message = "不存在的数据集") int datasetId,
+            @Parameter(description = "数据集修改模型", required = true)
+            @RequestBody @Validated({Update.class}) DatasetModifyModel model) {
         return FrameworkResponse.extend(datasetManageRestService.modifyDataset(datasetId, model));
     }
 
@@ -125,14 +175,25 @@ public class DatasetAmisRestController {
         DatasetColumnModel columnModel;
     }
 
+    @Operation(summary = "获取数据集字段列表", description = "根据数据集ID查询其包含的字段列表，支持多种过滤条件")
+    @CrossOrigin
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "操作成功", content = @Content(schema = @Schema(implementation = List.class))),
+            @ApiResponse(responseCode = "400", description = "请求参数错误"),
+            @ApiResponse(responseCode = "404", description = "数据集不存在"),
+            @ApiResponse(responseCode = "403", description = "未授权的访问")
+    })
     @GetMapping("/{datasetId}/columns")
-    public FrameworkResponse<List<DatasetColumnOptionModel>, Void> queryColumns(@PathVariable("datasetId") int datasetId,
-                                                                                @RequestParam(name = "nameKeyword", required = false, defaultValue = "")
-                                                                                @Parameter(name = "字段名称关键字，可选") String nameKeyword,
-                                                                                @RequestParam(name = "dataTypes", required = false, defaultValue = "")
-                                                                                @Parameter(name = "数据类型(可选，多个使用半角逗号分隔)") String dataTypes,
-                                                                                @RequestParam(name = "selectedColumns", required = false) List<String> selectedColumns,
-                                                                                @RequestParam(name = "selectType", required = false) Integer selectType) {
+    public FrameworkResponse<List<DatasetColumnOptionModel>, Void> queryColumns(
+            @Parameter(description = "数据集ID", required = true) @PathVariable("datasetId") int datasetId,
+            @RequestParam(name = "nameKeyword", required = false, defaultValue = "")
+            @Parameter(description = "字段名称关键字，可选") String nameKeyword,
+            @RequestParam(name = "dataTypes", required = false, defaultValue = "")
+            @Parameter(description = "数据类型(可选，多个使用半角逗号分隔)") String dataTypes,
+            @RequestParam(name = "selectedColumns", required = false)
+            @Parameter(description = "已选择的字段列表") List<String> selectedColumns,
+            @RequestParam(name = "selectType", required = false)
+            @Parameter(description = "选择类型，1表示维度，2表示度量") Integer selectType) {
         DatasetDBVO dataset = datasetDataManager.findDatasetById(datasetId);
         if (null == dataset) {
             return FrameworkResponse.frameworkResponse(1, "无效的的数据集! ");
